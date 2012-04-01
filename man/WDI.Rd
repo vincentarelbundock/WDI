@@ -1,0 +1,16 @@
+\name{WDI}
+\alias{WDI}
+\title{WDI: World Development Indicators (World Bank)...}
+\usage{WDI(country="all", indicator="NY.GNS.ICTR.GN.ZS", start=2002, end=2005,
+    extra=FALSE)}
+\description{WDI: World Development Indicators (World Bank)}
+\details{Downloads the requested data by using the World Bank's API, parses the resulting XML file, and formats it in long country-year format.}
+\value{Data frame with country-year observations}
+\author{Vincent Arel-Bundock \email{varel@umich.edu}}
+\arguments{\item{country}{Vector of countries (ISO-2 character codes, e.g. "BR", "US", "CA") for which the data is needed. Using the string "all" instead of individual iso codes pulls data for every available country.}
+\item{indicator}{Character vector of indicators codes. See the WDIsearch() function.}
+\item{start}{First year of data}
+\item{end}{Last year of data}
+\item{extra}{TRUE returns extra variables such as region, iso3c code, and incomeLevel}}
+\examples{WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"), start=1990, end=2000)
+WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000, extra=TRUE)}

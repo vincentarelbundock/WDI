@@ -1,0 +1,15 @@
+Package: WDI
+Maintainer: Vincent Arel-Bundock <varel@umich.edu>
+License: GPL-3
+Title: World Development Indicators (World Bank)
+LazyData: yes
+Type: Package
+LazyLoad: yes
+Author: Vincent Arel-Bundock <varel@umich.edu>
+Description: Search, extract and format data from the World Bank's
+    World Development Indicators
+Version: 2.0
+URL: http://www.umich.edu/~varel/
+Date: 2012-03-31
+Depends: XML
+Collate: 'WDI.R'
