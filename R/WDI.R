@@ -1,3 +1,4 @@
+library(RJSONIO)
 #' WDI: World Development Indicators (World Bank)
 #'
 #' Downloads the requested data by using the World Bank's API, parses the resulting XML file, and formats it in long country-year format. 
@@ -13,18 +14,19 @@
 #' WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"), start=1990, end=2000)
 #' WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000, extra=TRUE)
 WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, end = 2005, extra = FALSE){
-    # SANITIZE
+    # Sanitize country-indicator combinations
     indicator = gsub('[^a-zA-Z0-9\\.]', '', indicator)
-    country   = gsub('[^a-zA-Z]', '', country)
-    # COUNTRY-INDICATOR COMBINATIONS
-    requests = expand.grid(indicator, country)
-    # DOWNLOAD
-    dat = lapply(1:nrow(requests), function(i) try(wdi.dl(requests[i,1], requests[i,2], start, end), silent=TRUE))
-    # WEED OUT ERRORS
+    country   = gsub('[^a-zA-Z]', '', country) # 
+    a         = expand.grid(indicator, country)
+    # Download
+    dat = lapply(1:nrow(a), function(j) try(wdi.dl(a[j,1], a[j,2], start, end), silent=TRUE))
+    # Raise warning if download fails 
     good = unlist(lapply(dat, function(i) class(i)) == 'data.frame')
-    bad  = indicator[!good]
-    warning(paste('Unable to download the following indicators: ', paste(bad, collapse=',')))
-    dat = dat[good] 
+    if(any(!good)){
+        a = paste(paste('(', a[,1], '-', a[,2], ')')[!good], collapse=' ; ')
+        warning(paste('Unable to download the following: ', a))
+        dat = dat[good] 
+    }
     # MERGE
     dat = Reduce(function(x,y) merge(x,y,all=TRUE), dat)
     # EXTRAS
@@ -34,17 +36,15 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, 
     return(dat)
 }
 
-wdi.dl = function(indicator, country, start, stop){
-    daturl = paste("http://api.worldbank.org/countries/", country, "/indicators/", indicator,
-                    "?date=",start,":",stop, "&per_page=25000", "&format=XML", sep = "")
-    dat           = xmlTreeParse(daturl, useInternal = TRUE)
-    iso2c         = unlist(lapply(getNodeSet(dat, "//wb:country"), xmlAttrs))
-    dat           = xmlToDataFrame(dat)[,2:4]
-    dat$iso2c     = iso2c
-    colnames(dat) = c("country","year", as.character(indicator), "iso2c")
-    dat$year      = as.numeric(as.character(dat$year))
-    dat$iso2c     = gsub(" ", "", as.character(dat$iso2c))
-    dat$country   = gsub(" ", "", as.character(dat$country))
+wdi.dl = function(indicator, country, start, end){
+    daturl  = paste("http://api.worldbank.org/countries/", country, "/indicators/", indicator,
+                    "?date=",start,":",end, "&per_page=25000", "&format=json", sep = "")
+    dat     = fromJSON(daturl)[[2]]
+    dat     = data.frame(do.call('rbind', lapply(dat, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date))))
+    for(i in 1:4){dat[,i] = as.character(dat[,i])}
+    dat[,3] = as.numeric(dat[,3])
+    dat[,4] = as.numeric(dat[,4])
+    colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
     return(dat)
 }
 
@@ -57,15 +57,15 @@ wdi.dl = function(indicator, country, start, stop){
 #' @note Downloading all series information from the World Bank website can take time.
 #' The \code{WDI} package ships with a local data object with information on all the series
 #' available on 2012-03-31. You can update this database by retrieving a new list using \code{WDIcache}, and  then
-#' feeding the resulting object to \code{WDI} via the \code{cache} argument. 
+#' feeding the resulting object to \code{WDIsearch} via the \code{cache} argument. 
 WDIcache = function(){
-    daturl = 'http://api.worldbank.org/indicators?per_page=25000'
-    dat    = xmlTreeParse(daturl, useInternal=TRUE)
-    ind    = unlist(lapply(getNodeSet(dat, "//wb:indicator"), xmlAttrs))
-    dat    = xmlToDataFrame(dat)
-    dat$indicator = ind
-    dat = dat[,c('indicator', 'name', 'topics', 'sourceNote', 'sourceOrganization')]
-    colnames(dat) = c('indicator', 'name', 'topic', 'description', 'source')
+    daturl = 'http://api.worldbank.org/indicators?per_page=25000&format=json'
+    dat    = fromJSON(daturl)[[2]]
+    dat    = data.frame('id'=unlist(lapply(dat, function(i) i$id)), 'name'=unlist(lapply(dat, function(i) i$name)), 
+                        'source'=unlist(lapply(dat, function(i) i$sourceOrganization)), 'description'=unlist(lapply(dat, function(i) i$sourceNote)))
+    for(i in 1:4){
+        dat[,i] = as.character(dat[,i])
+    }
     return(dat)
 }
 
@@ -73,7 +73,7 @@ WDIcache = function(){
 #'
 #' Data frame with series code, name, description, and source for the WDI series which match the given criteria
 #' 
-#' @param string Character string. Search for this string.
+#' @param string Character string. Search for this string using \code{grep} with \code{ignore.case=TRUE}.
 #' @param field Character string. Search this field. Admissible fields: 'indicator', 'name', 'topic', 'description', 'source'
 #' @param short TRUE: Returns only the indicator's code and name. FALSE: Returns the indicator's code, name, topic, description, and source.
 #' @param cache Data frame generated by the \code{WDIcache} function. If omitted, \code{WDIsearch} will search a local list of series updated on 2012-03-31.  
@@ -82,7 +82,7 @@ WDIcache = function(){
 #' @note Downloading all series information from the World Bank website can take time.
 #' The \code{WDI} package ships with a local data object with information on all the series
 #' available on 2012-03-31. You can update this database by retrieving a new list using \code{WDIcache}, and  then
-#' feeding the resulting object to \code{WDI} via the \code{cache} argument. 
+#' feeding the resulting object to \code{WDIsearch} via the \code{cache} argument. 
 #' @examples
 #' WDIsearch(string='gdp', field='name', cache=NULL)
 #' WDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)
@@ -92,7 +92,7 @@ WDIsearch <- function(string="gdp", field="name", short=TRUE, cache=NULL){
     }
     matches = grep(string, series[,field], ignore.case=TRUE)
     if(short){
-        out = series[matches, c('indicator', 'name')]
+        out = series[matches, c('id', 'name')]
     }else{
         out = series[matches,]
     }
