@@ -1,16 +1,16 @@
 # World Bank Development indicators for R
 
-The World Bank makes available a ton of great data from its World Development Indicators through its web API. The `WDI` package for `R` makes it easy to search and download data series from the WDI. 
+The World Bank makes available a ton of great data from the World Development Indicators through its web API. The `WDI` package for `R` makes it easy to search and download data series from the WDI. 
 
 # Installation
 
-`WDI` is published on CRAN and so can be installed by simply typing: 
+`WDI` is published on CRAN and so can be installed by simply typing this in the `R` console: 
 
     install.packages('WDI')
 
 # Searching for data
 
-You can search for data by using keywords in the `WDIsearch`. For instance, if you are looking for data on Gross Domestic Product (i.e. GDP): 
+You can search for data by using keywords in `WDIsearch`. For instance, if you are looking for data on Gross Domestic Product: 
 
 ```r
 WDIsearch('gdp')
@@ -75,7 +75,7 @@ ggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() +
 
 ![GDP per capita in North America](https://github.com/vincentarelbundock/WDI/raw/master/web/gdp_per_capita.jpg)
 
-Note: You can use 'all' to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.
+Note: You can use `country='all'` to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.
 
 
 # Updating series list
