@@ -73,7 +73,7 @@ ggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() +
     xlab('Year') + ylab('GDP per capita')
 ```
 
-![GDP per capita in North America](vincentarelbundock.github.com/WDI/web/gdp_per_capita.jpg)
+![GDP per capita in North America](https://github.com/vincentarelbundock/WDI/raw/master/web/gdp_per_capita.jpg)
 
 Note: You can use 'all' to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.
 
