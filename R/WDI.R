@@ -58,6 +58,8 @@ wdi.dl = function(indicator, country, start, end){
     dat[,3] = as.numeric(dat[,3])
     dat[,4] = as.numeric(dat[,4])
     colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
+    # Bad data in WDI JSON files require me to impose this constraint
+    dat = dat[!is.na(dat$year) & dat$year <= end & dat$year >= start,] 
     return(dat)
 }
 
