@@ -82,8 +82,13 @@ Note: You can use 'all' to download data for all available countries. You can al
 
 To speed up search, `WDI` ships with a local list of all available WDI series as of 2012-06-18. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the `cache` function:
 
+```r
 new_cache = WDIcache()
 WDIsearch('gdp', cache=new_cache)
+```
 
+# Bugs, suggestions, etc.
+
+Thanks for using `WDI`! Please send all bug reports and suggestions through the github issue tracker or by email at varel@umich.edu 
 
 
