@@ -112,7 +112,7 @@ WDIsearch <- function(string="gdp", field="name", short=TRUE, cache=NULL){
     }
     matches = grep(string, series[,field], ignore.case=TRUE)
     if(short){
-        out = series[matches, c('id', 'name')]
+        out = series[matches, c('indicator', 'name')]
     }else{
         out = series[matches,]
     }
