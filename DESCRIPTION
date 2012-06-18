@@ -11,5 +11,9 @@ Description: Search, extract and format data from the World Bank's
 Version: 2.0
 URL: http://www.umich.edu/~varel , https://www.github.com/vincentarelbundock/WDI
 Date: 2012-06-18
-Depends: RJSONIO 
-Collate: 'WDI.R'
+Depends:
+    RJSONIO
+Collate:
+    'WDI.R'
+    'WDI-package.R'
+    'WDI_data.R'
