@@ -1,7 +1,10 @@
 Version 0.2
-    Now uses JSON instead of XML (Faster, easier)
-    WDIcache function now allows users to update the locally stored database of available WDI series
-    Fixed doc examples  
-    Documentation now uses roxygen2
-    Moved development to github 
-     
+-----------
+
+* Now uses JSON instead of XML (Faster, easier)
+* WDIcache function now allows users to update the locally stored database of available WDI series
+* Fixed doc examples  
+* Documentation now uses roxygen2
+* Moved development to github 
+* Series and country info now in a single data list. utf-8 encoding fixed    
+ 
