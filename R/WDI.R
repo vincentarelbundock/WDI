@@ -21,26 +21,14 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, 
     if(!(start < end)){
         stop('start/end must be integers with start <= end')
     }
-    # Indicator-Country combinations
-    a = expand.grid('indicator'=indicator, 'country'=country)
     # Download
-    dat = lapply(1:nrow(a), function(j) try(wdi.dl(a$indicator[j], a$country[j], start, end), silent=TRUE))
+    dat = lapply(indicator, function(j) try(wdi.dl(j, country, start, end), silent=TRUE))
     # Raise warning if download fails 
     good = unlist(lapply(dat, function(i) class(i)) == 'data.frame')
     if(any(!good)){
         a = paste(paste('(', a[,1], '-', a[,2], ')')[!good], collapse=' ; ')
         warning(paste('Unable to download the following: ', a))
         dat = dat[good] 
-    }
-    # MERGE
-     if(country!="all" &&length(country)>1){
-      dat2<-list()
-      indi<-unique(indicator)
-      for(i in 1:length(indi)) {
-	same_indic<-unlist(lapply(dat, function(x)  indi[i]%in%colnames(x)))
-	dat2[[i]] <- do.call(rbind, dat[same_indic])
-      }
-      dat<-dat2
     }
     dat = Reduce(function(x,y) merge(x,y,all=TRUE), dat)
     # EXTRAS
@@ -56,7 +44,7 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, 
 }
 
 wdi.dl = function(indicator, country, start, end){
-    daturl = paste("http://api.worldbank.org/countries/", country, "/indicators/", indicator,
+    daturl = paste("http://api.worldbank.org/countries/all/indicators/", indicator,
                     "?date=",start,":",end, "&per_page=25000", "&format=json", sep = "")
     dat = fromJSON(daturl, nullValue=NA)[[2]]
     dat = lapply(dat, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date))
@@ -67,8 +55,9 @@ wdi.dl = function(indicator, country, start, end){
     dat[,3] = as.numeric(dat[,3])
     dat[,4] = as.numeric(dat[,4])
     colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
+    dat = dat[dat$iso2c %in% country, ] 
     # Bad data in WDI JSON files require me to impose this constraint
-    dat = dat[!is.na(dat$year) & dat$year <= end & dat$year >= start,] 
+    dat = dat[!is.na(dat$year) & dat$year <= end & dat$year >= start,]
     return(dat)
 }
 
