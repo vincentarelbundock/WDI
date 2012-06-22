@@ -26,10 +26,9 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, 
     # Raise warning if download fails 
     good = unlist(lapply(dat, function(i) class(i)) == 'data.frame')
     if(any(!good)){
-        a = paste(paste('(', a[,1], '-', a[,2], ')')[!good], collapse=' ; ')
-        warning(paste('Unable to download the following: ', a))
-        dat = dat[good] 
+        warning(paste('Unable to download indicators ', paste(indicator[!good], collapse=' ; ')))
     }
+    dat = dat[good] 
     dat = Reduce(function(x,y) merge(x,y,all=TRUE), dat)
     # EXTRAS
     if(!is.null(cache)){
@@ -39,6 +38,10 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, 
     }
     if(extra==TRUE){
 	    dat = merge(dat, country_data, all.x=TRUE)
+    }
+    countries = country[country != 'all' & !(country %in% dat$iso2c)]
+    if(length(countries) > 0){
+        warning(paste('Unable to download data on countries: ', paste(countries, collapse=' ; ')))
     }
     return(dat)
 }
@@ -55,7 +58,9 @@ wdi.dl = function(indicator, country, start, end){
     dat[,3] = as.numeric(dat[,3])
     dat[,4] = as.numeric(dat[,4])
     colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
-    dat = dat[dat$iso2c %in% country, ] 
+    if(!('all' %in% country)){
+        dat = dat[dat$iso2c %in% country, ]
+    }
     # Bad data in WDI JSON files require me to impose this constraint
     dat = dat[!is.na(dat$year) & dat$year <= end & dat$year >= start,]
     return(dat)
