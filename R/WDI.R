@@ -33,6 +33,15 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, 
         dat = dat[good] 
     }
     # MERGE
+     if(country!="all" &&length(country)>1){
+      dat2<-list()
+      indi<-unique(indicator)
+      for(i in 1:length(indi)) {
+	same_indic<-unlist(lapply(dat, function(x)  indi[i]%in%colnames(x)))
+	dat2[[i]] <- do.call(rbind, dat[same_indic])
+      }
+      dat<-dat2
+    }
     dat = Reduce(function(x,y) merge(x,y,all=TRUE), dat)
     # EXTRAS
     if(!is.null(cache)){
