@@ -8,7 +8,7 @@ LazyLoad: yes
 Author: Vincent Arel-Bundock <varel@umich.edu>
 Description: Search, extract and format data from the World Bank's
     World Development Indicators
-Version: 2.0
+Version: 2.1
 URL: http://www.umich.edu/~varel , https://www.github.com/vincentarelbundock/WDI
 Date: 2012-06-18
 Depends:

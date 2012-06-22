@@ -1,4 +1,10 @@
-Version 0.2
+Version 2.1
+-------------
+
+* Fixed various issues (thanks to Matthieu Stigler for bug reports and patches)
+* WDI now downloads data on all countries and then subsets for the set of countries requested by the user. This imposes little overhead when the number of countries is small, but improves performance considerably when it is big. 
+
+Version 2.0
 -----------
 
 * Now uses JSON instead of XML (Faster, easier)
