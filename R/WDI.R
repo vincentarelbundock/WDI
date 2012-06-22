@@ -15,9 +15,23 @@
 #' WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"), start=1990, end=2000)
 #' WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000, extra=TRUE, cache=NULL)
 WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, end = 2005, extra = FALSE, cache=NULL){
-    # Sanity
+    # Sanity checks
     indicator = gsub('[^a-zA-Z0-9\\.]', '', indicator)
-    country   = gsub('[^a-zA-Z]', '', country) # 
+    country   = gsub('[^a-zA-Z]', '', country)
+    if(!('all' %in% country)){
+        country_bad = country[!(country %in% WDI_data$country[,'iso2c'])]
+        country = country[!(country %in% country_bad)]
+        if(length(country_bad) > 0){
+            warning(paste('Unable to download data on countries: ', paste(country_bad, collapse=', ')))
+        }
+        if(length(country) > 0){
+            country = paste(country, collapse=';')
+        }else{
+            stop('No valid country was requested')
+        }
+    }else{
+        country = 'all'
+    }
     if(!(start < end)){
         stop('start/end must be integers with start <= end')
     }
@@ -41,13 +55,12 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, 
     }
     countries = country[country != 'all' & !(country %in% dat$iso2c)]
     if(length(countries) > 0){
-        warning(paste('Unable to download data on countries: ', paste(countries, collapse=' ; ')))
     }
     return(dat)
 }
 
 wdi.dl = function(indicator, country, start, end){
-    daturl = paste("http://api.worldbank.org/countries/all/indicators/", indicator,
+    daturl = paste("http://api.worldbank.org/countries/", country, "/indicators/", indicator,
                     "?date=",start,":",end, "&per_page=25000", "&format=json", sep = "")
     dat = fromJSON(daturl, nullValue=NA)[[2]]
     dat = lapply(dat, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date))
@@ -58,9 +71,6 @@ wdi.dl = function(indicator, country, start, end){
     dat[,3] = as.numeric(dat[,3])
     dat[,4] = as.numeric(dat[,4])
     colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
-    if(!('all' %in% country)){
-        dat = dat[dat$iso2c %in% country, ]
-    }
     # Bad data in WDI JSON files require me to impose this constraint
     dat = dat[!is.na(dat$year) & dat$year <= end & dat$year >= start,]
     return(dat)
