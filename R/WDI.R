@@ -32,7 +32,7 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, 
     }else{
         country = 'all'
     }
-    if(!(start < end)){
+    if(!(start <= end)){
         stop('start/end must be integers with start <= end')
     }
     # Download
