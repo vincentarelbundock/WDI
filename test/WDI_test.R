@@ -1,7 +1,9 @@
 # Warning no longer works
 rm(list=ls())
-load('../data/WDI_data.RData')
-source('../R/WDI.R')
+library(WDI)
+
+# Country list
+co = c('IN', 'US', 'BR', 'ZW')
 
 # Cache
 cache = WDIcache()
@@ -25,7 +27,7 @@ head(x)
 
 # Multiple indicators 1 country
 x = WDIsearch('gdp.*capita')
-x = WDI(country='CA', indicator=x[,1])
+x = WDI(country=co, indicator=x[,1], start=2002, end=2003)
 head(x)
 
 # Multiple indicators 1 country + 2 bad indicator (should raise warning)
@@ -47,4 +49,7 @@ head(x)
 x = WDI(country=WDI_data[[2]][,'iso2c'])
 head(x)
 
+# Extra information
+rm(x)
+x = WDI(country=co, extra=TRUE)
 
