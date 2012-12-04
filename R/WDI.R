@@ -17,7 +17,7 @@
 WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, end = 2005, extra = FALSE, cache=NULL){
     # Sanity checks
     indicator = gsub('[^a-zA-Z0-9\\.]', '', indicator)
-    country   = gsub('[^a-zA-Z]', '', country)
+    country   = gsub('[^a-zA-Z0-9]', '', country)
     if(!('all' %in% country)){
         country_bad = country[!(country %in% WDI_data$country[,'iso2c'])]
         country = country[!(country %in% country_bad)]
