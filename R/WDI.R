@@ -14,7 +14,7 @@
 #' @examples
 #' WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"), start=1990, end=2000)
 #' WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000, extra=TRUE, cache=NULL)
-WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2002, end = 2005, extra = FALSE, cache=NULL){
+WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2005, end = 2011, extra = FALSE, cache=NULL){
     # Sanity checks
     indicator = gsub('[^a-zA-Z0-9\\.]', '', indicator)
     country   = gsub('[^a-zA-Z0-9]', '', country)
