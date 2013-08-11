@@ -1,3 +1,8 @@
+Version 2.4
+-----------
+
+* Call RJSONIO::fromJSON explicitly to avoid conflict with JSON package (Thanks to Richard Cotton)
+
 Version 2.3
 -----------
 
