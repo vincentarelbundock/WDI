@@ -27,8 +27,9 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2005, 
     indicator = gsub('[^a-zA-Z0-9\\.]', '', indicator)
     country   = gsub('[^a-zA-Z0-9]', '', country)
     if(!('all' %in% country)){
-        country_bad = country[!(country %in% WDI_data$country[,'iso2c'])]
-        country = country[!(country %in% country_bad)]
+        country_good = unique(c(WDI_data$country[,'iso3c'], WDI_data$country[,'iso2c']))
+        country_bad = country[!country %in% country_good]
+        country = country[country %in% country_good]
         if(length(country_bad) > 0){
             warning(paste('Unable to download data on countries: ', paste(country_bad, collapse=', ')))
         }

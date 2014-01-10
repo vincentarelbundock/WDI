@@ -53,3 +53,5 @@ head(x)
 rm(x)
 x = WDI(country=co, extra=TRUE)
 
+# iso3c and iso2c
+x = WDI(country=c('US', 'CAN'))
