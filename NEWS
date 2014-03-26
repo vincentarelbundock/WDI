@@ -2,6 +2,7 @@ Version 2.5
 -----------
 
 * Allow iso3c or iso2c as input for country argument
+* Rolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)
 
 Version 2.4
 -----------
