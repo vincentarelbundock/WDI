@@ -1,6 +1,7 @@
 Version 2.5
 -----------
 
+* Updated the list of available indicators
 * Allow iso3c or iso2c as input for country argument
 * Rolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)
 
