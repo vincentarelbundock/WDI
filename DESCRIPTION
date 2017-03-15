@@ -13,3 +13,4 @@ URL: http://www.umich.edu/~varel , https://www.github.com/vincentarelbundock/WDI
 Date: 2014-03-26
 Depends:
     RJSONIO
+RoxygenNote: 5.0.1
