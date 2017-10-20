@@ -77,6 +77,23 @@ ggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() +
 
 Note: You can use `country='all'` to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.
 
+# Automatic rename
+
+If the vector that you supply to ``WDI`` is named, the function will automatically rename columns where possible.
+
+```r
+ind = c("gdp_per_capita" = "NY.GDP.PCAP.KD",
+        "population" = "SP.POP.TOTL")
+dat = WDI(indicator = ind)
+head(dat)
+iso2c    country year gdp_per_capita population
+1    1A Arab World 2005       5378.379  316264728
+2    1A Arab World 2006       5594.899  323773264
+3    1A Arab World 2007       5711.663  331653797
+4    1A Arab World 2008       5898.516  339825483
+5    1A Arab World 2009       5782.422  348145094
+6    1A Arab World 2010       5916.330  356508908
+```
 
 # Updating series list
 

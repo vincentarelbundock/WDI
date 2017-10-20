@@ -65,6 +65,18 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2005, 
     countries = country[country != 'all' & !(country %in% dat$iso2c)]
     if(length(countries) > 0){
     }
+
+	# Rename columns based on indicator vector names
+	if (!is.null(names(indicator))) {
+		for (i in seq_along(indicator)) {
+			idx = match(indicator[i], colnames(dat))
+			if (!is.na(idx)) {
+				colnames(dat)[idx] = names(indicator)[i]
+			}
+		}
+	}
+
+	# Output
     return(dat)
 }
 
