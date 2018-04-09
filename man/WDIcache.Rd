@@ -18,4 +18,3 @@ The \code{WDI} package ships with a local data object with information on all th
 available on 2012-06-18. You can update this database by retrieving a new list using \code{WDIcache}, and  then
 feeding the resulting object to \code{WDIsearch} via the \code{cache} argument.
 }
-

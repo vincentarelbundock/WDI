@@ -41,4 +41,3 @@ WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000,
 \author{
 Vincent Arel-Bundock \email{varel@umich.edu}
 }
-

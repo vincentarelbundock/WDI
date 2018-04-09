@@ -13,12 +13,11 @@ download API.  For fast searching, the WDI package ships with a local list of
 available data series. This local list can be updated to the latest version
 using the \code{WDIcache} function.
 }
-\author{
-Vincent Arel-Bundock \email{varel@umich.edu}
-}
 \references{
 \url{http://www.umich.edu/~varel}
     \url{https://github.com/vincentarelbundock/WDI}
 }
+\author{
+Vincent Arel-Bundock \email{varel@umich.edu}
+}
 \keyword{package}
-

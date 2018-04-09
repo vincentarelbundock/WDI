@@ -37,4 +37,3 @@ The second character matrix includes extra country information (updated 2012-06-
 }
 }
 \keyword{datasets}
-
