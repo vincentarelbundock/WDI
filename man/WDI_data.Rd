@@ -31,7 +31,7 @@ The second character matrix includes extra country information (updated 2012-06-
   \item region Region
   \item capital Capital 
   \item longitude Longitude 
-  \item latitutde Latitude
+  \item latitude Latitude
   \item income Income level as defined by the World Bank
   \item lending Lending category, as defined by the World Bank
 }
