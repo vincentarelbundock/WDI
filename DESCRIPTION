@@ -1,5 +1,5 @@
 Package: WDI
-Maintainer: Vincent Arel-Bundock <varel@umich.edu>
+Maintainer: Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>
 License: GPL-3
 Title: World Development Indicators (World Bank)
 LazyData: yes 
