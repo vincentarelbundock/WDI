@@ -3,4 +3,3 @@
 export(WDI)
 export(WDIcache)
 export(WDIsearch)
-importFrom(RJSONIO,fromJSON)

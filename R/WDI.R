@@ -16,7 +16,6 @@
 #'     extra=TRUE argument
 #' @return Data frame with country-year observations 
 #' @author Vincent Arel-Bundock \email{varel@@umich.edu}
-#' @importFrom RJSONIO fromJSON
 #' @export
 #' @examples
 #' WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"),
@@ -28,7 +27,7 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2005, 
     #indicator = gsub('[^a-zA-Z0-9\\.]', '', indicator)
     country   = gsub('[^a-zA-Z0-9]', '', country)
     if(!('all' %in% country)){
-        country_good = unique(c(WDI::WDI_data$country[,'iso3c'], WDI::WDI_data$country[,'iso2c']))
+        country_good = unique(c(WDI_data$country[,'iso3c'], WDI_data$country[,'iso2c']))
         country_bad = country[!country %in% country_good]
         country = country[country %in% country_good]
         if(length(country_bad) > 0){
@@ -58,7 +57,7 @@ WDI <- function(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2005, 
     if(!is.null(cache)){
         country_data = cache$country
     }else{
-        country_data = WDI::WDI_data$country
+        country_data = WDI_data$country
     }
     if(extra==TRUE){
 	    dat = merge(dat, country_data, all.x=TRUE)
@@ -111,14 +110,14 @@ wdi.dl = function(indicator, country, start, end){
 WDIcache = function(){
     # Series
     series_url = 'http://api.worldbank.org/indicators?per_page=25000&format=json'
-    series_dat    = RJSONIO::fromJSON(series_url, nullValue=NA)[[2]]
+    series_dat    = fromJSON(series_url, nullValue=NA)[[2]]
     series_dat = lapply(series_dat, function(k) cbind(
                         'indicator'=k$id, 'name'=k$name, 'description'=k$sourceNote, 
                         'sourceDatabase'=k$source[2], 'sourceOrganization'=k$sourceOrganization)) 
     series_dat = do.call('rbind', series_dat)          
     # Countries
     country_url = 'http://api.worldbank.org/countries/all?per_page=25000&format=json'
-    country_dat = RJSONIO::fromJSON(country_url, nullValue=NA)[[2]]
+    country_dat = fromJSON(country_url, nullValue=NA)[[2]]
     country_dat = lapply(country_dat, function(k) cbind(
                          'iso3c'=k$id, 'iso2c'=k$iso2Code, 'country'=k$name, 'region'=k$region[2],
                          'capital'=k$capitalCity, 'longitude'=k$longitude, 'latitude'=k$latitude, 
@@ -151,7 +150,7 @@ WDIsearch <- function(string="gdp", field="name", short=TRUE, cache=NULL){
     if(!is.null(cache)){
         series = cache$series    
     }else{
-        series = WDI::WDI_data$series
+        series = WDI_data$series
     }
     matches = grep(string, series[,field], ignore.case=TRUE)
     if(short){
