@@ -2,7 +2,7 @@ Package: WDI
 Maintainer: Vincent Arel-Bundock <varel@umich.edu>
 License: GPL-3
 Title: World Development Indicators (World Bank)
-LazyData: yes
+LazyData: yes 
 Type: Package
 LazyLoad: yes
 Author: Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>
@@ -13,4 +13,4 @@ URL: http://arelbundock.com , https://www.github.com/vincentarelbundock/WDI
 Date: 2018-04-09
 Depends:
     RJSONIO
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
