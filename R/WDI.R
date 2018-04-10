@@ -125,7 +125,10 @@ WDIcache = function(){
                          'income'=k$incomeLevel[2], 'lending'=k$lendingType[2])) 
     country_dat = do.call('rbind', country_dat)
     row.names(country_dat) = row.names(series_dat) = NULL
-    return(list('series'=series_dat, 'country'=country_dat))
+    out = list('series'=series_dat, 'country'=country_dat)
+    out$series = iconv(out$series, to = 'utf8')
+    out$country = iconv(out$country, to = 'utf8')
+    return(out)
 }
 
 #' Search names and descriptions of available WDI series
