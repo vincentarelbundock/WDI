@@ -1,5 +1,5 @@
-This is a minor release of WDI. Slight improvements to functionality, and better namespace management to facilitate imports by other packages.
+This is a minor release of WDI. No change to functionality.
 
-I (the author/maintainer) also use a new email adress since I moved from the University of Michigan to the University of Montreal.
+The UTF-8 strings in the data file are intentional and required for proper functionality.
 
 Vincent Arel-Bundock

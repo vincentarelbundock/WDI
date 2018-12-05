@@ -30,6 +30,7 @@
 #' @keywords datasets
 #' @name WDI_data 
 #' @usage WDI_data
+#' @encoding UTF-8 
 #' @format List of 2 data frames 
 NULL
 
