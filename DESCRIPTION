@@ -8,9 +8,9 @@ LazyData: yes
 Type: Package
 LazyLoad: yes
 Encoding: UTF-8
-Version: 2.5
+Version: 2.6
 URL: https://www.github.com/vincentarelbundock/WDI
-Date: 2018-04-09
+Date: 2018-12-05
 Depends: RJSONIO, R (>= 2.10)
 RoxygenNote: 6.0.1
 Suggests: testthat
