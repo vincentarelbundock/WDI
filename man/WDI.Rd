@@ -37,6 +37,10 @@ WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"),
     start=1990, end=2000)
 WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000,
     extra=TRUE, cache=NULL)
+
+# Rename indicators on the fly
+WDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',
+                                  'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))
 }
 \author{
 Vincent Arel-Bundock \email{varel@umich.edu}
