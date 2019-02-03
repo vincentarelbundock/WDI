@@ -1,3 +1,9 @@
+Version 2.6.0 (2019-02-??)
+--------------------------
+
+* `start` and `end` are NULL as default and download all available years.
+* `label` attribute to the return data.frame includes descriptive labels for each
+
 Version 2.5.1 (2018-12-05)
 --------------------------
 

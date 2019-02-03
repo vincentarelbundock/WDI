@@ -4,8 +4,8 @@
 \alias{WDI}
 \title{WDI: World Development Indicators (World Bank)}
 \usage{
-WDI(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2005,
-  end = 2011, extra = FALSE, cache = NULL)
+WDI(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = NULL,
+  end = NULL, extra = FALSE, cache = NULL)
 }
 \arguments{
 \item{country}{Vector of countries (ISO-2 character codes, e.g. "BR", "US",
@@ -13,11 +13,12 @@ WDI(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = 2005,
 individual iso codes pulls data for every available country.}
 
 \item{indicator}{Character vector of indicators codes. See the WDIsearch()
-function.}
+function. If you supply a named vector, the indicators will be automatically
+renamed: `c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS')`}
 
-\item{start}{First year of data}
+\item{start}{First year of data. If NULL, the start year is set to 1950.}
 
-\item{end}{Last year of data}
+\item{end}{Last year of data. If NULL, the end year is set to the current year.}
 
 \item{extra}{TRUE returns extra variables such as region, iso3c code, and
 incomeLevel}
@@ -26,13 +27,16 @@ incomeLevel}
 extra=TRUE argument}
 }
 \value{
-Data frame with country-year observations
+Data frame with country-year observations. You can extract a
+data.frame with indicator names and descriptive labels by inspecting the
+`label` attribute of the resulting data.frame: `attr(dat, 'label')`
 }
 \description{
 Downloads the requested data by using the World Bank's API, parses the
 resulting XML file, and formats it in long country-year format.
 }
 \examples{
+
 WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"),
     start=1990, end=2000)
 WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000,
