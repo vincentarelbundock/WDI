@@ -11,7 +11,12 @@ Encoding: UTF-8
 Version: 2.5.1-9000
 URL: https://www.github.com/vincentarelbundock/WDI
 Date: 2018-12-05
-Depends: RJSONIO, R (>= 2.10)
+Depends:
+    R (>= 3.1.0)
+Imports: 
+    RJSONIO
+Suggests: 
+    tidyr (>= 0.8.0),
+    testthat
 RoxygenNote: 6.1.1
-Suggests: testthat
 License: GPL-3

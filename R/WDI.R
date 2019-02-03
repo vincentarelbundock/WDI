@@ -18,7 +18,7 @@
 #' @return Data frame with country-year observations. You can extract a
 #' data.frame with indicator names and descriptive labels by inspecting the
 #' `label` attribute of the resulting data.frame: `attr(dat, 'label')`
-#' @author Vincent Arel-Bundock \email{varel@@umich.edu}
+#' @author Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca}
 #' @importFrom RJSONIO fromJSON
 #' @export
 #'
@@ -112,6 +112,51 @@ WDI <- function(country = "all",
     attr(dat, 'labels') = lab
     return(dat)
 }
+
+#' Download all the WDI indicators at once.
+#' 
+#' @return Data frame 
+#' @author Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca}
+#' @return a list of 6 data frames: Data, Country, Series, Country-Series,
+#' Series-Time, FootNote
+#' @export
+WDIbulk = function() {
+    if (!'tidyr' %in% utils::installed.packages()[, 1]) {
+        stop('To use the `WDIbulk` function, you must install the `tidyr` package.')
+    }
+
+    # download
+    temp = tempfile()
+    url = 'http://databank.worldbank.org/data/download/WDI_csv.zip'
+    utils::download.file(url, temp)
+
+    # read
+    zip_content = c("WDIData.csv", "WDICountry.csv", "WDISeries.csv",
+                    "WDICountry-Series.csv", "WDISeries-Time.csv",
+                    "WDIFootNote.csv")
+    out = lapply(zip_content, function(x) utils::read.csv(unz(temp, x), stringsAsFactors = FALSE))
+
+    # flush
+    unlink(temp)
+
+    # names
+    names(out) = zip_content
+    names(out) = gsub('.csv', '', names(out))
+    names(out) = gsub('WDI', '', names(out))
+
+    # clean "Data" entry
+    out$Data$X = NULL
+    out$Data = tidyr::gather(out$Data, year, value, -Country.Name,
+                             -Country.Code, -Indicator.Name, -Indicator.Code)
+
+    # clean year column
+    out$Data$year = gsub('^X', '', out$Data$year)
+    out$Data$year = as.integer(out$Data$year)
+
+    # output
+    return(out)
+}
+
 
 wdi.dl = function(indicator, country, start, end){
     # years

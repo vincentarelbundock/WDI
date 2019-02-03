@@ -47,5 +47,5 @@ WDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',
                                   'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))
 }
 \author{
-Vincent Arel-Bundock \email{varel@umich.edu}
+Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca}
 }
