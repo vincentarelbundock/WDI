@@ -98,6 +98,13 @@ WDI <- function(country = "all",
     if(length(countries) > 0){
     }
 
+    # Assign label attributes
+    for (i in 1:nrow(lab)) {
+        if (lab$indicator[i] %in% colnames(dat)) {
+            attr(dat[[lab$indicator[i]]], 'label') = lab$label[[i]]
+        }
+    }
+
 	# Rename columns based on indicator vector names
 	if (!is.null(names(indicator))) {
 		for (i in seq_along(indicator)) {
@@ -109,7 +116,6 @@ WDI <- function(country = "all",
 	}
 
 	# Output
-    attr(dat, 'labels') = lab
     return(dat)
 }
 
