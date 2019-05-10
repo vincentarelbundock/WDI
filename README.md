@@ -82,9 +82,8 @@ Note: You can use `country='all'` to download data for all available countries. 
 If the vector that you supply to ``WDI`` is named, the function will automatically rename columns where possible.
 
 ```r
-ind = c("gdp_per_capita" = "NY.GDP.PCAP.KD",
-        "population" = "SP.POP.TOTL")
-dat = WDI(indicator = ind)
+dat <- WDI(indicator = c("gdp_per_capita" = "NY.GDP.PCAP.KD",
+                         "population" = "SP.POP.TOTL"))
 head(dat)
 iso2c    country year gdp_per_capita population
 1    1A Arab World 2005       5378.379  316264728
