@@ -168,39 +168,57 @@ WDIbulk = function() {
     return(out)
 }
 
-
 wdi.dl = function(indicator, country, start, end){
+
     # years
     if (is.null(start)) {
         start = 1950
     }
+
     if (is.null(end)) {
-        end = as.integer(format(Sys.Date(), "%Y"))
+        end = as.integer(format(Sys.Date(), "%Y")) - 1
     }
 
-    # build url
-    daturl = paste("http://api.worldbank.org/countries/", country, "/indicators/", indicator,
-                    "?date=",start,":",end, "&per_page=25000", "&format=json", sep = "")
-
-    # download
-    dat_raw = RJSONIO::fromJSON(daturl, nullValue=NA)[[2]]
-
-    # extract data 
-    dat = lapply(dat_raw, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date))
-    dat = data.frame(do.call('rbind', dat), stringsAsFactors = FALSE)
-    colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
+    # WDI only allows 32500 per_page (this seems undocumented)
+    get_page <- function(i) {
+        
+        # build url
+        # this used to bse useful: "&per_page=25000" 
+        daturl = paste0("http://api.worldbank.org/v2/country/", country, "/indicator/", indicator,
+                        "?format=json",
+                        "&date=",start,":",end,
+                        "&per_page=32500",
+                        "&page=", i)
+        # download
+        dat_raw = RJSONIO::fromJSON(daturl, nullValue=NA)[[2]]
+        # extract data 
+        dat = lapply(dat_raw, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date))
+        dat = data.frame(do.call('rbind', dat), stringsAsFactors = FALSE)
+        colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
+        dat$label <- dat_raw[[1]]$indicator['value']
+        # output
+        return(dat)
+    }
+    tmp <- sapply(1:10, function(i) try(get_page(i), silent = TRUE))
+    tmp <- tmp[sapply(tmp, inherits, what = 'data.frame')]
+    dat <- do.call('rbind', tmp)
 
     # numeric types
-    dat[[indicator]] = as.numeric(dat[[indicator]])
-    dat$year = as.integer(dat$year)
+    dat[[indicator]] <- as.numeric(dat[[indicator]])
+
+    # date is character for monthly/quarterly data, numeric otherwise
+    if (!any(grepl('M|Q', dat$year))) {
+        dat$year <- as.integer(dat$year)
+    }
 
     # Bad data in WDI JSON files require me to impose this constraint
     dat = dat[!is.na(dat$year) & dat$year <= end & dat$year >= start,]
 
     # output
-    out = list('data' = dat,
+    out = list('data' = dat[, 1:4],
                'indicator' = indicator,
-               'label' = as.character(dat_raw[[1]]$indicator['value']))
+               'label' = dat$label[1])
+
     return(out)
 }
 
@@ -272,4 +290,3 @@ WDIsearch <- function(string="gdp", field="name", short=TRUE, cache=NULL){
     }
     return(out)
 }
-

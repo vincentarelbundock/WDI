@@ -77,6 +77,21 @@ ggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() +
 
 Note: You can use `country='all'` to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.
 
+# Monthly or quarterly data
+
+Some World Bank series are available at the monthly or quarterly frequency. You can download those simply using the `start` and `end` arguments:
+
+```r
+WDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05')
+
+  iso2c country DPANUSSPB    year
+1   CHN   China  6.324130 2012M05
+2   CHN   China  6.303810 2012M04
+3   CHN   China  6.313545 2012M03
+4   CHN   China  6.300286 2012M02
+5   CHN   China  6.313091 2012M01
+```
+
 # Automatic rename
 
 If the vector that you supply to ``WDI`` is named, the function will automatically rename columns where possible.
