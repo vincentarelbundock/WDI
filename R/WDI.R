@@ -168,27 +168,28 @@ WDIbulk = function() {
     return(out)
 }
 
-wdi.dl = function(indicator, country, start, end){
-
-    # years
+wdi.query = function(indicator = "NY.GDP.PCAP.CD", 
+                     country = 'all', 
+                     start = 1960, 
+                     end = 2020) {
     if (is.null(start)) {
         start = 1950
     }
-
     if (is.null(end)) {
         end = as.integer(format(Sys.Date(), "%Y")) - 1
     }
-
     # WDI only allows 32500 per_page (this seems undocumented)
-    get_page <- function(i) {
-        
-        # build url
-        # this used to bse useful: "&per_page=25000" 
-        daturl = paste0("http://api.worldbank.org/v2/country/", country, "/indicator/", indicator,
-                        "?format=json",
-                        "&date=",start,":",end,
-                        "&per_page=32500",
-                        "&page=", i)
+    out = paste0("http://api.worldbank.org/v2/country/", country, "/indicator/", indicator,
+                 "?format=json",
+                 "&date=",start,":",end,
+                 "&per_page=32500",
+                 "&page=",1:10)
+    return(out)
+}
+
+
+wdi.dl = function(indicator, country, start, end){
+    get_page <- function(daturl) {
         # download
         dat_raw = RJSONIO::fromJSON(daturl, nullValue=NA)[[2]]
         # extract data 
@@ -199,7 +200,8 @@ wdi.dl = function(indicator, country, start, end){
         # output
         return(dat)
     }
-    tmp <- sapply(1:10, function(i) try(get_page(i), silent = TRUE))
+    pages <- wdi.query(indicator, country, start, end)
+    tmp <- sapply(pages, function(x) try(get_page(x), silent = TRUE))
     tmp <- tmp[sapply(tmp, inherits, what = 'data.frame')]
     dat <- do.call('rbind', tmp)
 
