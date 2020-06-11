@@ -2,6 +2,8 @@
 
 The World Bank makes available a ton of great data from the World Development Indicators through its web API. The `WDI` package for `R` makes it easy to search and download data series from the WDI. 
 
+![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/WDI)
+
 # Installation
 
 `WDI` is published on CRAN and so can be installed by simply typing this in the `R` console: 
