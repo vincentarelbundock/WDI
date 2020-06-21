@@ -1,7 +1,8 @@
-Version 2.7.0 (2020-??-??)
+Version 2.7.0 (2020-06-21)
 --------------------------
 
 * API v2
+* Fix a breaking change after API v2
 * per_page not large enough when dataset is big
 * Monthly and quarterly data
 

@@ -4,8 +4,14 @@
 \alias{WDI}
 \title{WDI: World Development Indicators (World Bank)}
 \usage{
-WDI(country = "all", indicator = "NY.GNS.ICTR.GN.ZS", start = NULL,
-  end = NULL, extra = FALSE, cache = NULL)
+WDI(
+  country = "all",
+  indicator = "NY.GDP.PCAP.KD",
+  start = 1960,
+  end = 2020,
+  extra = FALSE,
+  cache = NULL
+)
 }
 \arguments{
 \item{country}{Vector of countries (ISO-2 character codes, e.g. "BR", "US",

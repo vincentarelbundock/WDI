@@ -5,7 +5,9 @@
 \name{WDI_data}
 \alias{WDI_data}
 \title{World Development Indicators series and country information}
-\format{List of 2 data frames}
+\format{
+List of 2 data frames
+}
 \usage{
 WDI_data
 }

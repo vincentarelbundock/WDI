@@ -4,8 +4,7 @@
 \alias{WDIsearch}
 \title{Search names and descriptions of available WDI series}
 \usage{
-WDIsearch(string = "gdp", field = "name", short = TRUE,
-  cache = NULL)
+WDIsearch(string = "gdp", field = "name", short = TRUE, cache = NULL)
 }
 \arguments{
 \item{string}{Character string. Search for this string using \code{grep} with

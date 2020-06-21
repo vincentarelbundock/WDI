@@ -1,22 +1,20 @@
 Package: WDI
-Title: World Development Indicators (World Bank)
-Description: Search, extract and format data from the World Bank's
-    World Development Indicators.
+Title: World Development Indicators and Other World Bank Data
+Description: Search and download data from over 40 databases hosted by the World Bank, including the World Development Indicators ('WDI'), International Debt Statistics, Doing Business, Human Capital Index, and Sub-national Poverty indicators.
 Author: Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>
 Maintainer: Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>
 LazyData: yes 
 Type: Package
 LazyLoad: yes
 Encoding: UTF-8
-Version: 2.6.0.9000
+Version: 2.7.0
 URL: https://www.github.com/vincentarelbundock/WDI
-Date: 2019-03-02
 Depends:
-    R (>= 3.1.0)
+    R (>= 3.5.0)
 Imports: 
     RJSONIO
 Suggests: 
     tidyr (>= 0.8.0),
     testthat
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0.9000
 License: GPL-3
