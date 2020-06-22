@@ -28,6 +28,7 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #'
 #' WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"),
 #'     start=1990, end=2000)
@@ -37,6 +38,7 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' # Rename indicators on the fly
 #' WDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',
 #'                                   'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))
+#' }
 WDI <- function(country = "all", 
                 indicator = "NY.GDP.PCAP.KD",
                 start = 1960, 
@@ -264,7 +266,7 @@ wdi.dl = function(indicator, country, start, end){
 #' @export
 WDIcache = function(){
     # Series
-    series_url = 'https://api.worldbank.org/v2/indicators?per_page=25000&format=json'
+    series_url = 'https://api.worldbank.org/v2/indicator?per_page=25000&format=json'
     series_dat    = RJSONIO::fromJSON(series_url, nullValue=NA)[[2]]
     series_dat = lapply(series_dat, function(k) cbind(
                         'indicator'=k$id, 'name'=k$name, 'description'=k$sourceNote, 
@@ -304,8 +306,10 @@ WDIcache = function(){
 #'     match the criteria.  
 #' @export
 #' @examples
+#' \donrun{
 #' WDIsearch(string='gdp', field='name', cache=NULL)
 #' WDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)
+#' }
 WDIsearch <- function(string="gdp", field="name", short=TRUE, cache=NULL){
     if(!is.null(cache)){ 
         series = cache$series    

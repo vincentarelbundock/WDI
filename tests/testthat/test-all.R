@@ -2,10 +2,6 @@ context('All tests in one file')
 
 library(WDI)
 
-test_that('intential breakage to test travis', {
-    expect_equal(3, 5)
-})
-
 test_that('WDIcache', {
 
     cache = WDIcache()
