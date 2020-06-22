@@ -28,6 +28,7 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' @export
 #'
 #' @examples
+#'
 #' \dontrun{
 #'
 #' WDI(country="all", indicator=c("AG.AGR.TRAC.NO","TM.TAX.TCOM.BC.ZS"),
@@ -39,6 +40,7 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' WDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',
 #'                                   'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))
 #' }
+#'
 WDI <- function(country = "all", 
                 indicator = "NY.GDP.PCAP.KD",
                 start = 1960, 
@@ -306,7 +308,7 @@ WDIcache = function(){
 #'     match the criteria.  
 #' @export
 #' @examples
-#' \donrun{
+#' \dontrun{
 #' WDIsearch(string='gdp', field='name', cache=NULL)
 #' WDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)
 #' }

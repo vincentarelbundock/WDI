@@ -28,6 +28,8 @@ Data frame with series code, name, description, and source for the WDI series
 which match the given criteria
 }
 \examples{
+\dontrun{
 WDIsearch(string='gdp', field='name', cache=NULL)
 WDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)
+}
 }
