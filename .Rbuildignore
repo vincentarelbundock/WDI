@@ -3,3 +3,17 @@ share
 web
 test
 README.md
+^LICENSE\.md$
+^.*\.Rproj$
+^\.Rproj\.user$
+.travis.yml
+tests/
+cran-comments.md
+^CRAN-RELEASE$
+^appveyor\.yml$
+^_pkgdown\.yml$
+^pkgdown$
+docs/
+doc/
+README.Rmd
+utilities/
