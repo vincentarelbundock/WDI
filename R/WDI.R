@@ -14,8 +14,10 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' @param indicator Character vector of indicators codes. See the WDIsearch()
 #' function. If you supply a named vector, the indicators will be automatically
 #' renamed: `c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS')`
-#' @param start First year of data. If NULL, the start year is set to 1950.
-#' @param end Last year of data. If NULL, the end year is set to the current year. 
+#' @param start Start date, usually a year in integer format. Must be 1960 or
+#' greater.
+#' @param end End date, usually a year in integer format. Must be greater than
+#' the `start` argument.
 #' @param extra TRUE returns extra variables such as region, iso3c code, and
 #'     incomeLevel
 #' @param cache NULL (optional) a list created by WDIcache() to be used with the
@@ -48,50 +50,68 @@ WDI <- function(country = "all",
                 extra = FALSE, 
                 cache = NULL){
 
-    # Sanity checks
-    country   = gsub('[^a-zA-Z0-9]', '', country)
-    if(!('all' %in% country)){
-        country_good = unique(c(WDI::WDI_data$country[,'iso3c'], WDI::WDI_data$country[,'iso2c']))
-        country_bad = country[!country %in% country_good]
-        country = country[country %in% country_good]
-        if(length(country_bad) > 0){
-            warning(paste('Unable to download data on countries: ', paste(country_bad, collapse=', ')))
-        }
-        if(length(country) > 0){
-            country = paste(country, collapse=';')
-        }else{
-            stop('No valid country was requested')
-        }
-    }else{
-        country = 'all'
+    # Sanity: country
+    if (!is.character(country)) {
+        stop('The `country` argument must be a character vector')
     }
 
-    if (!is.null(start)) {
-        if (!is.null(end)) {
-            if(!(start <= end)){
-                stop('start must be smaller than end.') 
-            }
-        }
+    country <- gsub('[^a-zA-Z0-9]', '', country)
+    country_good <- unique(c(WDI::WDI_data$country[,'iso3c'], 
+                             WDI::WDI_data$country[,'iso2c']))
+    country_good <- c('all', country_good)
+    country_bad <- base::setdiff(country, country_good)
+    country <- base::intersect(country, country_good)
+
+    if (length(country) == 0) {
+        stop('None of the countries requested are valid. Please use ISO-2, ISO-3, or World Bank regional codes.')
+    }
+    if (length(country_bad) > 0) {
+        warning('Please use ISO-2, ISO-3, or World Bank regional codes. Some of the country codes that you requested are invalid: ',  
+                paste(country_bad, collapse = ', '))
+    }
+
+    # Sanity: start & end
+    if(!(start <= end)){
+        stop('`end` must be equal to or greater than `start`.')
+    }
+    is_integer <- function(x) is.numeric(x) && (x %% 1 == 0)
+    if (is_integer(start) && (start < 1960)) {
+        stop('`start` must be equal to or greater than 1960')
     }
 
     # Download
     dat <- list()
+    failed <- NULL
     for (i in indicator) {
-        tmp <- tryCatch(wdi.dl(i, country, start, end),
-                        error = function(e) e)
-        if (is.null(tmp) || 
-            !inherits(tmp$data, 'data.frame') ||
-            (nrow(tmp$data) == 0)) {
-            message('Unable to download indicator ', i)
+        tmp <- tryCatch(wdi.dl(i, country, start, end), error = function(e) e)
+        if (is.null(tmp) || !inherits(tmp$data, 'data.frame') || (nrow(tmp$data) == 0)) {
+            failed <- c(failed, i)
         } else {
             dat[[i]] <- tmp
         }
     }
 
+    # Sanity: downloaded data
     if (length(dat) == 0) {
-        message('No indicator could be downloaded. Please check that (a) the country codes are correct, (b) the indicator exists for country and years requested, (c) the indicator name is correctly entered, and (d) the World Bank API servers are online. If you still think your command should have succeeded, please file a support request on Github: https://github.com/vincentarelbundock/WDI')
+        message('None of the indicators your requested could be downloaded. Please verify the arguments of the `WDI()` function. You can also type a URL of this form in your browser to check if the World Bank web API is currently serving the indicator(s) of interest: ',
+                wdi.query(indicator = failed[1])[1])
         return(NULL)
     } 
+
+    # not downloaded and not in cache
+    indicator_good <- WDI::WDI_data$series[, 'indicator']
+    tmp <- base::setdiff(failed, indicator_good) 
+    if (length(tmp) > 0) {
+        message('These indicators could not be downloaded, and they do not appear in the cached list of available World Bank data series: ',
+                paste(tmp, collapse = ', '))
+    }
+
+    # not downloaded
+    tmp <- base::setdiff(failed, tmp)
+    if (length(tmp) > 0) {
+        message('These indicators could not be downloaded: ',
+                paste(tmp, collapse = ', '))
+    }
 
     # Extract labels
     lab = lapply(dat, function(x) data.frame('indicator' = x$indicator,
