@@ -1,27 +1,23 @@
-Version 2.7.0 (2020-06-21)
---------------------------
+# WDI 2.7.0 
 
 * API v2
 * Fix a breaking change after API v2
 * per_page not large enough when dataset is big
 * Monthly and quarterly data
 
-Version 2.6.0 (2019-03-02)
---------------------------
+# WDI 2.6.0
 
 * `start` and `end` are NULL as default and download all available years.
 * `label` attribute to the return data.frame includes descriptive labels for each
 * `WDIbulk` function to download all of WDI
 * WDIcache and data trim whitespace from region names
 
-Version 2.5.1 (2018-12-05)
---------------------------
+# WDI 2.5.1
 
-* New version numbering scheme
+* New # WDI numbering scheme
 * Updated country and indicator data
 
-Version 2.5.0 (2018-04-09)
---------------------------
+# WDI 2.5.0
 
 * Namespace issues (thanks to Jan Dietrich)
 * Updated the list of available indicators
@@ -29,29 +25,24 @@ Version 2.5.0 (2018-04-09)
 * Rolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)
 * Rename columns automatically when using a named vector
 
-Version 2.4.0
--------------
+# WDI 2.4.0
 
 * Call RJSONIO::fromJSON explicitly to avoid conflict with JSON package (Thanks to Richard Cotton)
 
-Version 2.3.0
--------------
+# WDI 2.3.0
 
 * Change default start/end date per user request
 
-Version 2.2.0
--------------
+# WDI 2.2.0
 
 * Bug: country names were stripped of digits
 
-Version 2.1.0
--------------
+# WDI 2.1.0
 
 * Fixed various issues (thanks to Matthieu Stigler for bug reports and patches)
 * Faster downloads when requesting multiple countries (leveraging the US;BR;CA API syntax)
 
-Version 2.0.0
--------------
+# WDI 2.0.0
 
 * Now uses JSON instead of XML (Faster, easier)
 * WDIcache function now allows users to update the locally stored database of available WDI series
