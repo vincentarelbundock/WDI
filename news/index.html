@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal function to build API call — wdi.query • WDI</title>
+<title>Changelog • WDI</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,7 @@
 
 
 
-<meta property="og:title" content="Internal function to build API call — wdi.query" />
-<meta property="og:description" content="Internal function to build API call" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -59,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -106,30 +105,111 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal function to build API call</h1>
-    
-    <div class="hidden name"><code>wdi.query.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      
     </div>
 
-    <div class="ref-description">
-    <p>Internal function to build API call</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>wdi.query</span>(
-  <span class='kw'>indicator</span> <span class='kw'>=</span> <span class='st'>"NY.GDP.PCAP.CD"</span>,
-  <span class='kw'>country</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
-  <span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>1960</span>,
-  <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>2020</span>
-)</pre>
-
-
-
+    <div id="wdi-270" class="section level1">
+<h1 class="page-header" data-toc-text="2.7.0">
+<a href="#wdi-270" class="anchor"></a>WDI 2.7.0<small> 2020-06-23 </small>
+</h1>
+<ul>
+<li>API v2</li>
+<li>Fix a breaking change after API v2</li>
+<li>per_page not large enough when dataset is big</li>
+<li>Monthly and quarterly data</li>
+</ul>
+</div>
+    <div id="wdi-260" class="section level1">
+<h1 class="page-header" data-toc-text="2.6.0">
+<a href="#wdi-260" class="anchor"></a>WDI 2.6.0<small> 2019-03-03 </small>
+</h1>
+<ul>
+<li>
+<code>start</code> and <code>end</code> are NULL as default and download all available years.</li>
+<li>
+<code>label</code> attribute to the return data.frame includes descriptive labels for each</li>
+<li>
+<code>WDIbulk</code> function to download all of WDI</li>
+<li>WDIcache and data trim whitespace from region names</li>
+</ul>
+</div>
+    <div id="wdi-251" class="section level1">
+<h1 class="page-header" data-toc-text="2.5.1">
+<a href="#wdi-251" class="anchor"></a>WDI 2.5.1<small> 2018-12-07 </small>
+</h1>
+<ul>
+<li>New # WDI numbering scheme</li>
+<li>Updated country and indicator data</li>
+</ul>
+</div>
+    <div id="wdi-250" class="section level1">
+<h1 class="page-header" data-toc-text="2.5.0">
+<a href="#wdi-250" class="anchor"></a>WDI 2.5.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>Namespace issues (thanks to Jan Dietrich)</li>
+<li>Updated the list of available indicators</li>
+<li>Allow iso3c or iso2c as input for country argument</li>
+<li>Rolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)</li>
+<li>Rename columns automatically when using a named vector</li>
+</ul>
+</div>
+    <div id="wdi-240" class="section level1">
+<h1 class="page-header" data-toc-text="2.4.0">
+<a href="#wdi-240" class="anchor"></a>WDI 2.4.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>Call RJSONIO::fromJSON explicitly to avoid conflict with JSON package (Thanks to Richard Cotton)</li>
+</ul>
+</div>
+    <div id="wdi-230" class="section level1">
+<h1 class="page-header" data-toc-text="2.3.0">
+<a href="#wdi-230" class="anchor"></a>WDI 2.3.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>Change default start/end date per user request</li>
+</ul>
+</div>
+    <div id="wdi-220" class="section level1">
+<h1 class="page-header" data-toc-text="2.2.0">
+<a href="#wdi-220" class="anchor"></a>WDI 2.2.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>Bug: country names were stripped of digits</li>
+</ul>
+</div>
+    <div id="wdi-210" class="section level1">
+<h1 class="page-header" data-toc-text="2.1.0">
+<a href="#wdi-210" class="anchor"></a>WDI 2.1.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed various issues (thanks to Matthieu Stigler for bug reports and patches)</li>
+<li>Faster downloads when requesting multiple countries (leveraging the US;BR;CA API syntax)</li>
+</ul>
+</div>
+    <div id="wdi-200" class="section level1">
+<h1 class="page-header" data-toc-text="2.0.0">
+<a href="#wdi-200" class="anchor"></a>WDI 2.0.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>Now uses JSON instead of XML (Faster, easier)</li>
+<li>WDIcache function now allows users to update the locally stored database of available WDI series</li>
+<li>Fixed doc examples<br>
+</li>
+<li>Documentation now uses roxygen2</li>
+<li>Moved development to github</li>
+<li>Series and country info now in a single data list. utf-8 encoding fixed</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
