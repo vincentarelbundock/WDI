@@ -1,8 +1,6 @@
-# World Bank Development indicators for R
+# World Bank data in `R`
 
-
-
-The World Bank makes available a ton of great data from the World Development Indicators through its web API. The `WDI` package for `R` makes it easy to search and download data series from the WDI. 
+The `WDI` package allows users to search and download data from over 40 datasets hosted by the World Bank, including the World Development Indicators ('WDI'), International Debt Statistics, Doing Business, Human Capital Index, and Sub-national Poverty indicators.
 
 <!-- badges: start -->
 [![Travis-CI Build Status](https://travis-ci.org/vincentarelbundock/WDI.svg?branch=master)](https://travis-ci.org/vincentarelbundock/WDI)
@@ -14,7 +12,16 @@ The World Bank makes available a ton of great data from the World Development In
 
 `WDI` is published on CRAN and so can be installed by simply typing this in the `R` console: 
 
-    install.packages('WDI')
+```r
+install.packages('WDI')
+```
+
+To install the development version of the package, use `remotes`:
+
+```r
+library(remotes)
+install_github('vincentarelbundock/WDI')
+```
 
 # Searching for data
 

@@ -6,3 +6,6 @@ README.Rmd
 cran-comments.md
 ^CRAN-RELEASE$
 ^appveyor\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
