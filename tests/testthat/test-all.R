@@ -2,7 +2,7 @@ context('All tests in one file')
 
 library(WDI)
 
-# breaks on travis but works locally
+## breaks on travis but works locally
 #test_that('WDIcache', {
 
     #cache = WDIcache()
@@ -17,37 +17,54 @@ library(WDI)
 
 #})
 
+test_that('Bad indicator' , {
+    expect_message(expect_s3_class(
+        WDI(indicator = c('NY.GDP.PCAP.KD', 'test'), country = 'US', start = 1990, end = 1991),
+        'data.frame'))
+    expect_message(expect_null(
+        WDI(indicator = c('bad', 'test'), country = 'US', start = 1990, end = 1990)))
+})
+
+test_that('Bad country', {
+    expect_error(WDI(country = c('bad')))
+    expect_warning(WDI(country = c('CA', 'bad'), start = 1990, end = 1991))
+})
+
+test_that('Bad year', {
+    expect_error(WDI(start = 1950))
+    expect_error(WDI(start = 1991, end = 1990))
+    expect_error(WDI(start = '1990M2', end = '1990M1'))
+})
+
 test_that('WDI', {
 
     # 1 country 1 indicator
-    x <- WDI(country='US', indicator='NY.GDP.PCAP.KD', 
-             start=1960, end=2005)
+    x <- WDI(country='US', indicator='NY.GDP.PCAP.KD', start = 1990, end = 1991) 
     expect_s3_class(x, 'data.frame')
-    expect_gte(nrow(x), 30)
-    expect_equal(ncol(x), 4)
+    expect_equal(dim(x), c(2, 4))
 
     # 3 countries 1 indicator
     x <- WDI(country=c('CA', 'MX', 'US'), 
              indicator='NY.GDP.PCAP.KD', 
-             start=1960, end=2005)
+             start=1990, end=1991)
     expect_s3_class(x, 'data.frame')
-    expect_gte(nrow(x), 30)
-    expect_equal(ncol(x), 4)
+    expect_equal(dim(x), c(6, 4))
     expect_equal(length(unique(x$iso2c)), 3)
 
     # multiple indicators
     ind <- c("NY.GDP.PCAP.KD", "NY.GDP.PCAP.KN", "NY.GDP.PCAP.PP.KD")
-    x <- WDI(indicator = ind)
+    x <- WDI(indicator = ind, start=1990, end=1991)
     expect_gte(nrow(x), 30)
     expect_equal(ncol(x), 6)
 
     # bad countries
     co <- c('BADCOUNTRY_one', 'BADCOUNTRY_two', 'CA', 'MX', 'US')
-    expect_warning(WDI(country = co))
+    x <- expect_warning(WDI(country = co, start=1990, end=1991))
+    expect_equal(length(unique(x$iso2c)), 3)
 
     # bad indicator 
     ind <- c("blah blah", "NY.GDP.PCAP.KD", "NY.GDP.PCAP.KN", "NY.GDP.PCAP.PP.KD", "NY.GDP.PCAP.PP.KD.87")
-    x <- expect_message(WDI(indicator = ind))
+    x <- expect_message(WDI(indicator = ind, start=1990, end=1991))
     expect_gte(nrow(x), 30)
     expect_equal(ncol(x), 6)
 
@@ -56,9 +73,8 @@ test_that('WDI', {
 test_that('WDI(extra = TRUE)', {
 
     x <- WDI(country='US', indicator='NY.GDP.PCAP.KD', 
-             start=1960, end=2005, extra = TRUE)
+             start=1991, end=1992, extra = TRUE)
     expect_s3_class(x, 'data.frame')
-    expect_gte(nrow(x), 30)
-    expect_equal(ncol(x), 11)
+    expect_equal(dim(x), c(2, 11))
 
 })

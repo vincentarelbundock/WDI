@@ -211,10 +211,7 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
                      start = 1960, 
                      end = 2020) {
 
-    # if integer, make sure it is higher than 1960 (world bank breaks otherwise)
-    if (is.numeric(start) && (start %% 1==0)) {
-        if (start < 1960) stop('Start year must be equal or greater than 1950.')
-    }
+    country <- paste(country, collapse = ';')
 
     # WDI only allows 32500 per_page (this seems undocumented)
     out = paste0("http://api.worldbank.org/v2/country/", country, "/indicator/", indicator,
@@ -241,6 +238,7 @@ wdi.dl = function(indicator, country, start, end){
         # output
         return(dat)
     }
+
     pages <- wdi.query(indicator, country, start, end)
 
     dat <- list()

@@ -22,9 +22,11 @@ individual iso codes pulls data for every available country.}
 function. If you supply a named vector, the indicators will be automatically
 renamed: `c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS')`}
 
-\item{start}{First year of data. If NULL, the start year is set to 1950.}
+\item{start}{Start date, usually a year in integer format. Must be 1960 or
+greater.}
 
-\item{end}{Last year of data. If NULL, the end year is set to the current year.}
+\item{end}{End date, usually a year in integer format. Must be greater than
+the `start` argument.}
 
 \item{extra}{TRUE returns extra variables such as region, iso3c code, and
 incomeLevel}
