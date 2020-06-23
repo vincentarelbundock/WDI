@@ -172,7 +172,7 @@ WDIbulk = function() {
 
     # download
     temp = tempfile()
-    url = 'http://databank.worldbank.org/data/download/WDI_csv.zip'
+    url = 'https://databank.worldbank.org/data/download/WDI_csv.zip'
     utils::download.file(url, temp)
 
     # read
@@ -214,9 +214,9 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
     country <- paste(country, collapse = ';')
 
     # WDI only allows 32500 per_page (this seems undocumented)
-    out = paste0("http://api.worldbank.org/v2/country/", country, "/indicator/", indicator,
+    out = paste0("https://api.worldbank.org/v2/country/", country, "/indicator/", indicator,
                  "?format=json",
-                 "&date=",start,":",end,
+                 "&date=", start, ":", end,
                  "&per_page=32500",
                  "&page=",1:10)
     return(out)
