@@ -1,3 +1,8 @@
+# WDI 2.7.0.9000
+
+* Bug: did not download all countries
+* WDIcache did not retrieve regions
+
 # WDI 2.7.0 
 
 * API v2

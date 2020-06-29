@@ -296,9 +296,9 @@ WDIcache = function(){
     country_url = 'https://api.worldbank.org/v2/countries/all?per_page=25000&format=json'
     country_dat = RJSONIO::fromJSON(country_url, nullValue=NA)[[2]]
     country_dat = lapply(country_dat, function(k) cbind(
-                         'iso3c'=k$id, 'iso2c'=k$iso2Code, 'country'=k$name, 'region'=k$region[2],
+                         'iso3c'=k$id, 'iso2c'=k$iso2Code, 'country'=k$name, 'region'=k$region[['value']],
                          'capital'=k$capitalCity, 'longitude'=k$longitude, 'latitude'=k$latitude, 
-                         'income'=k$incomeLevel[2], 'lending'=k$lendingType[2])) 
+                         'income'=k$incomeLevel[['value']], 'lending'=k$lendingType[['value']])) 
     country_dat = do.call('rbind', country_dat)
     row.names(country_dat) = row.names(series_dat) = NULL
     out = list('series'=series_dat, 'country'=country_dat)
