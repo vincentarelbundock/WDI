@@ -93,7 +93,7 @@ WDI <- function(country = "all",
 
     # Sanity: downloaded data
     if (length(dat) == 0) {
-        message('None of the indicators your requested could be downloaded. Please verify the arguments of the `WDI()` function. You can also type a URL of this form in your browser to check if the World Bank web API is currently serving the indicator(s) of interest: ',
+        message('None of the indicators you requested could be downloaded. Please verify the arguments of the `WDI()` function. You can also type a URL of this form in your browser to check if the World Bank web API is currently serving the indicator(s) of interest: ',
                 wdi.query(indicator = failed[1])[1])
         return(NULL)
     } 
