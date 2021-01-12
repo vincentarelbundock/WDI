@@ -162,10 +162,15 @@ WDI <- function(country = "all",
 #' 
 #' @return Data frame 
 #' @author Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca}
+#' @param timeout integer maximum number of seconds to wait for download
 #' @return a list of 6 data frames: Data, Country, Series, Country-Series,
 #' Series-Time, FootNote
 #' @export
-WDIbulk = function() {
+WDIbulk = function(timeout = 600) {
+
+    # store default option
+    oo <- options(timeout = timeout)
+
     if (!'tidyr' %in% utils::installed.packages()[, 1]) {
         stop('To use the `WDIbulk` function, you must install the `tidyr` package.')
     }
@@ -205,6 +210,9 @@ WDIbulk = function() {
 
     # clean year column
     out$Data$year = as.integer(out$Data$year)
+
+    # restore default option
+    on.exit(options(oo))
 
     # output
     return(out)

@@ -4,7 +4,10 @@
 \alias{WDIbulk}
 \title{Download all the WDI indicators at once.}
 \usage{
-WDIbulk()
+WDIbulk(timeout = 600)
+}
+\arguments{
+\item{timeout}{integer maximum number of seconds to wait for download}
 }
 \value{
 Data frame

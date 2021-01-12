@@ -1,3 +1,8 @@
+# WDI 2.7.1.9000
+
+* Speed improvement in WDIbulk (Thanks to @etiennebacher)
+* WDIbulk gets a `timeout` argument
+
 # WDI 2.7.1
 
 * Bug: did not download all countries
