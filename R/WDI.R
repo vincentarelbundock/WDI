@@ -4,10 +4,10 @@
 globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Name', 'Indicator.Code'))
 
 #' WDI: World Development Indicators (World Bank)
-#' 
+#'
 #' Downloads the requested data by using the World Bank's API, parses the
-#' resulting XML file, and formats it in long country-year format. 
-#' 
+#' resulting XML file, and formats it in long country-year format.
+#'
 #' @param country Vector of countries (ISO-2 character codes, e.g. "BR", "US",
 #'     "CA") for which the data is needed. Using the string "all" instead of
 #'     individual iso codes pulls data for every available country.
@@ -43,11 +43,11 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #'                                   'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))
 #' }
 #'
-WDI <- function(country = "all", 
+WDI <- function(country = "all",
                 indicator = "NY.GDP.PCAP.KD",
-                start = 1960, 
-                end = 2020, 
-                extra = FALSE, 
+                start = 1960,
+                end = 2020,
+                extra = FALSE,
                 cache = NULL){
   
   # Sanity: country
@@ -56,7 +56,7 @@ WDI <- function(country = "all",
   }
   
   country <- gsub('[^a-zA-Z0-9]', '', country)
-  country_good <- unique(c(WDI::WDI_data$country[,'iso3c'], 
+  country_good <- unique(c(WDI::WDI_data$country[,'iso3c'],
                            WDI::WDI_data$country[,'iso2c']))
   country_good <- c('all', country_good)
   country_bad <- base::setdiff(country, country_good)
@@ -66,7 +66,7 @@ WDI <- function(country = "all",
     stop('None of the countries requested are valid. Please use ISO-2, ISO-3, or World Bank regional codes.')
   }
   if (length(country_bad) > 0) {
-    warning('Please use ISO-2, ISO-3, or World Bank regional codes. Some of the country codes that you requested are invalid: ',  
+    warning('Please use ISO-2, ISO-3, or World Bank regional codes. Some of the country codes that you requested are invalid: ',
             paste(country_bad, collapse = ', '))
   }
   
@@ -96,11 +96,11 @@ WDI <- function(country = "all",
     message('None of the indicators you requested could be downloaded. Please verify the arguments of the `WDI()` function. You can also type a URL of this form in your browser to check if the World Bank web API is currently serving the indicator(s) of interest: ',
             wdi.query(indicator = failed[1])[1])
     return(NULL)
-  } 
+  }
   
   # not downloaded and not in cache
   indicator_good <- WDI::WDI_data$series[, 'indicator']
-  tmp <- base::setdiff(failed, indicator_good) 
+  tmp <- base::setdiff(failed, indicator_good)
   if (length(tmp) > 0) {
     message('These indicators could not be downloaded, and they do not appear in the cached list of available World Bank data series: ',
             paste(tmp, collapse = ', '))
@@ -159,8 +159,8 @@ WDI <- function(country = "all",
 }
 
 #' Download all the WDI indicators at once.
-#' 
-#' @return Data frame 
+#'
+#' @return Data frame
 #' @author Vincent Arel-Bundock \email{vincent.arel-bundock@umontreal.ca}
 #' @return a list of 6 data frames: Data, Country, Series, Country-Series,
 #' Series-Time, FootNote
@@ -171,31 +171,39 @@ WDIbulk = function() {
   }
   
   # download
-  temp = tempfile()
+  temp_dir = tempdir()
+  temp_file = tempfile(tmpdir = temp_dir)
   url = 'https://databank.worldbank.org/data/download/WDI_csv.zip'
-  utils::download.file(url, temp)
+  utils::download.file(url, temp_file)
   
   # read
-  zip_content = c("WDIData.csv", "WDICountry.csv", "WDISeries.csv",
-                  "WDICountry-Series.csv", "WDISeries-Time.csv",
-                  "WDIFootNote.csv")
-  out = lapply(zip_content, function(x) utils::read.csv(unz(temp, x), stringsAsFactors = FALSE))
+  unzipped <- utils::unzip(zipfile = temp_file,
+                           exdir = temp_dir)
+  
+  out = lapply(unzipped, function(x){
+    utils::read.csv(x, stringsAsFactors = FALSE)
+  })
   
   # flush
   unlink(temp)
   
   # names
-  names(out) = zip_content
-  names(out) = gsub('.csv', '', names(out))
-  names(out) = gsub('WDI', '', names(out))
+  names(out) = c("Data", "Country", "Series",
+                 "Country-Series", "Series-Time",
+                 "FootNote")
   
   # clean "Data" entry
   out$Data$X = NULL
-  out$Data = tidyr::gather(out$Data, year, value, -Country.Name,
-                           -Country.Code, -Indicator.Name, -Indicator.Code)
+  
+  out$Data = tidyr::pivot_longer(
+    data = out$Data,
+    cols = tidyr::starts_with("X"),
+    names_to = "year",
+    names_prefix = "X",
+    values_to = "value"
+  )
   
   # clean year column
-  out$Data$year = gsub('^X', '', out$Data$year)
   out$Data$year = as.integer(out$Data$year)
   
   # output
@@ -206,9 +214,9 @@ WDIbulk = function() {
 #'
 #' @export
 #' @keywords internal
-wdi.query = function(indicator = "NY.GDP.PCAP.CD", 
-                     country = 'all', 
-                     start = 1960, 
+wdi.query = function(indicator = "NY.GDP.PCAP.CD",
+                     country = 'all',
+                     start = 1960,
                      end = 2020) {
   
   country <- paste(country, collapse = ';')
@@ -230,7 +238,7 @@ wdi.dl = function(indicator, country, start, end){
   get_page <- function(daturl) {
     # download
     dat_raw = RJSONIO::fromJSON(daturl, nullValue=NA)[[2]]
-    # extract data 
+    # extract data
     dat = lapply(dat_raw, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date))
     dat = data.frame(do.call('rbind', dat), stringsAsFactors = FALSE)
     colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
@@ -276,29 +284,29 @@ wdi.dl = function(indicator, country, start, end){
 
 #' Update the list of available WDI indicators
 #'
-#' Download an updated list of available WDI indicators from the World Bank website. Returns a list for use in the \code{WDIsearch} function. 
-#' 
-#' @return Series of indicators, sources and descriptions in two lists list  
+#' Download an updated list of available WDI indicators from the World Bank website. Returns a list for use in the \code{WDIsearch} function.
+#'
+#' @return Series of indicators, sources and descriptions in two lists list
 #' @note Downloading all series information from the World Bank website can take time.
 #' The \code{WDI} package ships with a local data object with information on all the series
 #' available on 2012-06-18. You can update this database by retrieving a new list using \code{WDIcache}, and  then
-#' feeding the resulting object to \code{WDIsearch} via the \code{cache} argument. 
+#' feeding the resulting object to \code{WDIsearch} via the \code{cache} argument.
 #' @export
 WDIcache = function(){
   # Series
   series_url = 'https://api.worldbank.org/v2/indicator?per_page=25000&format=json'
   series_dat    = RJSONIO::fromJSON(series_url, nullValue=NA)[[2]]
   series_dat = lapply(series_dat, function(k) cbind(
-    'indicator'=k$id, 'name'=k$name, 'description'=k$sourceNote, 
-    'sourceDatabase'=k$source[2], 'sourceOrganization'=k$sourceOrganization)) 
-  series_dat = do.call('rbind', series_dat)          
+    'indicator'=k$id, 'name'=k$name, 'description'=k$sourceNote,
+    'sourceDatabase'=k$source[2], 'sourceOrganization'=k$sourceOrganization))
+  series_dat = do.call('rbind', series_dat)
   # Countries
   country_url = 'https://api.worldbank.org/v2/countries/all?per_page=25000&format=json'
   country_dat = RJSONIO::fromJSON(country_url, nullValue=NA)[[2]]
   country_dat = lapply(country_dat, function(k) cbind(
     'iso3c'=k$id, 'iso2c'=k$iso2Code, 'country'=k$name, 'region'=k$region[['value']],
-    'capital'=k$capitalCity, 'longitude'=k$longitude, 'latitude'=k$latitude, 
-    'income'=k$incomeLevel[['value']], 'lending'=k$lendingType[['value']])) 
+    'capital'=k$capitalCity, 'longitude'=k$longitude, 'latitude'=k$latitude,
+    'income'=k$incomeLevel[['value']], 'lending'=k$lendingType[['value']]))
   country_dat = do.call('rbind', country_dat)
   row.names(country_dat) = row.names(series_dat) = NULL
   out = list('series'=series_dat, 'country'=country_dat)
@@ -310,10 +318,10 @@ WDIcache = function(){
 }
 
 #' Search names and descriptions of available WDI series
-#' 
+#'
 #' Data frame with series code, name, description, and source for the WDI series
 #' which match the given criteria
-#' 
+#'
 #' @param string Character string. Search for this string using \code{grep} with
 #'     \code{ignore.case=TRUE}.
 #' @param field Character string. Search this field. Admissible fields:
@@ -321,9 +329,9 @@ WDIcache = function(){
 #' @param short TRUE: Returns only the indicator's code and name. FALSE: Returns
 #'     the indicator's code, name, description, and source.
 #' @param cache Data list generated by the \code{WDIcache} function. If omitted,
-#'     \code{WDIsearch} will search a local list of series.  
+#'     \code{WDIsearch} will search a local list of series.
 #' @return Data frame with code, name, source, and description of all series which
-#'     match the criteria.  
+#'     match the criteria.
 #' @export
 #' @examples
 #' \dontrun{
@@ -331,8 +339,8 @@ WDIcache = function(){
 #' WDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)
 #' }
 WDIsearch <- function(string="gdp", field="name", short=TRUE, cache=NULL){
-  if(!is.null(cache)){ 
-    series = cache$series    
+  if(!is.null(cache)){
+    series = cache$series
   }else{
     series = WDI::WDI_data$series
   }
