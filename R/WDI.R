@@ -171,31 +171,39 @@ WDIbulk = function() {
     }
 
     # download
-    temp = tempfile()
+    temp_dir = tempdir()
+    temp_file = tempfile(tmpdir = temp_dir)
     url = 'https://databank.worldbank.org/data/download/WDI_csv.zip'
-    utils::download.file(url, temp)
+    utils::download.file(url, temp_file)
 
     # read
-    zip_content = c("WDIData.csv", "WDICountry.csv", "WDISeries.csv",
-                    "WDICountry-Series.csv", "WDISeries-Time.csv",
-                    "WDIFootNote.csv")
-    out = lapply(zip_content, function(x) utils::read.csv(unz(temp, x), stringsAsFactors = FALSE))
+    unzipped <- utils::unzip(zipfile = temp_file,
+                             exdir = temp_dir)
+
+    out = lapply(unzipped, function(x){
+        utils::read.csv(x, stringsAsFactors = FALSE)
+    })
 
     # flush
-    unlink(temp)
+    unlink(temp_file)
 
     # names
-    names(out) = zip_content
-    names(out) = gsub('.csv', '', names(out))
-    names(out) = gsub('WDI', '', names(out))
+    names(out) = c("Data", "Country", "Series",
+                   "Country-Series", "Series-Time",
+                   "FootNote")
 
     # clean "Data" entry
     out$Data$X = NULL
-    out$Data = tidyr::gather(out$Data, year, value, -Country.Name,
-                             -Country.Code, -Indicator.Name, -Indicator.Code)
+
+    out$Data = tidyr::pivot_longer(
+        data = out$Data,
+        cols = tidyr::starts_with("X"),
+        names_to = "year",
+        names_prefix = "X",
+        values_to = "value"
+    )
 
     # clean year column
-    out$Data$year = gsub('^X', '', out$Data$year)
     out$Data$year = as.integer(out$Data$year)
 
     # output
