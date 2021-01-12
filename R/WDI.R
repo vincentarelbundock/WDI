@@ -169,32 +169,32 @@ WDIbulk = function() {
     if (!'tidyr' %in% utils::installed.packages()[, 1]) {
         stop('To use the `WDIbulk` function, you must install the `tidyr` package.')
     }
-    
+
     # download
     temp_dir = tempdir()
     temp_file = tempfile(tmpdir = temp_dir)
     url = 'https://databank.worldbank.org/data/download/WDI_csv.zip'
     utils::download.file(url, temp_file)
-    
+
     # read
     unzipped <- utils::unzip(zipfile = temp_file,
                              exdir = temp_dir)
-    
+
     out = lapply(unzipped, function(x){
         utils::read.csv(x, stringsAsFactors = FALSE)
     })
-    
+
     # flush
     unlink(temp_file)
-    
+
     # names
     names(out) = c("Data", "Country", "Series",
                    "Country-Series", "Series-Time",
                    "FootNote")
-    
+
     # clean "Data" entry
     out$Data$X = NULL
-    
+
     out$Data = tidyr::pivot_longer(
         data = out$Data,
         cols = tidyr::starts_with("X"),
@@ -202,10 +202,10 @@ WDIbulk = function() {
         names_prefix = "X",
         values_to = "value"
     )
-    
+
     # clean year column
     out$Data$year = as.integer(out$Data$year)
-    
+
     # output
     return(out)
 }
