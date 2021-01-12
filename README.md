@@ -3,9 +3,9 @@
 The `WDI` package allows users to search and download data from over 40 datasets hosted by the World Bank, including the World Development Indicators ('WDI'), International Debt Statistics, Doing Business, Human Capital Index, and Sub-national Poverty indicators.
 
 <!-- badges: start -->
-[![Travis-CI Build Status](https://travis-ci.org/vincentarelbundock/WDI.svg?branch=master)](https://travis-ci.org/vincentarelbundock/WDI)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/vincentarelbundock/WDI?branch=master&svg=true)](https://ci.appveyor.com/project/vincentarelbundock/WDI)
 ![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/WDI)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/vincentarelbundock/WDI?branch=master&svg=true)](https://ci.appveyor.com/project/vincentarelbundock/WDI)
+[![R build status](https://github.com/vincentarelbundock/WDI/workflows/R-CMD-check/badge.svg)](https://github.com/vincentarelbundock/WDI/actions)
 <!-- badges: end -->
 
 # Installation
