@@ -21,11 +21,12 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' @param extra TRUE returns extra variables such as region, iso3c code, and
 #'     incomeLevel.
 #' @param cache NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.
-#' @param mrv,mrnev Integer indicating the number of most recent non-empty values to get. Specify only one of the two. Default is NULL. Incompatible with `start` and `end`. 
+#' @param latest Integer indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.
+#'     
 #'     
 #' @details It is possible to only specify the `indicator` and the `country` arguments, in which case `WDI()` will return data from 1960 to the last year available on World Bank's website. 
 #' 
-#' It is also possible to get only the most recent values, whether empty or non-empty, with the arguments `mrv` (for Most Recent Values) and `mrnev` (for Most Recent Non-Empty Values). If one of those two arguments is specified, it is no longer required to provide `start` and `end` dates.
+#' It is also possible to get only the most recent non-NA values, with `latest`.
 #' 
 #' @return Data frame with country-year observations. You can extract a
 #' data.frame with indicator names and descriptive labels by inspecting the
@@ -46,6 +47,9 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' # Rename indicators on the fly
 #' WDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',
 #'                                   'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))
+#'                                   
+#' # Get the 5 latest non-NA values
+#' WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", latest = 5)
 #' }
 #'
 WDI <- function(country = "all", 
@@ -54,8 +58,7 @@ WDI <- function(country = "all",
                 end = 2020, 
                 extra = FALSE, 
                 cache = NULL,
-                mrv = NULL,
-                mrnev = NULL){
+                latest = NULL){
 
     # Sanity: country
     if (!is.character(country)) {
@@ -79,7 +82,9 @@ WDI <- function(country = "all",
 
     # Sanity: start & end
     is_integer <- function(x) is.numeric(x) && (x %% 1 == 0)
-    if (!is.null(start) && !is.null(end)) {
+    
+    # If latest is specified then the good order of dates doesn't matter
+    if (!is.null(start) && !is.null(end) && is.null(latest)) {
       if(!(start <= end)){
         stop('`end` must be equal to or greater than `start`.')
       }
@@ -89,12 +94,8 @@ WDI <- function(country = "all",
     }
     
     # Sanity: needs dates or number of most recent values (but not both)
-    if (is.null(start) && is.null(end) && is.null(mrv) && is.null(mrnev)) {
-      stop("Need to specify dates or number of most recent values.")
-    }
-    if (!is.null(start) && !is.null(end) && 
-        (!is.null(mrnev) || !is.null(mrv))) {
-      stop("You can't specify dates and 'mrv' or 'mrnev' at the same time.")
+    if (is.null(start) && is.null(end) && is.null(latest)) {
+      stop("Need to specify dates or number of latest values.")
     }
     
 
@@ -102,7 +103,7 @@ WDI <- function(country = "all",
     dat <- list()
     failed <- NULL
     for (i in indicator) {
-        tmp <- tryCatch(wdi.dl(i, country, start, end, mrv, mrnev), error = function(e) e)
+        tmp <- tryCatch(wdi.dl(i, country, start, end, latest), error = function(e) e)
         if (is.null(tmp) || !inherits(tmp$data, 'data.frame') || (nrow(tmp$data) == 0)) {
             failed <- c(failed, i)
         } else {
@@ -245,21 +246,22 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
                      country = 'all', 
                      start = 1960, 
                      end = 2020,
-                     mrv = NULL,
-                     mrnev = NULL) {
+                     latest = NULL) {
 
     country <- paste(country, collapse = ';')
     
-    # Optional arguments
-    if (!is.null(mrv)) {
-      mrv <- paste0("&mrv=", mrv)
-    }
-    if (!is.null(mrnev)) {
-      mrnev <- paste0("&mrnev=", mrnev)
+    # Optional argument
+    if (!is.null(latest)) {
+      latest <- paste0("&mrnev=", latest)
     }
     
+    # If latest is specified, dates are overridden
     if (!is.null(start) && !is.null(end)) {
-      years <- paste0("&date=", start, ":", end)
+      if (is.null(latest)) {
+        years <- paste0("&date=", start, ":", end)
+      } else {
+        years <- NULL
+      }
     } else {
       years <- NULL
     }
@@ -271,8 +273,7 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
                  years,
                  "&per_page=32500",
                  "&page=", 1:10,
-                 mrv,
-                 mrnev)
+                 latest)
     return(out)
 }
 
@@ -280,7 +281,7 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
 #'
 #' @export
 #' @keywords internal
-wdi.dl = function(indicator, country, start, end, mrv = NULL, mrnev = NULL){
+wdi.dl = function(indicator, country, start, end, latest = NULL){
     get_page <- function(daturl) {
         # download
         dat_raw = RJSONIO::fromJSON(daturl, nullValue=NA)[[2]]
@@ -293,7 +294,7 @@ wdi.dl = function(indicator, country, start, end, mrv = NULL, mrnev = NULL){
         return(dat)
     }
 
-    pages <- wdi.query(indicator, country, start, end, mrv, mrnev)
+    pages <- wdi.query(indicator, country, start, end, latest)
 
     dat <- list()
     done <- FALSE # done when pages no longer return useable info

@@ -9,8 +9,7 @@ wdi.query(
   country = "all",
   start = 1960,
   end = 2020,
-  mrv = NULL,
-  mrnev = NULL
+  latest = NULL
 )
 }
 \description{

@@ -79,44 +79,21 @@ test_that('WDI(extra = TRUE)', {
 
 })
 
-test_that("behavior of start/end dates with mrv/mrnev", {
-    expect_error(
-        WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL)
+test_that("behavior of start/end dates with latest", {
+   expect_silent(
+        WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, latest = 5)
     )
     expect_silent(
-        WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, mrv = 5)
-    )
-    expect_silent(
-        WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, mrnev = 5)
-    )
-    expect_error(
-        WDI("all", "AG.AGR.TRAC.NO", start = 1980, end = 2000, mrv = 5)
-    )
-    expect_error(
-        WDI("all", "AG.AGR.TRAC.NO", start = 1980, end = 2000, mrnev = 5)
+        WDI("all", "AG.AGR.TRAC.NO", start = 1980, end = 2000, latest = 5)
     )
 })
 
-test_that("mrv and mrnev provides right dataframe", {
-    x <- WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, mrv = 5)
-    expect_s3_class(x, "data.frame")
-    expect_equal(length(unique(x$year)), 5)
-    
-    y <- WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, mrnev = 5)
+test_that("latest provides a dataframe", {
+   y <- WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, latest = 5)
     expect_s3_class(y, "data.frame")
-    # Number of years can't be tested for mrnev as it can go back far 
-    # in time until every country has at least 5 obs
+    
+   z <- WDI("all", "AG.AGR.TRAC.NO", latest = 5)
+   expect_s3_class(z, "data.frame")
 })
 
-test_that("mrnev overrides mrv", {
-    # only mrnev
-    x <- WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, mrnev = 5)
-    # both
-    y <- WDI("all", "AG.AGR.TRAC.NO", 
-             start = NULL, end = NULL, 
-             mrv = 5, mrnev = 5)
-    
-    expect_equal(unique(x$year), unique(y$year))
-    
-})
 

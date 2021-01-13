@@ -4,7 +4,7 @@
 \alias{wdi.dl}
 \title{Internal function to download data}
 \usage{
-wdi.dl(indicator, country, start, end, mrv = NULL, mrnev = NULL)
+wdi.dl(indicator, country, start, end, latest = NULL)
 }
 \description{
 Internal function to download data
