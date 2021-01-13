@@ -1,4 +1,4 @@
-context('All tests in one file')
+skip_on_cran()
 
 library(WDI)
 
