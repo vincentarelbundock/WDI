@@ -8,7 +8,9 @@ wdi.query(
   indicator = "NY.GDP.PCAP.CD",
   country = "all",
   start = 1960,
-  end = 2020
+  end = 2020,
+  mrv = NULL,
+  mrnev = NULL
 )
 }
 \description{
