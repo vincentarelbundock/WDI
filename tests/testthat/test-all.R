@@ -79,7 +79,7 @@ test_that('WDI(extra = TRUE)', {
 
 })
 
-test_that("start and end dates not required when specifying mrv or mrnev", {
+test_that("behavior of start/end dates with mrv/mrnev", {
     expect_error(
         WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL)
     )
@@ -88,6 +88,12 @@ test_that("start and end dates not required when specifying mrv or mrnev", {
     )
     expect_silent(
         WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, mrnev = 5)
+    )
+    expect_error(
+        WDI("all", "AG.AGR.TRAC.NO", start = 1980, end = 2000, mrv = 5)
+    )
+    expect_error(
+        WDI("all", "AG.AGR.TRAC.NO", start = 1980, end = 2000, mrnev = 5)
     )
 })
 
@@ -113,5 +119,4 @@ test_that("mrnev overrides mrv", {
     expect_equal(unique(x$year), unique(y$year))
     
 })
-
 

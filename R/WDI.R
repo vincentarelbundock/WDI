@@ -21,8 +21,7 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' @param extra TRUE returns extra variables such as region, iso3c code, and
 #'     incomeLevel.
 #' @param cache NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.
-#' @param mrv Integer indicating the number of most recent values to get. Default is NULL.
-#' @param mrnev Integer indicating the number of most recent non-empty values to get. Default is NULL. 
+#' @param mrv,mrnev Integer indicating the number of most recent non-empty values to get. Specify only one of the two. Default is NULL. Incompatible with `start` and `end`. 
 #'     
 #' @details It is possible to only specify the `indicator` and the `country` arguments, in which case `WDI()` will return data from 1960 to the last year available on World Bank's website. 
 #' 
@@ -89,9 +88,13 @@ WDI <- function(country = "all",
       }
     }
     
-    # Sanity: needs dates or number of most recent values
+    # Sanity: needs dates or number of most recent values (but not both)
     if (is.null(start) && is.null(end) && is.null(mrv) && is.null(mrnev)) {
       stop("Need to specify dates or number of most recent values.")
+    }
+    if (!is.null(start) && !is.null(end) && 
+        (!is.null(mrnev) || !is.null(mrv))) {
+      stop("You can't specify dates and 'mrv' or 'mrnev' at the same time.")
     }
     
 

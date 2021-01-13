@@ -35,9 +35,7 @@ incomeLevel.}
 
 \item{cache}{NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.}
 
-\item{mrv}{Integer indicating the number of most recent values to get. Default is NULL.}
-
-\item{mrnev}{Integer indicating the number of most recent non-empty values to get. Default is NULL.}
+\item{mrv, mrnev}{Integer indicating the number of most recent non-empty values to get. Specify only one of the two. Default is NULL. Overrides the specified dates.}
 }
 \value{
 Data frame with country-year observations. You can extract a
