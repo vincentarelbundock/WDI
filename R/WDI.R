@@ -22,6 +22,7 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #'     incomeLevel.
 #' @param cache NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.
 #' @param latest Integer indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.
+#' @param language ISO-2 code in lower case indicating in which language the characters should be provided. List of languages available with `WDI::languages_supported()`. Default is English.
 #'     
 #'     
 #' @details It is possible to only specify the `indicator` and the `country` arguments, in which case `WDI()` will return data from 1960 to the last year available on World Bank's website. 
@@ -58,7 +59,8 @@ WDI <- function(country = "all",
                 end = 2020, 
                 extra = FALSE, 
                 cache = NULL,
-                latest = NULL){
+                latest = NULL,
+                language = "en"){
 
     # Sanity: country
     if (!is.character(country)) {
@@ -98,12 +100,35 @@ WDI <- function(country = "all",
       stop("Need to specify dates or number of latest values.")
     }
     
+    
+    # "Language" option (placed here and not in wdi.query because
+    # otherwise tryCatch doesn't show the expected error message)
+    # get the two first letters (iso code)
+    supported_fully <- substr(languages_supported()$fully, 
+                              start = 1, 
+                              stop = 2)
+    supported_locally <- substr(languages_supported()$locally, 
+                                start = 1, 
+                                stop = 2)
+    if (is.null(language)) {
+      language <- "en"
+    } else {
+      if (language %in% supported_locally) {
+        warning("This language is only supported partially.")
+      } else if (!(language %in% supported_locally ||  
+                   language %in% supported_fully)) {
+        stop(paste0("This language is not supported. Run ",
+                    "WDI::languages_supported() to have a list of ",
+                    "fully and partially supported languages."))
+      }
+    }
+    
 
     # Download
     dat <- list()
     failed <- NULL
     for (i in indicator) {
-        tmp <- tryCatch(wdi.dl(i, country, start, end, latest), error = function(e) e)
+        tmp <- tryCatch(wdi.dl(i, country, start, end, latest, language), error = function(e) e)
         if (is.null(tmp) || !inherits(tmp$data, 'data.frame') || (nrow(tmp$data) == 0)) {
             failed <- c(failed, i)
         } else {
@@ -246,11 +271,12 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
                      country = 'all', 
                      start = 1960, 
                      end = 2020,
-                     latest = NULL) {
+                     latest = NULL,
+                     language = "en") {
 
     country <- paste(country, collapse = ';')
     
-    # Optional argument
+    # "Latest" option
     if (!is.null(latest)) {
       latest <- paste0("&mrnev=", latest)
     }
@@ -267,7 +293,9 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
     }
 
     # WDI only allows 32500 per_page (this seems undocumented)
-    out = paste0("https://api.worldbank.org/v2/country/", 
+    out = paste0("https://api.worldbank.org/v2/",
+                 language, 
+                 "/country/", 
                  country, "/indicator/", indicator,
                  "?format=json",
                  years,
@@ -281,7 +309,7 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
 #'
 #' @export
 #' @keywords internal
-wdi.dl = function(indicator, country, start, end, latest = NULL){
+wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"){
     get_page <- function(daturl) {
         # download
         dat_raw = RJSONIO::fromJSON(daturl, nullValue=NA)[[2]]
@@ -294,7 +322,7 @@ wdi.dl = function(indicator, country, start, end, latest = NULL){
         return(dat)
     }
 
-    pages <- wdi.query(indicator, country, start, end, latest)
+    pages <- wdi.query(indicator, country, start, end, latest, language)
 
     dat <- list()
     done <- FALSE # done when pages no longer return useable info
@@ -400,4 +428,34 @@ WDIsearch <- function(string="gdp", field="name", short=TRUE, cache=NULL){
         out = series[matches,]
     }
     return(out)
+}
+
+
+#' List of supported languages
+#' 
+#' This prints two lists of languages, the fully supported ones and the locally supported ones:
+#' * the languages in the category "fully" will return translated names and other info for all countries.
+#' * the languages in the category "partially" will return translated names and other info only for the country they represent. 
+#' 
+#' For example, choosing "vi" (for Vietnamese) will translate "Vietnam" in the dataset but other country names won't be translated and will be empty.
+#'
+#'
+#' @return A list of fully and partially supported languages.
+#' @export
+languages_supported <- function() {
+  
+    fully <- c("en (English)", "es (Spanish)", "fr (French)", 
+               "ar (Arabic)", "zh (Chinese)")
+    locally <- c("bg (Belgian)", "de (German)", "hi (Hindi)", 
+                 "id (Indonesian)", "ja (Japanese)", "km (Khmer)", 
+                 "ko (Korean)", "mk (Macedonian)", "mn (Mongolian)",
+                 "pl (Polish)", "pt (Portuguese)", "ro (Romanian)",
+                 "ru (Russian)", "sq (Albanian)", "th (Thai)", "tr (Turkish)",
+                 "uk (Ukrainian)", "vi (Vietnamese)")
+    
+    list(
+      fully = fully,
+      locally = locally
+    )
+    
 }

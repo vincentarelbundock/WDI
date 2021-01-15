@@ -9,7 +9,8 @@ wdi.query(
   country = "all",
   start = 1960,
   end = 2020,
-  latest = NULL
+  latest = NULL,
+  language = "en"
 )
 }
 \description{

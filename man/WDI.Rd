@@ -11,7 +11,8 @@ WDI(
   end = 2020,
   extra = FALSE,
   cache = NULL,
-  latest = NULL
+  latest = NULL,
+  language = "en"
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ incomeLevel.}
 \item{cache}{NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.}
 
 \item{latest}{Integer indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.}
+
+\item{language}{ISO-2 code in lower case indicating in which language the characters should be provided. List of languages available with `WDI::languages_supported()`. Default is English.}
 }
 \value{
 Data frame with country-year observations. You can extract a
