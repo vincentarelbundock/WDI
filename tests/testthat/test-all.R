@@ -39,13 +39,13 @@ test_that('Bad year', {
 test_that('WDI', {
 
     # 1 country 1 indicator
-    x <- WDI(country='US', indicator='NY.GDP.PCAP.KD', start = 1990, end = 1991) 
+    x <- WDI(country='US', indicator='NY.GDP.PCAP.KD', start = 1990, end = 1991)
     expect_s3_class(x, 'data.frame')
     expect_equal(dim(x), c(2, 4))
 
     # 3 countries 1 indicator
-    x <- WDI(country=c('CA', 'MX', 'US'), 
-             indicator='NY.GDP.PCAP.KD', 
+    x <- WDI(country=c('CA', 'MX', 'US'),
+             indicator='NY.GDP.PCAP.KD',
              start=1990, end=1991)
     expect_s3_class(x, 'data.frame')
     expect_equal(dim(x), c(6, 4))
@@ -62,7 +62,7 @@ test_that('WDI', {
     x <- expect_warning(WDI(country = co, start=1990, end=1991))
     expect_equal(length(unique(x$iso2c)), 3)
 
-    # bad indicator 
+    # bad indicator
     ind <- c("blah blah", "NY.GDP.PCAP.KD", "NY.GDP.PCAP.KN", "NY.GDP.PCAP.PP.KD", "NY.GDP.PCAP.PP.KD.87")
     x <- expect_message(WDI(indicator = ind, start=1990, end=1991))
     expect_gte(nrow(x), 30)
@@ -72,9 +72,28 @@ test_that('WDI', {
 
 test_that('WDI(extra = TRUE)', {
 
-    x <- WDI(country='US', indicator='NY.GDP.PCAP.KD', 
+    x <- WDI(country='US', indicator='NY.GDP.PCAP.KD',
              start=1991, end=1992, extra = TRUE)
     expect_s3_class(x, 'data.frame')
     expect_equal(dim(x), c(2, 11))
 
 })
+
+test_that("behavior of start/end dates with latest", {
+   expect_silent(
+        WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, latest = 5)
+    )
+    expect_silent(
+        WDI("all", "AG.AGR.TRAC.NO", start = 1980, end = 2000, latest = 5)
+    )
+})
+
+test_that("latest provides a dataframe", {
+   y <- WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, latest = 5)
+    expect_s3_class(y, "data.frame")
+    
+   z <- WDI("all", "AG.AGR.TRAC.NO", latest = 5)
+   expect_s3_class(z, "data.frame")
+})
+
+

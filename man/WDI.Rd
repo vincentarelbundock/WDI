@@ -10,7 +10,8 @@ WDI(
   start = 1960,
   end = 2020,
   extra = FALSE,
-  cache = NULL
+  cache = NULL,
+  latest = NULL
 )
 }
 \arguments{
@@ -29,10 +30,11 @@ greater.}
 the `start` argument.}
 
 \item{extra}{TRUE returns extra variables such as region, iso3c code, and
-incomeLevel}
+incomeLevel.}
 
-\item{cache}{NULL (optional) a list created by WDIcache() to be used with the
-extra=TRUE argument}
+\item{cache}{NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.}
+
+\item{latest}{Integer indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.}
 }
 \value{
 Data frame with country-year observations. You can extract a
@@ -42,6 +44,11 @@ data.frame with indicator names and descriptive labels by inspecting the
 \description{
 Downloads the requested data by using the World Bank's API, parses the
 resulting XML file, and formats it in long country-year format.
+}
+\details{
+It is possible to only specify the `indicator` and the `country` arguments, in which case `WDI()` will return data from 1960 to the last year available on World Bank's website. 
+
+It is also possible to get only the most recent non-NA values, with `latest`.
 }
 \examples{
 
@@ -55,6 +62,9 @@ WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000,
 # Rename indicators on the fly
 WDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',
                                   'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))
+                                  
+# Get the 5 latest non-NA values
+WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", latest = 5)
 }
 
 }
