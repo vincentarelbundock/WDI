@@ -1,5 +1,7 @@
 # WDI 2.7.1.9000
 
+* Add support for several languages with the "language" argument in `WDI()` (#15)
+* Add "latest" argument in `WDI()`, to fetch the most recent non-NA values (#29, #43)
 * Speed improvement in WDIbulk (Thanks to @etiennebacher)
 * WDIbulk gets a `timeout` argument
 
