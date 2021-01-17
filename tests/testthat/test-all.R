@@ -91,9 +91,51 @@ test_that("behavior of start/end dates with latest", {
 test_that("latest provides a dataframe", {
    y <- WDI("all", "AG.AGR.TRAC.NO", start = NULL, end = NULL, latest = 5)
     expect_s3_class(y, "data.frame")
-    
+
    z <- WDI("all", "AG.AGR.TRAC.NO", latest = 5)
    expect_s3_class(z, "data.frame")
 })
+
+test_that("check that language doesn't change output format", {
+    x <- suppressWarnings(
+        WDI("all", "AG.AGR.TRAC.NO", language = "vi")
+    )
+    expect_s3_class(x, "data.frame")
+})
+
+test_that("default language is english", {
+    x <- WDI("all", "AG.AGR.TRAC.NO")
+    y <- WDI("all", "AG.AGR.TRAC.NO", language = "en")
+    expect_true(identical(x, y))
+})
+
+test_that("NULL language is equivalent to english", {
+   x <- WDI("all", "AG.AGR.TRAC.NO", language = NULL)
+   y <- WDI("all", "AG.AGR.TRAC.NO", language = "en")
+   expect_true(identical(x, y))
+})
+
+test_that("error if language not in list", {
+    expect_error(
+        WDI("all", "AG.AGR.TRAC.NO", language = "xyz")
+    )
+})
+
+test_that("warning if language only supported partially", {
+    expect_warning(
+        WDI("all", "AG.AGR.TRAC.NO", language = "vi")
+    )
+})
+
+test_that("languages_supported produces a list", {
+    expect_type(
+        languages_supported(),
+        "list"
+    )
+})
+
+
+
+
 
 
