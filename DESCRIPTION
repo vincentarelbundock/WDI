@@ -10,8 +10,8 @@ LazyData: yes
 Type: Package
 LazyLoad: yes
 Encoding: UTF-8
-Version: 2.7.1
-URL: https://vincentarelbundock.github.io/WDI
+Version: 2.7.2
+URL: https://vincentarelbundock.github.io/WDI/
 Depends:
     R (>= 3.5.0)
 Imports: 

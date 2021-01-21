@@ -1,4 +1,4 @@
-# WDI 2.7.1.9000
+# WDI 2.7.2
 
 * Add support for several languages with the "language" argument in `WDI()` (#15)
 * Add "latest" argument in `WDI()`, to fetch the most recent non-NA values (#29, #43)
