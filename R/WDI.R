@@ -446,7 +446,7 @@ languages_supported <- function() {
   
     fully <- c("en (English)", "es (Spanish)", "fr (French)", 
                "ar (Arabic)", "zh (Chinese)")
-    locally <- c("bg (Belgian)", "de (German)", "hi (Hindi)", 
+    locally <- c("bg (Bulgarian)", "de (German)", "hi (Hindi)", 
                  "id (Indonesian)", "ja (Japanese)", "km (Khmer)", 
                  "ko (Korean)", "mk (Macedonian)", "mn (Mongolian)",
                  "pl (Polish)", "pt (Portuguese)", "ro (Romanian)",

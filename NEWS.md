@@ -1,3 +1,7 @@
+# WDI 2.7.2.9000
+
+* bug fixes
+
 # WDI 2.7.2
 
 * Add support for several languages with the "language" argument in `WDI()` (#15)
