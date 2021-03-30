@@ -1,6 +1,7 @@
-# WDI 2.7.2.9000
+# WDI 2.7.3
 
-* bug fixes
+* Better error message
+* Bug fixes
 
 # WDI 2.7.2
 

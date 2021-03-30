@@ -127,6 +127,9 @@ WDI <- function(country = "all",
     # Download
     dat <- list()
     failed <- NULL
+
+    indicator <- unique(indicator)
+
     for (i in indicator) {
         tmp <- tryCatch(wdi.dl(i, country, start, end, latest, language), error = function(e) e)
         if (is.null(tmp) || !inherits(tmp$data, 'data.frame') || (nrow(tmp$data) == 0)) {
@@ -137,25 +140,26 @@ WDI <- function(country = "all",
     }
 
     # Sanity: downloaded data
-    if (length(dat) == 0) {
-        message('None of the indicators you requested could be downloaded. Please verify the arguments of the `WDI()` function. You can also type a URL of this form in your browser to check if the World Bank web API is currently serving the indicator(s) of interest: ',
-                wdi.query(indicator = failed[1])[1])
-        return(NULL)
-    } 
+    if (length(failed) > 0) {
 
-    # not downloaded and not in cache
-    indicator_good <- WDI::WDI_data$series[, 'indicator']
-    tmp <- base::setdiff(failed, indicator_good) 
-    if (length(tmp) > 0) {
-        message('These indicators could not be downloaded, and they do not appear in the cached list of available World Bank data series: ',
-                paste(tmp, collapse = ', '))
-    }
+        msg <- sprintf(
+'The following indicators could not be downloaded: %s.
 
-    # not downloaded
-    tmp <- base::setdiff(failed, tmp)
-    if (length(tmp) > 0) {
-        message('These indicators could not be downloaded: ',
-                paste(tmp, collapse = ', '))
+Please make sure that you are running the latest version of the `WDI` package, and that the arguments you are using in the `WDI()` function are valid.
+
+Sometimes, downloads will suddenly stop working, even if nothing has changed in the R code of the WDI package. ("The same WDI package version worked yesterday!") In those cases, the problem is almost certainly related to the World Bank servers or to your internet connection.
+
+You can check if the World Bank web API is currently serving the indicator(s) of interest by typing a URL of this form in your web browser:
+
+%s',
+paste(failed, collapse = ", "),
+wdi.query(indicator = failed[1])[1])
+
+        if (length(failed) == length(indicator)) {
+            stop(msg)
+        } else if (length(failed) > 0) {
+            warning(msg)
+        }
     }
 
     # Extract labels
