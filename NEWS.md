@@ -1,3 +1,7 @@
+# WDI 2.7.4
+
+* Bug fix for on-the-fly rename
+
 # WDI 2.7.3
 
 * Better error message
