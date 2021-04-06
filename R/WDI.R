@@ -62,6 +62,7 @@ WDI <- function(country = "all",
                 latest = NULL,
                 language = "en"){
 
+
     # Sanity: country
     if (!is.character(country)) {
         stop('The `country` argument must be a character vector')
@@ -127,8 +128,6 @@ WDI <- function(country = "all",
     # Download
     dat <- list()
     failed <- NULL
-
-    indicator <- unique(indicator)
 
     for (i in indicator) {
         tmp <- tryCatch(wdi.dl(i, country, start, end, latest, language), error = function(e) e)
@@ -204,7 +203,7 @@ wdi.query(indicator = failed[1])[1])
 	}
 
 	# Output
-    return(dat)
+  return(dat)
 }
 
 #' Download all the WDI indicators at once.
