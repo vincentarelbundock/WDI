@@ -135,7 +135,10 @@ test_that("languages_supported produces a list", {
 })
 
 
-
-
-
-
+test_that("rename on the fly", {
+    ind <- c("women_private_sector" = "BI.PWK.PRVS.FE.ZS", "women_public_sector" = "BI.PWK.PUBS.FE.ZS")
+    x <- WDI(country = 'CA', indicator = ind)
+    expect_identical(
+        colnames(x),
+        c("iso2c", "country", "year", "women_private_sector", "women_public_sector"))
+})
