@@ -18,10 +18,10 @@ test_that('WDIcache', {
 })
 
 test_that('Bad indicator' , {
-    expect_message(expect_s3_class(
+    expect_warning(expect_s3_class(
         WDI(indicator = c('NY.GDP.PCAP.KD', 'test'), country = 'US', start = 1990, end = 1991),
         'data.frame'))
-    expect_message(expect_null(
+    expect_error(expect_null(
         WDI(indicator = c('bad', 'test'), country = 'US', start = 1990, end = 1990)))
 })
 
@@ -64,7 +64,7 @@ test_that('WDI', {
 
     # bad indicator
     ind <- c("blah blah", "NY.GDP.PCAP.KD", "NY.GDP.PCAP.KN", "NY.GDP.PCAP.PP.KD", "NY.GDP.PCAP.PP.KD.87")
-    x <- expect_message(WDI(indicator = ind, start=1990, end=1991))
+    x <- expect_warning(WDI(indicator = ind, start=1990, end=1991))
     expect_gte(nrow(x), 30)
     expect_equal(ncol(x), 6)
 
