@@ -19,15 +19,27 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' @param end End date, usually a year in integer format. Must be greater than
 #' the `start` argument.
 #' @param extra TRUE returns extra variables such as region, iso3c code, and
-#'     incomeLevel.
+#'     incomeLevel. See Details.
 #' @param cache NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.
 #' @param latest Integer indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.
 #' @param language ISO-2 code in lower case indicating in which language the characters should be provided. List of languages available with `WDI::languages_supported()`. Default is English.
 #'     
 #'     
-#' @details It is possible to only specify the `indicator` and the `country` arguments, in which case `WDI()` will return data from 1960 to the last year available on World Bank's website. 
+#' @details It is possible to only specify the `indicator` and the `country` arguments, in which case `WDI()` will return data from 1960 to the last year available on World Bank's website. It is also possible to get only the most recent non-NA values, with `latest`.
 #' 
-#' It is also possible to get only the most recent non-NA values, with `latest`.
+#' If `extra = TRUE`, additional variables are provided:
+#' 
+#' \itemize{
+#' 
+#' \item{status: observation status, e.g is the observation a forecast?}
+#' \item{iso3c}
+#' \item{region}
+#' \item{capital: name of the capital city}
+#' \item{latitude, longitude}
+#' \item{income: income categories of the World Bank}
+#' \item{lending}
+#' 
+#' }
 #' 
 #' @return Data frame with country-year observations. You can extract a
 #' data.frame with indicator names and descriptive labels by inspecting the
@@ -130,7 +142,7 @@ WDI <- function(country = "all",
     failed <- NULL
 
     for (i in indicator) {
-        tmp <- tryCatch(wdi.dl(i, country, start, end, latest, language), error = function(e) e)
+        tmp <- tryCatch(wdi.dl(i, country, start, end, latest, language, extra), error = function(e) e)
         if (is.null(tmp) || !inherits(tmp$data, 'data.frame') || (nrow(tmp$data) == 0)) {
             failed <- c(failed, i)
         } else {
@@ -312,14 +324,18 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
 #'
 #' @export
 #' @keywords internal
-wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"){
+wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en", extra = FALSE){
     get_page <- function(daturl) {
         # download
         dat_raw = RJSONIO::fromJSON(daturl, nullValue=NA)[[2]]
         # extract data 
-        dat = lapply(dat_raw, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date))
+        dat = lapply(dat_raw, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date, j$obs_status))
         dat = data.frame(do.call('rbind', dat), stringsAsFactors = FALSE)
-        colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year')
+        colnames(dat) = c('iso2c', 'country', as.character(indicator), 'year', "status")
+        dat$status <- ifelse(dat$status == "F", "forecast", dat$status)
+        if (!isTRUE(extra)) {
+          dat$status <- NULL
+        }
         dat$label <- dat_raw[[1]]$indicator['value']
         # output
         return(dat)
@@ -355,9 +371,15 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
     }
 
     # output
-    out = list('data' = dat[, 1:4],
-               'indicator' = indicator,
-               'label' = dat$label[1])
+    out = if (isTRUE(extra)) {
+      list('data' = dat[, 1:5],
+           'indicator' = indicator,
+           'label' = dat$label[1])
+    } else {
+      list('data' = dat[, 1:4],
+           'indicator' = indicator,
+           'label' = dat$label[1])
+    }
 
     return(out)
 }
