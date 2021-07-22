@@ -75,8 +75,15 @@ test_that('WDI(extra = TRUE)', {
     x <- WDI(country='US', indicator='NY.GDP.PCAP.KD',
              start=1991, end=1992, extra = TRUE)
     expect_s3_class(x, 'data.frame')
-    expect_equal(dim(x), c(2, 11))
+    expect_equal(dim(x), c(2, 12))
 
+})
+
+test_that("extra = TRUE provides observation status", {
+    x <- WDI(country='US', indicator='NY.GDP.PCAP.KD',
+             start=1991, end=1992, extra = TRUE)
+    expect_true("status" %in% names(x))
+    expect_true(is.character(x$status))
 })
 
 test_that("behavior of start/end dates with latest", {

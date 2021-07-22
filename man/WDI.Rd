@@ -31,7 +31,7 @@ greater.}
 the `start` argument.}
 
 \item{extra}{TRUE returns extra variables such as region, iso3c code, and
-incomeLevel.}
+incomeLevel. See Details.}
 
 \item{cache}{NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.}
 
@@ -49,9 +49,21 @@ Downloads the requested data by using the World Bank's API, parses the
 resulting XML file, and formats it in long country-year format.
 }
 \details{
-It is possible to only specify the `indicator` and the `country` arguments, in which case `WDI()` will return data from 1960 to the last year available on World Bank's website. 
+It is possible to only specify the `indicator` and the `country` arguments, in which case `WDI()` will return data from 1960 to the last year available on World Bank's website. It is also possible to get only the most recent non-NA values, with `latest`.
 
-It is also possible to get only the most recent non-NA values, with `latest`.
+If `extra = TRUE`, additional variables are provided:
+
+\itemize{
+
+\item{status: observation status, e.g is the observation a forecast?}
+\item{iso3c}
+\item{region}
+\item{capital: name of the capital city}
+\item{latitude, longitude}
+\item{income: income categories of the World Bank}
+\item{lending}
+
+}
 }
 \examples{
 
