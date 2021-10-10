@@ -2,7 +2,7 @@
 #'
 #' A list of two character matrices. 
 #'
-#' The first character matrix includes a full list of WDI series (updated 2012-06-18):
+#' The first character matrix includes a full list of WDI series. This list is updated semi-regularly. Users can refresh the list manually using the `WDIcache()` function and search in the updated list using the `cache` argument.
 #' 
 #' \itemize{
 #'   \item id WDI indicator code  

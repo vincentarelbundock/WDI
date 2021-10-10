@@ -23,5 +23,5 @@ Imports:
 Suggests: 
     testthat,
     tidyr (>= 0.8.0)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 License: GPL-3
