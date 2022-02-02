@@ -65,14 +65,14 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", latest = 5)
 #' }
 #'
-WDI <- function(country = "all", 
+WDI <- function(country = "all",
                 indicator = "NY.GDP.PCAP.KD",
-                start = 1960, 
-                end = 2020, 
-                extra = FALSE, 
+                start = 1960,
+                end = 2025,
+                extra = FALSE,
                 cache = NULL,
                 latest = NULL,
-                language = "en"){
+                language = "en") {
 
 
     # Sanity: country
