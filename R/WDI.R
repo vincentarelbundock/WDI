@@ -327,7 +327,10 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
 wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en", extra = FALSE){
     get_page <- function(daturl) {
         # download
-        dat_raw = RJSONIO::fromJSON(daturl, nullValue=NA)[[2]]
+        dat_raw <- RJSONIO::fromJSON(daturl, nullValue=NA)
+        meta <- dat_raw[[1]]
+        dat_raw <- dat_raw[[2]]
+
         # extract data 
         dat = lapply(dat_raw, function(j) cbind(j$country[[1]], j$country[[2]], j$value, j$date, j$obs_status))
         dat = data.frame(do.call('rbind', dat), stringsAsFactors = FALSE)
@@ -337,7 +340,9 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
           dat$status <- NULL
         }
         dat$label <- dat_raw[[1]]$indicator['value']
+
         # output
+        attr(dat, "lastupdated") <- tryCatch(meta[["lastupdated"]], error = function(e) NULL)
         return(dat)
     }
 
@@ -355,6 +360,7 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
             }
         }
     }
+    lastupdated <- attr(dat[[1]], "lastupdated")
     dat <- do.call('rbind', dat)
 
     # numeric types
@@ -371,14 +377,19 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
     }
 
     # output
-    out = if (isTRUE(extra)) {
-      list('data' = dat[, 1:5],
-           'indicator' = indicator,
-           'label' = dat$label[1])
+    if (isTRUE(extra)) {
+      out <- list('data' = dat[, 1:5],
+                  'indicator' = indicator,
+                  'label' = dat$label[1])
     } else {
-      list('data' = dat[, 1:4],
-           'indicator' = indicator,
-           'label' = dat$label[1])
+      out <- list('data' = dat[, 1:4],
+                  'indicator' = indicator,
+                  'label' = dat$label[1])
+    }
+
+    # updated column
+    if (isTRUE(extra) && !is.null(lastupdated)) {
+      out[["data"]][["lastupdated"]] <- lastupdated
     }
 
     return(out)

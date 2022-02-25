@@ -1,3 +1,7 @@
+# WDI 2.7.6
+
+* `WDI(extra = TRUE)` includes a new `lastupdated` column.
+
 # WDI 2.7.5
 
 * Add the observation status (whether an observation is a forecast) when `extra = TRUE` in `WDI()` (#48)

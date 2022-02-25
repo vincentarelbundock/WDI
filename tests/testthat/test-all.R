@@ -2,6 +2,12 @@ skip_on_cran()
 
 library(WDI)
 
+
+test_that("extra includes last updated", {
+   x <- WDI(extra = TRUE)
+   expect_true("lastupdated" %in% colnames(x))
+})
+
 # breaks on travis but works locally
 test_that('WDIcache', {
 
@@ -75,7 +81,7 @@ test_that('WDI(extra = TRUE)', {
     x <- WDI(country='US', indicator='NY.GDP.PCAP.KD',
              start=1991, end=1992, extra = TRUE)
     expect_s3_class(x, 'data.frame')
-    expect_equal(dim(x), c(2, 12))
+    expect_equal(dim(x), c(2, 13))
 
 })
 
