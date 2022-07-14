@@ -1,3 +1,7 @@
+# WDI 2.7.6.9000
+
+* Update the cache
+
 # WDI 2.7.6
 
 * `WDI(extra = TRUE)` includes a new `lastupdated` column.
