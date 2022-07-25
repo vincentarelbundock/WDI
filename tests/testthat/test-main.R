@@ -1,4 +1,4 @@
-skip_on_cran()
+# skip_on_cran()
 
 library(WDI)
 
@@ -14,7 +14,7 @@ test_that('WDIcache', {
     cache = WDIcache()
 
     expect_type(cache, 'list')
-    expect_gte(length(cache$series), 15000)
+    expect_gte(nrow(cache$series), 20000)
 
     # web cache = stored cache
     old <- WDIsearch('gdp.*capita.*constant')
@@ -43,25 +43,24 @@ test_that('Bad year', {
 })
 
 test_that('WDI', {
-
     # 1 country 1 indicator
     x <- WDI(country='US', indicator='NY.GDP.PCAP.KD', start = 1990, end = 1991)
     expect_s3_class(x, 'data.frame')
-    expect_equal(dim(x), c(2, 4))
+    expect_equal(dim(x), c(2, 5))
 
     # 3 countries 1 indicator
     x <- WDI(country=c('CA', 'MX', 'US'),
              indicator='NY.GDP.PCAP.KD',
              start=1990, end=1991)
     expect_s3_class(x, 'data.frame')
-    expect_equal(dim(x), c(6, 4))
+    expect_equal(dim(x), c(6, 5))
     expect_equal(length(unique(x$iso2c)), 3)
 
     # multiple indicators
     ind <- c("NY.GDP.PCAP.KD", "NY.GDP.PCAP.KN", "NY.GDP.PCAP.PP.KD")
     x <- WDI(indicator = ind, start=1990, end=1991)
     expect_gte(nrow(x), 30)
-    expect_equal(ncol(x), 6)
+    expect_equal(ncol(x), 7)
 
     # bad countries
     co <- c('BADCOUNTRY_one', 'BADCOUNTRY_two', 'CA', 'MX', 'US')
@@ -72,12 +71,11 @@ test_that('WDI', {
     ind <- c("blah blah", "NY.GDP.PCAP.KD", "NY.GDP.PCAP.KN", "NY.GDP.PCAP.PP.KD", "NY.GDP.PCAP.PP.KD.87")
     x <- expect_warning(WDI(indicator = ind, start=1990, end=1991))
     expect_gte(nrow(x), 30)
-    expect_equal(ncol(x), 6)
+    expect_equal(ncol(x), 7)
 
 })
 
 test_that('WDI(extra = TRUE)', {
-
     x <- WDI(country='US', indicator='NY.GDP.PCAP.KD',
              start=1991, end=1992, extra = TRUE)
     expect_s3_class(x, 'data.frame')
@@ -153,5 +151,5 @@ test_that("rename on the fly", {
     x <- WDI(country = 'CA', indicator = ind)
     expect_identical(
         colnames(x),
-        c("iso2c", "country", "year", "women_private_sector", "women_public_sector"))
+        c("country", "iso2c", "iso3c", "year", "women_private_sector", "women_public_sector"))
 })

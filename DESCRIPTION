@@ -19,9 +19,9 @@ URL: https://vincentarelbundock.github.io/WDI/
 Depends:
     R (>= 3.5.0)
 Imports: 
-    RJSONIO
+    jsonlite
 Suggests: 
     testthat,
     tidyr (>= 0.8.0)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 License: GPL-3

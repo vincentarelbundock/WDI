@@ -1,3 +1,7 @@
+# WDI 2.7.7.9000
+
+* Move to `jsonlite`
+
 # WDI 2.7.7
 
 * Update the cache
