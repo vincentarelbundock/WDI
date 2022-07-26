@@ -328,7 +328,8 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
             iso2c = dat[["country"]][["id"]],
             iso3c = dat[["countryiso3code"]],
             year = dat[["date"]],
-            indicator = dat[["value"]])
+            indicator = dat[["value"]],
+            stringsAsFactors = FALSE)
         colnames(dat2)[colnames(dat2) == "indicator"] <- indicator
         if (isTRUE(extra) && nrow(dat2) > 0 && "obs_status" %in% colnames(dat)) {
             dat2[["status"]] <- dat[["obs_status"]]
@@ -365,7 +366,10 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
     dat[[indicator]] <- as.numeric(dat[[indicator]])
 
     # date is character for monthly/quarterly data, numeric otherwise
-    if (!any(grepl('M|Q', dat$year))) {
+    if (is.factor(dat$year)) {
+        dat$year <- as.character(dat$year)
+    }
+    if (is.character(dat$year) && !any(grepl('M|Q', dat$year))) {
         dat$year <- as.integer(dat$year)
     }
 
@@ -409,7 +413,8 @@ WDIcache = function(){
         name = series_dat$name,
         description = series_dat$sourceNote,
         sourceDatabase = series_dat$source$value,
-        sourceOrganization = series_dat$sourceOrganization)
+        sourceOrganization = series_dat$sourceOrganization,
+        stringsAsFactors = FALSE)
 
     # Countries
     country_url = 'https://api.worldbank.org/v2/countries/all?per_page=25000&format=json'
@@ -423,7 +428,8 @@ WDIcache = function(){
         longitude = country_dat$longitude,
         latitude = country_dat$latitude,
         income = country_dat$incomeLevel$value,
-        lending = country_dat$lendingType$value)
+        lending = country_dat$lendingType$value,
+        stringsAsFactors = FALSE)
 
     out = list('series'=series_dat, 'country'=country_dat)
     # out$series = iconv(out$series, to = 'utf8')
