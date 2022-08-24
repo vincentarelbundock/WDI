@@ -8,7 +8,7 @@ WDI(
   country = "all",
   indicator = "NY.GDP.PCAP.KD",
   start = 1960,
-  end = 2025,
+  end = NULL,
   extra = FALSE,
   cache = NULL,
   latest = NULL,
@@ -28,7 +28,7 @@ renamed: `c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS')`}
 greater.}
 
 \item{end}{End date, usually a year in integer format. Must be greater than
-the `start` argument.}
+the `start` argument. If `NULL`, the end date is set to 5 years in the future.}
 
 \item{extra}{TRUE returns extra variables such as region, iso3c code, and
 incomeLevel. See Details.}

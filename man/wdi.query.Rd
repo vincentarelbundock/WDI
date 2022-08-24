@@ -7,8 +7,8 @@
 wdi.query(
   indicator = "NY.GDP.PCAP.CD",
   country = "all",
-  start = 1960,
-  end = 2020,
+  start = NULL,
+  end = NULL,
   latest = NULL,
   language = "en"
 )

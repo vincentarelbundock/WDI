@@ -1,6 +1,7 @@
-# WDI 2.7.7.9000
+# WDI 2.7.8
 
 * Move to `jsonlite`
+* `end` is NULL by default
 
 # WDI 2.7.7
 

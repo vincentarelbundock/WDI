@@ -153,3 +153,7 @@ test_that("rename on the fly", {
         colnames(x),
         c("country", "iso2c", "iso3c", "year", "women_private_sector", "women_public_sector"))
 })
+
+
+k <- WDI()
+

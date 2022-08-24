@@ -17,7 +17,7 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 #' @param start Start date, usually a year in integer format. Must be 1960 or
 #' greater.
 #' @param end End date, usually a year in integer format. Must be greater than
-#' the `start` argument.
+#' the `start` argument. If `NULL`, the end date is set to 5 years in the future.
 #' @param extra TRUE returns extra variables such as region, iso3c code, and
 #'     incomeLevel. See Details.
 #' @param cache NULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.
@@ -67,11 +67,12 @@ globalVariables(c('year', 'value', 'Country.Name', 'Country.Code', 'Indicator.Na
 WDI <- function(country = "all",
                 indicator = "NY.GDP.PCAP.KD",
                 start = 1960,
-                end = 2025,
+                end = NULL,
                 extra = FALSE,
                 cache = NULL,
                 latest = NULL,
                 language = "en") {
+
 
 
     # Sanity: country
@@ -97,14 +98,18 @@ WDI <- function(country = "all",
     # Sanity: start & end
     is_integer <- function(x) is.numeric(x) && (x %% 1 == 0)
     
+    if (is.null(end)) {
+        end <- as.integer(format(Sys.Date(), format = "%Y")) + 5
+    }
+
     # If latest is specified then the good order of dates doesn't matter
     if (!is.null(start) && !is.null(end) && is.null(latest)) {
-      if(!(start <= end)){
-        stop('`end` must be equal to or greater than `start`.')
-      }
-      if (is_integer(start) && (start < 1960)) {
-        stop('`start` must be equal to or greater than 1960')
-      }
+        if (!(start <= end)) {
+            stop("`end` must be equal to or greater than `start`.")
+        }
+        if (is_integer(start) && (start < 1960)) {
+            stop("`start` must be equal to or greater than 1960")
+        }
     }
     
     # Sanity: needs dates or number of most recent values (but not both)
@@ -278,29 +283,22 @@ WDIbulk = function(timeout = 600) {
 #' @keywords internal
 wdi.query = function(indicator = "NY.GDP.PCAP.CD", 
                      country = 'all', 
-                     start = 1960, 
-                     end = 2020,
+                     start = NULL, 
+                     end = NULL,
                      latest = NULL,
                      language = "en") {
 
     country <- paste(country, collapse = ';')
-    
-    # "Latest" option
-    if (!is.null(latest)) {
-      latest <- paste0("&mrnev=", latest)
-    }
+
     
     # If latest is specified, dates are overridden
-    if (!is.null(start) && !is.null(end)) {
-      if (is.null(latest)) {
-        years <- paste0("&date=", start, ":", end)
-      } else {
-        years <- NULL
-      }
-    } else {
+    if (!is.null(latest)) {
+      latest <- paste0("&mrnev=", latest)
       years <- NULL
+    } else {
+      years <- paste0("&date=", start, ":", end)
     }
-
+    
     # WDI only allows 32500 per_page (this seems undocumented)
     out = paste0("https://api.worldbank.org/v2/",
                  language, 
