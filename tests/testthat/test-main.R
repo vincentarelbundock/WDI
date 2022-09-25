@@ -10,17 +10,14 @@ test_that("extra includes last updated", {
 
 # breaks on travis but works locally
 test_that('WDIcache', {
-
     cache = WDIcache()
-
     expect_type(cache, 'list')
     expect_gte(nrow(cache$series), 20000)
-
     # web cache = stored cache
     old <- WDIsearch('gdp.*capita.*constant')
-    new <- WDIsearch('gdp.*capita.*constant', cache=cache)
+    new <- WDIsearch("gdp.*capita.*constant", cache = cache)
+    row.names(old) <- row.names(new) <- NULL
     expect_identical(old, new)
-
 })
 
 test_that('Bad indicator' , {
