@@ -328,6 +328,12 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
             year = dat[["date"]],
             indicator = dat[["value"]],
             stringsAsFactors = FALSE)
+        
+        # issue #54
+        if (any(unique(nchar(dat2$iso2c)) == 3)) {
+          dat2$iso3c <- dat2$iso2c
+          dat2$iso2c <- NULL
+        }
         colnames(dat2)[colnames(dat2) == "indicator"] <- indicator
         if (isTRUE(extra) && nrow(dat2) > 0 && "obs_status" %in% colnames(dat)) {
             dat2[["status"]] <- dat[["obs_status"]]
