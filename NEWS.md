@@ -1,3 +1,7 @@
+# WDI 2.7.8.9000
+
+* Fix a bug where ISO3 codes were wrongly attributed to column `iso2c` (#54).
+
 # WDI 2.7.8
 
 * Move to `jsonlite`

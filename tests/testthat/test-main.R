@@ -152,5 +152,12 @@ test_that("rename on the fly", {
 })
 
 
-k <- WDI()
+test_that("fix iso codes wrongly attributed to iso2 or iso3, issue #54", {
+  dat <- WDI(indicator = c("DT.ODA.ODAT.GN.ZS", "DT.ODA.ODAT.GD.ZS"),
+             country = c("AO","CG","SA","MZ"), start = 2000, end = 2020)
+  
+  expect_equal(unique(dat$iso3c), c("AGO", "COG", "MOZ", "SAU"))
+  
+  expect_equal(unique(dat$iso2c), c("AO", "CG", "MZ", "SA"))
+})
 
