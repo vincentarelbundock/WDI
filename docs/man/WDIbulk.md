@@ -1,0 +1,38 @@
+
+# WDIbulk
+
+Download all the WDI indicators at once.
+
+## Description
+
+Download all the WDI indicators at once.
+
+## Usage
+
+<pre><code class='language-R'>WDIbulk(timeout = 600)
+</code></pre>
+
+## Arguments
+
+<table>
+<tr>
+<td style="white-space: nowrap; font-family: monospace; vertical-align: top">
+<code id="WDIbulk_:_timeout">timeout</code>
+</td>
+<td>
+integer maximum number of seconds to wait for download
+</td>
+</tr>
+</table>
+
+## Value
+
+Data frame
+
+a list of 6 data frames: Data, Country, Series, Country-Series,
+Series-Time, FootNote
+
+## Author(s)
+
+Vincent Arel-Bundock
+<a href="mailto:vincent.arel-bundock@umontreal.ca">vincent.arel-bundock@umontreal.ca</a>
