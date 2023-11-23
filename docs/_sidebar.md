@@ -1,12 +1,10 @@
 * [Home](/)
-* [Changelog](NEWS.md)
-* Reference
-  - [languages_supported](man/languages_supported)
-  - [WDI_data](man/WDI_data)
-  - [WDI-package](man/WDI-package)
-  - [wdi](man/wdi.dl)
+* Functions and data: 
   - [WDI](man/WDI)
-  - [wdi](man/wdi.query)
+  - [WDIsearch](man/WDIsearch)
   - [WDIbulk](man/WDIbulk)
   - [WDIcache](man/WDIcache)
-  - [WDIsearch](man/WDIsearch)
+  - [WDI_data](man/WDI_data)
+  - [languages_supported](man/languages_supported)
+* [News](NEWS.md)
+* [Citation](CITATION.md)

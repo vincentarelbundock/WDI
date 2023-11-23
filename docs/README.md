@@ -3,16 +3,13 @@
 The `WDI` package allows users to search and download data from over 40 datasets hosted by the World Bank, including the World Development Indicators ('WDI'), International Debt Statistics, Doing Business, Human Capital Index, and Sub-national Poverty indicators.
 
 <!-- badges: start -->
-
 ![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/WDI)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/vincentarelbundock/WDI?branch=master&svg=true)](https://ci.appveyor.com/project/vincentarelbundock/WDI)
 [![R build status](https://github.com/vincentarelbundock/WDI/workflows/R-CMD-check/badge.svg)](https://github.com/vincentarelbundock/WDI/actions)
-
 <!-- badges: end -->
 
 ## Installation
 
-`WDI` is published on CRAN and so can be installed by simply typing this in the `R` console:
+`WDI` is published on CRAN and so can be installed by simply typing this in the `R` console: 
 
 ```r
 install.packages('WDI')
@@ -27,13 +24,13 @@ install_github('vincentarelbundock/WDI')
 
 ## Searching for data
 
-You can search for data by using keywords in `WDIsearch`. For instance, if you are looking for data on Gross Domestic Product:
+You can search for data by using keywords in `WDIsearch`. For instance, if you are looking for data on Gross Domestic Product: 
 
 ```r
 WDIsearch('gdp')
 ```
 
-Which produces this:
+Which produces this: 
 
 ```r
 > WDIsearch('gdp')[1:10,]
@@ -50,7 +47,7 @@ Which produces this:
 [10,] "BX.KLT.DINV.WD.GD.ZS" "Foreign direct investment, net inflows (% of GDP)" 
 ```
 
-`WDIsearch` uses grep and ignores cases, so you can also use regular expressions. For instance, if you are looking for GDP per capita in constant dollars:
+`WDIsearch` uses grep and ignores cases, so you can also use regular expressions. For instance, if you are looking for GDP per capita in constant dollars: 
 
 ```r
 WDIsearch('gdp.*capita.*constant')
@@ -69,7 +66,7 @@ Download a series you like for the countries you like:
 dat = WDI(indicator='NY.GDP.PCAP.KD', country=c('MX','CA','US'), start=1960, end=2012)
 ```
 
-Look at the data:
+Look at the data: 
 
 ```r
 head(dat)
@@ -111,7 +108,7 @@ WDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05'
 
 ## Automatic rename
 
-If the vector that you supply to `WDI` is named, the function will automatically rename columns where possible.
+If the vector that you supply to ``WDI`` is named, the function will automatically rename columns where possible.
 
 ```r
 dat <- WDI(indicator = c("gdp_per_capita" = "NY.GDP.PCAP.KD",
@@ -137,5 +134,4 @@ WDIsearch('gdp', cache=new_cache)
 
 ## Bugs, suggestions, etc.
 
-Thanks for using `WDI`! Please send all bug reports and suggestions through the github issue tracker or by email to [vincent.arel-bundock@umontreal.ca](mailto:vincent.arel-bundock@umontreal.ca)
-
+Thanks for using `WDI`! Please send all bug reports and suggestions through the github issue tracker or by email to vincent.arel-bundock@umontreal.ca

@@ -15,5 +15,6 @@
 #'     \url{http://arelbundock.com}
 #'     \url{https://github.com/vincentarelbundock/WDI}
 #' @docType package
+#' @noRd
 #' @keywords package
 NULL

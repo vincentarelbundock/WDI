@@ -281,6 +281,7 @@ WDIbulk = function(timeout = 600) {
 #'
 #' @export
 #' @keywords internal
+#' @noRd
 wdi.query = function(indicator = "NY.GDP.PCAP.CD", 
                      country = 'all', 
                      start = NULL, 
@@ -316,6 +317,7 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
 #'
 #' @export
 #' @keywords internal
+#' @noRd
 wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en", extra = FALSE){
     get_page <- function(daturl) {
         dat_new <- jsonlite::fromJSON(daturl)

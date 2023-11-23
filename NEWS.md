@@ -1,66 +1,68 @@
-# WDI 2.7.8.9000
+# News
+
+## 2.7.8.9000
 
 * Fix a bug where ISO3 codes were wrongly attributed to column `iso2c` (#54).
 
-# WDI 2.7.8
+## 2.7.8
 
 * Move to `jsonlite`
 * `end` is NULL by default
 
-# WDI 2.7.7
+## 2.7.7
 
 * Update the cache
 
-# WDI 2.7.6
+## 2.7.6
 
 * `WDI(extra = TRUE)` includes a new `lastupdated` column.
 
-# WDI 2.7.5
+## 2.7.5
 
 * Add the observation status (whether an observation is a forecast) when `extra = TRUE` in `WDI()` (#48)
 * Updated cache
 
-# WDI 2.7.4
+## 2.7.4
 
 * Bug fix for on-the-fly rename
 
-# WDI 2.7.3
+## 2.7.3
 
 * Better error message
 * Bug fixes
 
-# WDI 2.7.2
+## 2.7.2
 
 * Add support for several languages with the "language" argument in `WDI()` (#15)
 * Add "latest" argument in `WDI()`, to fetch the most recent non-NA values (#29, #43)
 * Speed improvement in WDIbulk (Thanks to @etiennebacher)
 * WDIbulk gets a `timeout` argument
 
-# WDI 2.7.1
+## 2.7.1
 
 * Bug: did not download all countries
 * WDIcache did not retrieve regions
 
-# WDI 2.7.0 
+## 2.7.0 
 
 * API v2
 * Fix a breaking change after API v2
 * per_page not large enough when dataset is big
 * Monthly and quarterly data
 
-# WDI 2.6.0
+## 2.6.0
 
 * `start` and `end` are NULL as default and download all available years.
 * `label` attribute to the return data.frame includes descriptive labels for each
 * `WDIbulk` function to download all of WDI
 * WDIcache and data trim whitespace from region names
 
-# WDI 2.5.1
+## 2.5.1
 
 * New # WDI numbering scheme
 * Updated country and indicator data
 
-# WDI 2.5.0
+## 2.5.0
 
 * Namespace issues (thanks to Jan Dietrich)
 * Updated the list of available indicators
@@ -68,24 +70,24 @@
 * Rolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)
 * Rename columns automatically when using a named vector
 
-# WDI 2.4.0
+## 2.4.0
 
 * Call RJSONIO::fromJSON explicitly to avoid conflict with JSON package (Thanks to Richard Cotton)
 
-# WDI 2.3.0
+## 2.3.0
 
 * Change default start/end date per user request
 
-# WDI 2.2.0
+## 2.2.0
 
 * Bug: country names were stripped of digits
 
-# WDI 2.1.0
+## 2.1.0
 
 * Fixed various issues (thanks to Matthieu Stigler for bug reports and patches)
 * Faster downloads when requesting multiple countries (leveraging the US;BR;CA API syntax)
 
-# WDI 2.0.0
+## 2.0.0
 
 * Now uses JSON instead of XML (Faster, easier)
 * WDIcache function now allows users to update the locally stored database of available WDI series

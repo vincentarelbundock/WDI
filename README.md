@@ -4,11 +4,10 @@ The `WDI` package allows users to search and download data from over 40 datasets
 
 <!-- badges: start -->
 ![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/WDI)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/vincentarelbundock/WDI?branch=master&svg=true)](https://ci.appveyor.com/project/vincentarelbundock/WDI)
 [![R build status](https://github.com/vincentarelbundock/WDI/workflows/R-CMD-check/badge.svg)](https://github.com/vincentarelbundock/WDI/actions)
 <!-- badges: end -->
 
-# Installation
+## Installation
 
 `WDI` is published on CRAN and so can be installed by simply typing this in the `R` console: 
 
@@ -23,7 +22,7 @@ library(remotes)
 install_github('vincentarelbundock/WDI')
 ```
 
-# Searching for data
+## Searching for data
 
 You can search for data by using keywords in `WDIsearch`. For instance, if you are looking for data on Gross Domestic Product: 
 
@@ -59,7 +58,7 @@ WDIsearch('gdp.*capita.*constant')
 [4,] "NY.GDP.PCAP.PP.KD" "GDP per capita, PPP (constant 2005 international $)"
 ```
 
-# Download and use the data
+## Download and use the data
 
 Download a series you like for the countries you like:
 
@@ -92,7 +91,7 @@ ggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() +
 
 Note: You can use `country='all'` to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.
 
-# Monthly or quarterly data
+## Monthly or quarterly data
 
 Some World Bank series are available at the monthly or quarterly frequency. You can download those simply using the `start` and `end` arguments:
 
@@ -107,7 +106,7 @@ WDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05'
 5   CHN   China  6.313091 2012M01
 ```
 
-# Automatic rename
+## Automatic rename
 
 If the vector that you supply to ``WDI`` is named, the function will automatically rename columns where possible.
 
@@ -124,7 +123,7 @@ iso2c    country year gdp_per_capita population
 6    1A Arab World 2010       5916.330  356508908
 ```
 
-# Updating series list
+## Updating series list
 
 To speed up search, `WDI` ships with a local list of all available WDI series. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the `cache` function:
 
@@ -133,6 +132,6 @@ new_cache = WDIcache()
 WDIsearch('gdp', cache=new_cache)
 ```
 
-# Bugs, suggestions, etc.
+## Bugs, suggestions, etc.
 
 Thanks for using `WDI`! Please send all bug reports and suggestions through the github issue tracker or by email to vincent.arel-bundock@umontreal.ca
