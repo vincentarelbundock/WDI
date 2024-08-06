@@ -16,6 +16,7 @@ LazyLoad: yes
 Encoding: UTF-8
 Version: 2.7.8.9000
 URL: https://vincentarelbundock.github.io/WDI/
+BugReports: https://github.com/vincentarelbundock/WDI/issues
 Depends:
     R (>= 3.5.0)
 Imports: 
