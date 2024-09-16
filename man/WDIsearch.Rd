@@ -21,7 +21,7 @@ the indicator's code, name, description, and source.}
 }
 \value{
 Data frame with code, name, source, and description of all series which
-    match the criteria.
+match the criteria.
 }
 \description{
 Data frame with series code, name, description, and source for the WDI series
