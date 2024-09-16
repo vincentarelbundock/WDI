@@ -25,5 +25,6 @@ Suggests:
     curl,
     testthat,
     tidyr (>= 0.8.0)
-RoxygenNote: 7.2.3.9000
+RoxygenNote: 7.3.2
 License: GPL-3
+Roxygen: list(markdown = TRUE)

@@ -3,6 +3,8 @@
 ## 2.7.8.9000
 
 * Fix a bug where ISO3 codes were wrongly attributed to column `iso2c` (#54).
+* `wdi.dl()` and `wdi.query()` are not exported anymore. Those were undocumented anyway (#65).
+* Update the series search cache.
 
 ## 2.7.8
 
