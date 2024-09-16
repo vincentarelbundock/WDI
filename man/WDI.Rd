@@ -77,7 +77,7 @@ WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", start=1999, end=2000,
 # Rename indicators on the fly
 WDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',
                                   'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))
-                                  
+
 # Get the 5 latest non-NA values
 WDI(country=c("US","BR"), indicator="NY.GNS.ICTR.GN.ZS", latest = 5)
 }
