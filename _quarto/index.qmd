@@ -1,48 +1,39 @@
-
-
 # World Bank data in `R`
 
-The `WDI` package allows users to search and download data from over 40
-datasets hosted by the World Bank, including the World Development
-Indicators (‘WDI’), International Debt Statistics, Doing Business, Human
-Capital Index, and Sub-national Poverty indicators.
+The `WDI` package allows users to search and download data from over 40 datasets hosted by the World Bank, including the World Development Indicators ('WDI'), International Debt Statistics, Doing Business, Human Capital Index, and Sub-national Poverty indicators.
 
 <!-- badges: start -->
-
 <a href = "https://vincentarelbundock.github.io/WDI" target = "_blank"><img src="https://img.shields.io/static/v1?label=Website&message=Visit&color=blue"></a>
-![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/WDI.png)
-[![R build
-status](https://github.com/vincentarelbundock/WDI/workflows/R-CMD-check/badge.svg)](https://github.com/vincentarelbundock/WDI/actions)
+![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/WDI)
+[![R build status](https://github.com/vincentarelbundock/WDI/workflows/R-CMD-check/badge.svg)](https://github.com/vincentarelbundock/WDI/actions)
 <!-- badges: end -->
 
 ## Installation
 
-`WDI` is published on CRAN and so can be installed by simply typing this
-in the `R` console:
+`WDI` is published on CRAN and so can be installed by simply typing this in the `R` console: 
 
-``` r
+```r
 install.packages('WDI')
 ```
 
 To install the development version of the package, use `remotes`:
 
-``` r
+```r
 library(remotes)
 install_github('vincentarelbundock/WDI')
 ```
 
 ## Searching for data
 
-You can search for data by using keywords in `WDIsearch`. For instance,
-if you are looking for data on Gross Domestic Product:
+You can search for data by using keywords in `WDIsearch`. For instance, if you are looking for data on Gross Domestic Product: 
 
-``` r
+```r
 WDIsearch('gdp')
 ```
 
-Which produces this:
+Which produces this: 
 
-``` r
+```r
 > WDIsearch('gdp')[1:10,]
       indicator              name                                                                      
  [1,] "BG.GSR.NFSV.GD.ZS"    "Trade in services (% of GDP)"                                            
@@ -57,11 +48,9 @@ Which produces this:
 [10,] "BX.KLT.DINV.WD.GD.ZS" "Foreign direct investment, net inflows (% of GDP)" 
 ```
 
-`WDIsearch` uses grep and ignores cases, so you can also use regular
-expressions. For instance, if you are looking for GDP per capita in
-constant dollars:
+`WDIsearch` uses grep and ignores cases, so you can also use regular expressions. For instance, if you are looking for GDP per capita in constant dollars: 
 
-``` r
+```r
 WDIsearch('gdp.*capita.*constant')
      indicator           name                                                 
 [1,] "GDPPCKD"           "GDP per Capita, constant US$, millions"             
@@ -74,13 +63,13 @@ WDIsearch('gdp.*capita.*constant')
 
 Download a series you like for the countries you like:
 
-``` r
+```r
 dat = WDI(indicator='NY.GDP.PCAP.KD', country=c('MX','CA','US'), start=1960, end=2012)
 ```
 
-Look at the data:
+Look at the data: 
 
-``` r
+```r
 head(dat)
   iso2c country NY.GDP.PCAP.KD year
 1    CA  Canada       9374.883 1960
@@ -93,31 +82,21 @@ head(dat)
 
 Plot the data:
 
-``` r
+```r
 library(ggplot2)
 ggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() + 
     xlab('Year') + ylab('GDP per capita')
 ```
 
-<figure>
-<img
-src="https://raw.githubusercontent.com/vincentarelbundock/WDI/main/web/gdp_per_capita.jpg"
-alt="GDP per capita in North America" />
-<figcaption aria-hidden="true">GDP per capita in North
-America</figcaption>
-</figure>
+![GDP per capita in North America](https://raw.githubusercontent.com/vincentarelbundock/WDI/main/web/gdp_per_capita.jpg)
 
-Note: You can use `country='all'` to download data for all available
-countries. You can also feed a vector of indicator strings if you want
-to download multiple indicators at once.
+Note: You can use `country='all'` to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.
 
 ## Monthly or quarterly data
 
-Some World Bank series are available at the monthly or quarterly
-frequency. You can download those simply using the `start` and `end`
-arguments:
+Some World Bank series are available at the monthly or quarterly frequency. You can download those simply using the `start` and `end` arguments:
 
-``` r
+```r
 WDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05')
 
   iso2c country DPANUSSPB    year
@@ -130,10 +109,9 @@ WDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05'
 
 ## Automatic rename
 
-If the vector that you supply to `WDI` is named, the function will
-automatically rename columns where possible.
+If the vector that you supply to ``WDI`` is named, the function will automatically rename columns where possible.
 
-``` r
+```r
 dat <- WDI(indicator = c("gdp_per_capita" = "NY.GDP.PCAP.KD",
                          "population" = "SP.POP.TOTL"))
 head(dat)
@@ -148,24 +126,19 @@ iso2c    country year gdp_per_capita population
 
 ## Updating series list
 
-To speed up search, `WDI` ships with a local list of all available WDI
-series. This list will be updated semi-regularly, but you may still want
-to update it manually to get access to the very latest data series. To
-do so, use the `cache` function:
+To speed up search, `WDI` ships with a local list of all available WDI series. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the `cache` function:
 
-``` r
+```r
 WDI_data = WDIcache()
 WDIsearch('gdp', cache=new_cache)
 ```
 
 Developer note: To update the search cache, just save it to the repo:
 
-``` r
+```r
 save(WDI_data, file = "data/WDI_data.RData")
 ```
 
 ## Bugs, suggestions, etc.
 
-Thanks for using `WDI`! Please send all bug reports and suggestions
-through the github issue tracker or by email to
-vincent.arel-bundock@umontreal.ca
+Thanks for using `WDI`! Please send all bug reports and suggestions through the github issue tracker or by email to vincent.arel-bundock@umontreal.ca

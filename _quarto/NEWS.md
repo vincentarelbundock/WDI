@@ -1,8 +1,11 @@
 # News
 
-## 2.7.8.9000
+## 2.7.9
 
-* Fix a bug where ISO3 codes were wrongly attributed to column `iso2c` ([#54](https://github.com/vincentarelbundock/WDI//issues/54)).
+* The bulk download URL has changed. The package now uses the new URL. Thanks to [@mjantti](https://github.com/mjantti) for issue [#66](https://github.com/vincentarelbundock/WDI/issues/66). 
+* Fix a bug where ISO3 codes were wrongly attributed to column `iso2c` ([#54](https://github.com/vincentarelbundock/WDI/issues/54)).
+* `wdi.dl()` and `wdi.query()` are not exported anymore. Those were undocumented anyway ([#65](https://github.com/vincentarelbundock/WDI/issues/65)).
+* Update the series search cache.
 
 ## 2.7.8
 
@@ -19,7 +22,7 @@
 
 ## 2.7.5
 
-* Add the observation status (whether an observation is a forecast) when `extra = TRUE` in `WDI()` ([#48](https://github.com/vincentarelbundock/WDI//issues/48))
+* Add the observation status (whether an observation is a forecast) when `extra = TRUE` in `WDI()` ([#48](https://github.com/vincentarelbundock/WDI/issues/48))
 * Updated cache
 
 ## 2.7.4
@@ -33,8 +36,8 @@
 
 ## 2.7.2
 
-* Add support for several languages with the "language" argument in `WDI()` ([#15](https://github.com/vincentarelbundock/WDI//issues/15))
-* Add "latest" argument in `WDI()`, to fetch the most recent non-NA values ([#29](https://github.com/vincentarelbundock/WDI//issues/29), [#43](https://github.com/vincentarelbundock/WDI//issues/43))
+* Add support for several languages with the "language" argument in `WDI()` ([#15](https://github.com/vincentarelbundock/WDI/issues/15))
+* Add "latest" argument in `WDI()`, to fetch the most recent non-NA values ([#29](https://github.com/vincentarelbundock/WDI/issues/29), [#43](https://github.com/vincentarelbundock/WDI/issues/43))
 * Speed improvement in WDIbulk (Thanks to [@etiennebacher](https://github.com/etiennebacher))
 * WDIbulk gets a `timeout` argument
 

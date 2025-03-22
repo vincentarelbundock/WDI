@@ -129,8 +129,14 @@ iso2c    country year gdp_per_capita population
 To speed up search, `WDI` ships with a local list of all available WDI series. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the `cache` function:
 
 ```r
-new_cache = WDIcache()
+WDI_data = WDIcache()
 WDIsearch('gdp', cache=new_cache)
+```
+
+Developer note: To update the search cache, just save it to the repo:
+
+```r
+save(WDI_data, file = "data/WDI_data.RData")
 ```
 
 ## Bugs, suggestions, etc.

@@ -1,0 +1,33 @@
+project:
+  type: website
+website:
+  title: WDI
+  navbar:
+    search: true
+    right:
+      - icon: github
+        href: https://github.com/vincentarelbundock/WDI
+        aria-label: WDI GitHub
+  sidebar:
+    collapse-level: 1
+    contents:
+      - text: Home
+        file: index.qmd
+      - section: Reference
+        contents:
+          - text: languages_supported
+            file: man/languages_supported.qmd
+          - text: WDI_data
+            file: man/WDI_data.qmd
+          - text: WDI
+            file: man/WDI.qmd
+          - text: WDIbulk
+            file: man/WDIbulk.qmd
+          - text: WDIcache
+            file: man/WDIcache.qmd
+          - text: WDIsearch
+            file: man/WDIsearch.qmd
+      - text: News
+        file: NEWS.md
+      - text: Citation
+        file: CITATION.md

@@ -1,6 +1,7 @@
 share
 web
 README.Rmd
+README.qmd
 ^LICENSE\.md$
 .travis.yml
 cran-comments.md
@@ -11,3 +12,4 @@ cran-comments.md
 ^pkgdown$
 ^\.github$
 ^altdoc$
+^_quarto$

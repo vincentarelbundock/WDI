@@ -22,6 +22,7 @@ Depends:
 Imports: 
     jsonlite
 Suggests: 
+    altdoc,
     curl,
     testthat,
     tidyr (>= 0.8.0)
