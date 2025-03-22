@@ -237,7 +237,7 @@ WDIbulk = function(timeout = 600) {
     # download
     temp_dir = tempdir()
     temp_file = tempfile(tmpdir = temp_dir)
-    url = 'https://databank.worldbank.org/data/download/WDI_csv.zip'
+    url = 'https://databank.worldbank.org/data/download/WDI_CSV.zip'
     utils::download.file(url, temp_file)
 
     # read
