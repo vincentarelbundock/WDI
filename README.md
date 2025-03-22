@@ -136,7 +136,7 @@ WDIsearch('gdp', cache=new_cache)
 Developer note: To update the search cache, just save it to the repo:
 
 ```r
-save(WDI_data, "data/WDI_data.RData")
+save(WDI_data, file = "data/WDI_data.RData")
 ```
 
 ## Bugs, suggestions, etc.
