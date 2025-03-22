@@ -9,7 +9,7 @@ Capital Index, and Sub-national Poverty indicators.
 
 <!-- badges: start -->
 
-<a href = "https://vincentarelbundock.github.io/WDI" target = "_blank"><img src="https://img.shields.io/static/v1?label=Website&message=Visit&color=blue"></a>
+<a href = "https://vincentarelbundock.github.io/WDI/" target = "_blank"><img src="https://img.shields.io/static/v1?label=Website&message=Visit&color=blue"></a>
 ![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/WDI.png)
 [![R build
 status](https://github.com/vincentarelbundock/WDI/workflows/R-CMD-check/badge.svg)](https://github.com/vincentarelbundock/WDI/actions)

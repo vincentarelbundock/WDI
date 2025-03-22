@@ -4,411 +4,279 @@
     "href": "CITATION.html",
     "title": "Citation",
     "section": "",
-    "text": "Citation\nTo cite package ‘WDI’ in publications use:\n\n  Arel-Bundock V (2025). _WDI: World Development Indicators and Other\n  World Bank Data_. R package version 2.7.9,\n  &lt;https://vincentarelbundock.github.io/WDI/&gt;.\n\nA BibTeX entry for LaTeX users is\n\n  @Manual{,\n    title = {WDI: World Development Indicators and Other World Bank Data},\n    author = {Vincent Arel-Bundock},\n    year = {2025},\n    note = {R package version 2.7.9},\n    url = {https://vincentarelbundock.github.io/WDI/},\n  }",
-    "crumbs": [
-      "Citation"
-    ]
+    "text": "Citation\nTo cite package ‘WDI’ in publications use:\n\n  Arel-Bundock V (2025). _WDI: World Development Indicators and Other\n  World Bank Data_. R package version 2.7.9,\n  &lt;https://vincentarelbundock.github.io/WDI/&gt;.\n\nA BibTeX entry for LaTeX users is\n\n  @Manual{,\n    title = {WDI: World Development Indicators and Other World Bank Data},\n    author = {Vincent Arel-Bundock},\n    year = {2025},\n    note = {R package version 2.7.9},\n    url = {https://vincentarelbundock.github.io/WDI/},\n  }"
   },
   {
     "objectID": "NEWS.html",
     "href": "NEWS.html",
     "title": "News",
     "section": "",
-    "text": "The bulk download URL has changed. The package now uses the new URL. Thanks to @mjantti for issue #66.\nFix a bug where ISO3 codes were wrongly attributed to column iso2c (#54).\nwdi.dl() and wdi.query() are not exported anymore. Those were undocumented anyway (#65).\nUpdate the series search cache.\n\n\n\n\n\nMove to jsonlite\nend is NULL by default\n\n\n\n\n\nUpdate the cache\n\n\n\n\n\nWDI(extra = TRUE) includes a new lastupdated column.\n\n\n\n\n\nAdd the observation status (whether an observation is a forecast) when extra = TRUE in WDI() (#48)\nUpdated cache\n\n\n\n\n\nBug fix for on-the-fly rename\n\n\n\n\n\nBetter error message\nBug fixes\n\n\n\n\n\nAdd support for several languages with the “language” argument in WDI() (#15)\nAdd “latest” argument in WDI(), to fetch the most recent non-NA values (#29, #43)\nSpeed improvement in WDIbulk (Thanks to @etiennebacher)\nWDIbulk gets a timeout argument\n\n\n\n\n\nBug: did not download all countries\nWDIcache did not retrieve regions\n\n\n\n\n\nAPI v2\nFix a breaking change after API v2\nper_page not large enough when dataset is big\nMonthly and quarterly data\n\n\n\n\n\nstart and end are NULL as default and download all available years.\nlabel attribute to the return data.frame includes descriptive labels for each\nWDIbulk function to download all of WDI\nWDIcache and data trim whitespace from region names\n\n\n\n\n\nNew # WDI numbering scheme\nUpdated country and indicator data\n\n\n\n\n\nNamespace issues (thanks to Jan Dietrich)\nUpdated the list of available indicators\nAllow iso3c or iso2c as input for country argument\nRolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)\nRename columns automatically when using a named vector\n\n\n\n\n\nCall RJSONIO::fromJSON explicitly to avoid conflict with JSON package (Thanks to Richard Cotton)\n\n\n\n\n\nChange default start/end date per user request\n\n\n\n\n\nBug: country names were stripped of digits\n\n\n\n\n\nFixed various issues (thanks to Matthieu Stigler for bug reports and patches)\nFaster downloads when requesting multiple countries (leveraging the US;BR;CA API syntax)\n\n\n\n\n\nNow uses JSON instead of XML (Faster, easier)\nWDIcache function now allows users to update the locally stored database of available WDI series\nFixed doc examples\n\nDocumentation now uses roxygen2\nMoved development to github\nSeries and country info now in a single data list. utf-8 encoding fixed",
-    "crumbs": [
-      "News"
-    ]
+    "text": "The bulk download URL has changed. The package now uses the new URL. Thanks to @mjantti for issue #66.\nFix a bug where ISO3 codes were wrongly attributed to column iso2c (#54).\nwdi.dl() and wdi.query() are not exported anymore. Those were undocumented anyway (#65).\nUpdate the series search cache.\n\n\n\n\n\nMove to jsonlite\nend is NULL by default\n\n\n\n\n\nUpdate the cache\n\n\n\n\n\nWDI(extra = TRUE) includes a new lastupdated column.\n\n\n\n\n\nAdd the observation status (whether an observation is a forecast) when extra = TRUE in WDI() (#48)\nUpdated cache\n\n\n\n\n\nBug fix for on-the-fly rename\n\n\n\n\n\nBetter error message\nBug fixes\n\n\n\n\n\nAdd support for several languages with the “language” argument in WDI() (#15)\nAdd “latest” argument in WDI(), to fetch the most recent non-NA values (#29, #43)\nSpeed improvement in WDIbulk (Thanks to @etiennebacher)\nWDIbulk gets a timeout argument\n\n\n\n\n\nBug: did not download all countries\nWDIcache did not retrieve regions\n\n\n\n\n\nAPI v2\nFix a breaking change after API v2\nper_page not large enough when dataset is big\nMonthly and quarterly data\n\n\n\n\n\nstart and end are NULL as default and download all available years.\nlabel attribute to the return data.frame includes descriptive labels for each\nWDIbulk function to download all of WDI\nWDIcache and data trim whitespace from region names\n\n\n\n\n\nNew # WDI numbering scheme\nUpdated country and indicator data\n\n\n\n\n\nNamespace issues (thanks to Jan Dietrich)\nUpdated the list of available indicators\nAllow iso3c or iso2c as input for country argument\nRolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)\nRename columns automatically when using a named vector\n\n\n\n\n\nCall RJSONIO::fromJSON explicitly to avoid conflict with JSON package (Thanks to Richard Cotton)\n\n\n\n\n\nChange default start/end date per user request\n\n\n\n\n\nBug: country names were stripped of digits\n\n\n\n\n\nFixed various issues (thanks to Matthieu Stigler for bug reports and patches)\nFaster downloads when requesting multiple countries (leveraging the US;BR;CA API syntax)\n\n\n\n\n\nNow uses JSON instead of XML (Faster, easier)\nWDIcache function now allows users to update the locally stored database of available WDI series\nFixed doc examples\n\nDocumentation now uses roxygen2\nMoved development to github\nSeries and country info now in a single data list. utf-8 encoding fixed"
   },
   {
     "objectID": "NEWS.html#section",
     "href": "NEWS.html#section",
     "title": "News",
     "section": "",
-    "text": "The bulk download URL has changed. The package now uses the new URL. Thanks to @mjantti for issue #66.\nFix a bug where ISO3 codes were wrongly attributed to column iso2c (#54).\nwdi.dl() and wdi.query() are not exported anymore. Those were undocumented anyway (#65).\nUpdate the series search cache.",
-    "crumbs": [
-      "News"
-    ]
+    "text": "The bulk download URL has changed. The package now uses the new URL. Thanks to @mjantti for issue #66.\nFix a bug where ISO3 codes were wrongly attributed to column iso2c (#54).\nwdi.dl() and wdi.query() are not exported anymore. Those were undocumented anyway (#65).\nUpdate the series search cache."
   },
   {
     "objectID": "NEWS.html#section-1",
     "href": "NEWS.html#section-1",
     "title": "News",
     "section": "",
-    "text": "Move to jsonlite\nend is NULL by default",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Move to jsonlite\nend is NULL by default"
   },
   {
     "objectID": "NEWS.html#section-2",
     "href": "NEWS.html#section-2",
     "title": "News",
     "section": "",
-    "text": "Update the cache",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Update the cache"
   },
   {
     "objectID": "NEWS.html#section-3",
     "href": "NEWS.html#section-3",
     "title": "News",
     "section": "",
-    "text": "WDI(extra = TRUE) includes a new lastupdated column.",
-    "crumbs": [
-      "News"
-    ]
+    "text": "WDI(extra = TRUE) includes a new lastupdated column."
   },
   {
     "objectID": "NEWS.html#section-4",
     "href": "NEWS.html#section-4",
     "title": "News",
     "section": "",
-    "text": "Add the observation status (whether an observation is a forecast) when extra = TRUE in WDI() (#48)\nUpdated cache",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Add the observation status (whether an observation is a forecast) when extra = TRUE in WDI() (#48)\nUpdated cache"
   },
   {
     "objectID": "NEWS.html#section-5",
     "href": "NEWS.html#section-5",
     "title": "News",
     "section": "",
-    "text": "Bug fix for on-the-fly rename",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Bug fix for on-the-fly rename"
   },
   {
     "objectID": "NEWS.html#section-6",
     "href": "NEWS.html#section-6",
     "title": "News",
     "section": "",
-    "text": "Better error message\nBug fixes",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Better error message\nBug fixes"
   },
   {
     "objectID": "NEWS.html#section-7",
     "href": "NEWS.html#section-7",
     "title": "News",
     "section": "",
-    "text": "Add support for several languages with the “language” argument in WDI() (#15)\nAdd “latest” argument in WDI(), to fetch the most recent non-NA values (#29, #43)\nSpeed improvement in WDIbulk (Thanks to @etiennebacher)\nWDIbulk gets a timeout argument",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Add support for several languages with the “language” argument in WDI() (#15)\nAdd “latest” argument in WDI(), to fetch the most recent non-NA values (#29, #43)\nSpeed improvement in WDIbulk (Thanks to @etiennebacher)\nWDIbulk gets a timeout argument"
   },
   {
     "objectID": "NEWS.html#section-8",
     "href": "NEWS.html#section-8",
     "title": "News",
     "section": "",
-    "text": "Bug: did not download all countries\nWDIcache did not retrieve regions",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Bug: did not download all countries\nWDIcache did not retrieve regions"
   },
   {
     "objectID": "NEWS.html#section-9",
     "href": "NEWS.html#section-9",
     "title": "News",
     "section": "",
-    "text": "API v2\nFix a breaking change after API v2\nper_page not large enough when dataset is big\nMonthly and quarterly data",
-    "crumbs": [
-      "News"
-    ]
+    "text": "API v2\nFix a breaking change after API v2\nper_page not large enough when dataset is big\nMonthly and quarterly data"
   },
   {
     "objectID": "NEWS.html#section-10",
     "href": "NEWS.html#section-10",
     "title": "News",
     "section": "",
-    "text": "start and end are NULL as default and download all available years.\nlabel attribute to the return data.frame includes descriptive labels for each\nWDIbulk function to download all of WDI\nWDIcache and data trim whitespace from region names",
-    "crumbs": [
-      "News"
-    ]
+    "text": "start and end are NULL as default and download all available years.\nlabel attribute to the return data.frame includes descriptive labels for each\nWDIbulk function to download all of WDI\nWDIcache and data trim whitespace from region names"
   },
   {
     "objectID": "NEWS.html#section-11",
     "href": "NEWS.html#section-11",
     "title": "News",
     "section": "",
-    "text": "New # WDI numbering scheme\nUpdated country and indicator data",
-    "crumbs": [
-      "News"
-    ]
+    "text": "New # WDI numbering scheme\nUpdated country and indicator data"
   },
   {
     "objectID": "NEWS.html#section-12",
     "href": "NEWS.html#section-12",
     "title": "News",
     "section": "",
-    "text": "Namespace issues (thanks to Jan Dietrich)\nUpdated the list of available indicators\nAllow iso3c or iso2c as input for country argument\nRolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)\nRename columns automatically when using a named vector",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Namespace issues (thanks to Jan Dietrich)\nUpdated the list of available indicators\nAllow iso3c or iso2c as input for country argument\nRolled-back indicator input clean up because too aggressive (Thanks to Geoff Wright)\nRename columns automatically when using a named vector"
   },
   {
     "objectID": "NEWS.html#section-13",
     "href": "NEWS.html#section-13",
     "title": "News",
     "section": "",
-    "text": "Call RJSONIO::fromJSON explicitly to avoid conflict with JSON package (Thanks to Richard Cotton)",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Call RJSONIO::fromJSON explicitly to avoid conflict with JSON package (Thanks to Richard Cotton)"
   },
   {
     "objectID": "NEWS.html#section-14",
     "href": "NEWS.html#section-14",
     "title": "News",
     "section": "",
-    "text": "Change default start/end date per user request",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Change default start/end date per user request"
   },
   {
     "objectID": "NEWS.html#section-15",
     "href": "NEWS.html#section-15",
     "title": "News",
     "section": "",
-    "text": "Bug: country names were stripped of digits",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Bug: country names were stripped of digits"
   },
   {
     "objectID": "NEWS.html#section-16",
     "href": "NEWS.html#section-16",
     "title": "News",
     "section": "",
-    "text": "Fixed various issues (thanks to Matthieu Stigler for bug reports and patches)\nFaster downloads when requesting multiple countries (leveraging the US;BR;CA API syntax)",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Fixed various issues (thanks to Matthieu Stigler for bug reports and patches)\nFaster downloads when requesting multiple countries (leveraging the US;BR;CA API syntax)"
   },
   {
     "objectID": "NEWS.html#section-17",
     "href": "NEWS.html#section-17",
     "title": "News",
     "section": "",
-    "text": "Now uses JSON instead of XML (Faster, easier)\nWDIcache function now allows users to update the locally stored database of available WDI series\nFixed doc examples\n\nDocumentation now uses roxygen2\nMoved development to github\nSeries and country info now in a single data list. utf-8 encoding fixed",
-    "crumbs": [
-      "News"
-    ]
+    "text": "Now uses JSON instead of XML (Faster, easier)\nWDIcache function now allows users to update the locally stored database of available WDI series\nFixed doc examples\n\nDocumentation now uses roxygen2\nMoved development to github\nSeries and country info now in a single data list. utf-8 encoding fixed"
   },
   {
     "objectID": "man/WDIcache.html",
     "href": "man/WDIcache.html",
     "title": "WDI",
     "section": "",
-    "text": "Download an updated list of available WDI indicators from the World Bank website. Returns a list for use in the WDIsearch function.\n\n\n\nWDIcache()\n\n\n\n\nSeries of indicators, sources and descriptions in two lists list\n\n\n\nDownloading all series information from the World Bank website can take time. The WDI package ships with a local data object with information on all the series available on 2012-06-18. You can update this database by retrieving a new list using WDIcache, and then feeding the resulting object to WDIsearch via the cache argument.",
-    "crumbs": [
-      "Reference",
-      "WDIcache"
-    ]
+    "text": "Download an updated list of available WDI indicators from the World Bank website. Returns a list for use in the WDIsearch function.\n\n\n\nWDIcache()\n\n\n\n\nSeries of indicators, sources and descriptions in two lists list\n\n\n\nDownloading all series information from the World Bank website can take time. The WDI package ships with a local data object with information on all the series available on 2012-06-18. You can update this database by retrieving a new list using WDIcache, and then feeding the resulting object to WDIsearch via the cache argument."
   },
   {
     "objectID": "man/WDIcache.html#update-the-list-of-available-wdi-indicators",
     "href": "man/WDIcache.html#update-the-list-of-available-wdi-indicators",
     "title": "WDI",
     "section": "",
-    "text": "Download an updated list of available WDI indicators from the World Bank website. Returns a list for use in the WDIsearch function.\n\n\n\nWDIcache()\n\n\n\n\nSeries of indicators, sources and descriptions in two lists list\n\n\n\nDownloading all series information from the World Bank website can take time. The WDI package ships with a local data object with information on all the series available on 2012-06-18. You can update this database by retrieving a new list using WDIcache, and then feeding the resulting object to WDIsearch via the cache argument.",
-    "crumbs": [
-      "Reference",
-      "WDIcache"
-    ]
+    "text": "Download an updated list of available WDI indicators from the World Bank website. Returns a list for use in the WDIsearch function.\n\n\n\nWDIcache()\n\n\n\n\nSeries of indicators, sources and descriptions in two lists list\n\n\n\nDownloading all series information from the World Bank website can take time. The WDI package ships with a local data object with information on all the series available on 2012-06-18. You can update this database by retrieving a new list using WDIcache, and then feeding the resulting object to WDIsearch via the cache argument."
   },
   {
     "objectID": "man/WDIsearch.html",
     "href": "man/WDIsearch.html",
     "title": "WDI",
     "section": "",
-    "text": "Data frame with series code, name, description, and source for the WDI series which match the given criteria\n\n\n\nWDIsearch(string = \"gdp\", field = \"name\", short = TRUE, cache = NULL)\n\n\n\n\n\n\n\nstring\n\n\nCharacter string. Search for this string using grep with ignore.case=TRUE.\n\n\n\n\nfield\n\n\nCharacter string. Search this field. Admissible fields: ‘indicator’, ‘name’, ‘description’, ‘sourceDatabase’, ‘sourceOrganization’\n\n\n\n\nshort\n\n\nTRUE: Returns only the indicator’s code and name. FALSE: Returns the indicator’s code, name, description, and source.\n\n\n\n\ncache\n\n\nData list generated by the WDIcache function. If omitted, WDIsearch will search a local list of series.\n\n\n\n\n\n\nData frame with code, name, source, and description of all series which match the criteria.\n\n\n\n\nlibrary(WDI)\n\nWDIsearch(string='gdp', field='name', cache=NULL)\nWDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)",
-    "crumbs": [
-      "Reference",
-      "WDIsearch"
-    ]
+    "text": "Data frame with series code, name, description, and source for the WDI series which match the given criteria\n\n\n\nWDIsearch(string = \"gdp\", field = \"name\", short = TRUE, cache = NULL)\n\n\n\n\n\n\n\nstring\n\n\nCharacter string. Search for this string using grep with ignore.case=TRUE.\n\n\n\n\nfield\n\n\nCharacter string. Search this field. Admissible fields: ‘indicator’, ‘name’, ‘description’, ‘sourceDatabase’, ‘sourceOrganization’\n\n\n\n\nshort\n\n\nTRUE: Returns only the indicator’s code and name. FALSE: Returns the indicator’s code, name, description, and source.\n\n\n\n\ncache\n\n\nData list generated by the WDIcache function. If omitted, WDIsearch will search a local list of series.\n\n\n\n\n\n\nData frame with code, name, source, and description of all series which match the criteria.\n\n\n\n\nlibrary(WDI)\n\nWDIsearch(string='gdp', field='name', cache=NULL)\nWDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)"
   },
   {
     "objectID": "man/WDIsearch.html#search-names-and-descriptions-of-available-wdi-series",
     "href": "man/WDIsearch.html#search-names-and-descriptions-of-available-wdi-series",
     "title": "WDI",
     "section": "",
-    "text": "Data frame with series code, name, description, and source for the WDI series which match the given criteria\n\n\n\nWDIsearch(string = \"gdp\", field = \"name\", short = TRUE, cache = NULL)\n\n\n\n\n\n\n\nstring\n\n\nCharacter string. Search for this string using grep with ignore.case=TRUE.\n\n\n\n\nfield\n\n\nCharacter string. Search this field. Admissible fields: ‘indicator’, ‘name’, ‘description’, ‘sourceDatabase’, ‘sourceOrganization’\n\n\n\n\nshort\n\n\nTRUE: Returns only the indicator’s code and name. FALSE: Returns the indicator’s code, name, description, and source.\n\n\n\n\ncache\n\n\nData list generated by the WDIcache function. If omitted, WDIsearch will search a local list of series.\n\n\n\n\n\n\nData frame with code, name, source, and description of all series which match the criteria.\n\n\n\n\nlibrary(WDI)\n\nWDIsearch(string='gdp', field='name', cache=NULL)\nWDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)",
-    "crumbs": [
-      "Reference",
-      "WDIsearch"
-    ]
+    "text": "Data frame with series code, name, description, and source for the WDI series which match the given criteria\n\n\n\nWDIsearch(string = \"gdp\", field = \"name\", short = TRUE, cache = NULL)\n\n\n\n\n\n\n\nstring\n\n\nCharacter string. Search for this string using grep with ignore.case=TRUE.\n\n\n\n\nfield\n\n\nCharacter string. Search this field. Admissible fields: ‘indicator’, ‘name’, ‘description’, ‘sourceDatabase’, ‘sourceOrganization’\n\n\n\n\nshort\n\n\nTRUE: Returns only the indicator’s code and name. FALSE: Returns the indicator’s code, name, description, and source.\n\n\n\n\ncache\n\n\nData list generated by the WDIcache function. If omitted, WDIsearch will search a local list of series.\n\n\n\n\n\n\nData frame with code, name, source, and description of all series which match the criteria.\n\n\n\n\nlibrary(WDI)\n\nWDIsearch(string='gdp', field='name', cache=NULL)\nWDIsearch(string='AG.AGR.TRAC.NO', field='indicator', cache=NULL)"
   },
   {
     "objectID": "man/WDI.html",
     "href": "man/WDI.html",
     "title": "WDI",
     "section": "",
-    "text": "Downloads the requested data by using the World Bank’s API, parses the resulting XML file, and formats it in long country-year format.\n\n\n\nWDI(\n  country = \"all\",\n  indicator = \"NY.GDP.PCAP.KD\",\n  start = 1960,\n  end = NULL,\n  extra = FALSE,\n  cache = NULL,\n  latest = NULL,\n  language = \"en\"\n)\n\n\n\n\n\n\n\ncountry\n\n\nVector of countries (ISO-2 character codes, e.g. \"BR\", \"US\", \"CA\") for which the data is needed. Using the string \"all\" instead of individual iso codes pulls data for every available country.\n\n\n\n\nindicator\n\n\nCharacter vector of indicators codes. See the WDIsearch() function. If you supply a named vector, the indicators will be automatically renamed: c(‘women_private_sector’ = ‘BI.PWK.PRVS.FE.ZS’)\n\n\n\n\nstart\n\n\nStart date, usually a year in integer format. Must be 1960 or greater.\n\n\n\n\nend\n\n\nEnd date, usually a year in integer format. Must be greater than the start argument. If NULL, the end date is set to 5 years in the future.\n\n\n\n\nextra\n\n\nTRUE returns extra variables such as region, iso3c code, and incomeLevel. See Details.\n\n\n\n\ncache\n\n\nNULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.\n\n\n\n\nlatest\n\n\nInteger indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.\n\n\n\n\nlanguage\n\n\nISO-2 code in lower case indicating in which language the characters should be provided. List of languages available with WDI::languages_supported(). Default is English.\n\n\n\n\n\n\nIt is possible to only specify the indicator and the country arguments, in which case WDI() will return data from 1960 to the last year available on World Bank’s website. It is also possible to get only the most recent non-NA values, with latest.\nIf extra = TRUE, additional variables are provided:\n\n\nstatus: observation status, e.g is the observation a forecast?\n\n\niso3c\n\n\nregion\n\n\ncapital: name of the capital city\n\n\nlatitude, longitude\n\n\nincome: income categories of the World Bank\n\n\nlending\n\n\n\n\n\nData frame with country-year observations. You can extract a data.frame with indicator names and descriptive labels by inspecting the label attribute of the resulting data.frame: attr(dat, ‘label’)\n\n\n\nVincent Arel-Bundock vincent.arel-bundock@umontreal.ca\n\n\n\n\nlibrary(WDI)\n\n\n\nWDI(country=\"all\", indicator=c(\"AG.AGR.TRAC.NO\",\"TM.TAX.TCOM.BC.ZS\"),\n    start=1990, end=2000)\nWDI(country=c(\"US\",\"BR\"), indicator=\"NY.GNS.ICTR.GN.ZS\", start=1999, end=2000,\n    extra=TRUE, cache=NULL)\n\n# Rename indicators on the fly\nWDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',\n                                  'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))\n\n# Get the 5 latest non-NA values\nWDI(country=c(\"US\",\"BR\"), indicator=\"NY.GNS.ICTR.GN.ZS\", latest = 5)",
-    "crumbs": [
-      "Reference",
-      "WDI"
-    ]
+    "text": "Downloads the requested data by using the World Bank’s API, parses the resulting XML file, and formats it in long country-year format.\n\n\n\nWDI(\n  country = \"all\",\n  indicator = \"NY.GDP.PCAP.KD\",\n  start = 1960,\n  end = NULL,\n  extra = FALSE,\n  cache = NULL,\n  latest = NULL,\n  language = \"en\"\n)\n\n\n\n\n\n\n\ncountry\n\n\nVector of countries (ISO-2 character codes, e.g. \"BR\", \"US\", \"CA\") for which the data is needed. Using the string \"all\" instead of individual iso codes pulls data for every available country.\n\n\n\n\nindicator\n\n\nCharacter vector of indicators codes. See the WDIsearch() function. If you supply a named vector, the indicators will be automatically renamed: c(‘women_private_sector’ = ‘BI.PWK.PRVS.FE.ZS’)\n\n\n\n\nstart\n\n\nStart date, usually a year in integer format. Must be 1960 or greater.\n\n\n\n\nend\n\n\nEnd date, usually a year in integer format. Must be greater than the start argument. If NULL, the end date is set to 5 years in the future.\n\n\n\n\nextra\n\n\nTRUE returns extra variables such as region, iso3c code, and incomeLevel. See Details.\n\n\n\n\ncache\n\n\nNULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.\n\n\n\n\nlatest\n\n\nInteger indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.\n\n\n\n\nlanguage\n\n\nISO-2 code in lower case indicating in which language the characters should be provided. List of languages available with WDI::languages_supported(). Default is English.\n\n\n\n\n\n\nIt is possible to only specify the indicator and the country arguments, in which case WDI() will return data from 1960 to the last year available on World Bank’s website. It is also possible to get only the most recent non-NA values, with latest.\nIf extra = TRUE, additional variables are provided:\n\n\nstatus: observation status, e.g is the observation a forecast?\n\n\niso3c\n\n\nregion\n\n\ncapital: name of the capital city\n\n\nlatitude, longitude\n\n\nincome: income categories of the World Bank\n\n\nlending\n\n\n\n\n\nData frame with country-year observations. You can extract a data.frame with indicator names and descriptive labels by inspecting the label attribute of the resulting data.frame: attr(dat, ‘label’)\n\n\n\nVincent Arel-Bundock vincent.arel-bundock@umontreal.ca\n\n\n\n\nlibrary(WDI)\n\n\n\nWDI(country=\"all\", indicator=c(\"AG.AGR.TRAC.NO\",\"TM.TAX.TCOM.BC.ZS\"),\n    start=1990, end=2000)\nWDI(country=c(\"US\",\"BR\"), indicator=\"NY.GNS.ICTR.GN.ZS\", start=1999, end=2000,\n    extra=TRUE, cache=NULL)\n\n# Rename indicators on the fly\nWDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',\n                                  'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))\n\n# Get the 5 latest non-NA values\nWDI(country=c(\"US\",\"BR\"), indicator=\"NY.GNS.ICTR.GN.ZS\", latest = 5)"
   },
   {
     "objectID": "man/WDI.html#wdi-world-development-indicators-world-bank",
     "href": "man/WDI.html#wdi-world-development-indicators-world-bank",
     "title": "WDI",
     "section": "",
-    "text": "Downloads the requested data by using the World Bank’s API, parses the resulting XML file, and formats it in long country-year format.\n\n\n\nWDI(\n  country = \"all\",\n  indicator = \"NY.GDP.PCAP.KD\",\n  start = 1960,\n  end = NULL,\n  extra = FALSE,\n  cache = NULL,\n  latest = NULL,\n  language = \"en\"\n)\n\n\n\n\n\n\n\ncountry\n\n\nVector of countries (ISO-2 character codes, e.g. \"BR\", \"US\", \"CA\") for which the data is needed. Using the string \"all\" instead of individual iso codes pulls data for every available country.\n\n\n\n\nindicator\n\n\nCharacter vector of indicators codes. See the WDIsearch() function. If you supply a named vector, the indicators will be automatically renamed: c(‘women_private_sector’ = ‘BI.PWK.PRVS.FE.ZS’)\n\n\n\n\nstart\n\n\nStart date, usually a year in integer format. Must be 1960 or greater.\n\n\n\n\nend\n\n\nEnd date, usually a year in integer format. Must be greater than the start argument. If NULL, the end date is set to 5 years in the future.\n\n\n\n\nextra\n\n\nTRUE returns extra variables such as region, iso3c code, and incomeLevel. See Details.\n\n\n\n\ncache\n\n\nNULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.\n\n\n\n\nlatest\n\n\nInteger indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.\n\n\n\n\nlanguage\n\n\nISO-2 code in lower case indicating in which language the characters should be provided. List of languages available with WDI::languages_supported(). Default is English.\n\n\n\n\n\n\nIt is possible to only specify the indicator and the country arguments, in which case WDI() will return data from 1960 to the last year available on World Bank’s website. It is also possible to get only the most recent non-NA values, with latest.\nIf extra = TRUE, additional variables are provided:\n\n\nstatus: observation status, e.g is the observation a forecast?\n\n\niso3c\n\n\nregion\n\n\ncapital: name of the capital city\n\n\nlatitude, longitude\n\n\nincome: income categories of the World Bank\n\n\nlending\n\n\n\n\n\nData frame with country-year observations. You can extract a data.frame with indicator names and descriptive labels by inspecting the label attribute of the resulting data.frame: attr(dat, ‘label’)\n\n\n\nVincent Arel-Bundock vincent.arel-bundock@umontreal.ca\n\n\n\n\nlibrary(WDI)\n\n\n\nWDI(country=\"all\", indicator=c(\"AG.AGR.TRAC.NO\",\"TM.TAX.TCOM.BC.ZS\"),\n    start=1990, end=2000)\nWDI(country=c(\"US\",\"BR\"), indicator=\"NY.GNS.ICTR.GN.ZS\", start=1999, end=2000,\n    extra=TRUE, cache=NULL)\n\n# Rename indicators on the fly\nWDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',\n                                  'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))\n\n# Get the 5 latest non-NA values\nWDI(country=c(\"US\",\"BR\"), indicator=\"NY.GNS.ICTR.GN.ZS\", latest = 5)",
-    "crumbs": [
-      "Reference",
-      "WDI"
-    ]
+    "text": "Downloads the requested data by using the World Bank’s API, parses the resulting XML file, and formats it in long country-year format.\n\n\n\nWDI(\n  country = \"all\",\n  indicator = \"NY.GDP.PCAP.KD\",\n  start = 1960,\n  end = NULL,\n  extra = FALSE,\n  cache = NULL,\n  latest = NULL,\n  language = \"en\"\n)\n\n\n\n\n\n\n\ncountry\n\n\nVector of countries (ISO-2 character codes, e.g. \"BR\", \"US\", \"CA\") for which the data is needed. Using the string \"all\" instead of individual iso codes pulls data for every available country.\n\n\n\n\nindicator\n\n\nCharacter vector of indicators codes. See the WDIsearch() function. If you supply a named vector, the indicators will be automatically renamed: c(‘women_private_sector’ = ‘BI.PWK.PRVS.FE.ZS’)\n\n\n\n\nstart\n\n\nStart date, usually a year in integer format. Must be 1960 or greater.\n\n\n\n\nend\n\n\nEnd date, usually a year in integer format. Must be greater than the start argument. If NULL, the end date is set to 5 years in the future.\n\n\n\n\nextra\n\n\nTRUE returns extra variables such as region, iso3c code, and incomeLevel. See Details.\n\n\n\n\ncache\n\n\nNULL (optional) a list created by WDIcache() to be used with the extra=TRUE argument.\n\n\n\n\nlatest\n\n\nInteger indicating the number of most recent non-NA values to get. Default is NULL. If specified, it overrides the start and end dates.\n\n\n\n\nlanguage\n\n\nISO-2 code in lower case indicating in which language the characters should be provided. List of languages available with WDI::languages_supported(). Default is English.\n\n\n\n\n\n\nIt is possible to only specify the indicator and the country arguments, in which case WDI() will return data from 1960 to the last year available on World Bank’s website. It is also possible to get only the most recent non-NA values, with latest.\nIf extra = TRUE, additional variables are provided:\n\n\nstatus: observation status, e.g is the observation a forecast?\n\n\niso3c\n\n\nregion\n\n\ncapital: name of the capital city\n\n\nlatitude, longitude\n\n\nincome: income categories of the World Bank\n\n\nlending\n\n\n\n\n\nData frame with country-year observations. You can extract a data.frame with indicator names and descriptive labels by inspecting the label attribute of the resulting data.frame: attr(dat, ‘label’)\n\n\n\nVincent Arel-Bundock vincent.arel-bundock@umontreal.ca\n\n\n\n\nlibrary(WDI)\n\n\n\nWDI(country=\"all\", indicator=c(\"AG.AGR.TRAC.NO\",\"TM.TAX.TCOM.BC.ZS\"),\n    start=1990, end=2000)\nWDI(country=c(\"US\",\"BR\"), indicator=\"NY.GNS.ICTR.GN.ZS\", start=1999, end=2000,\n    extra=TRUE, cache=NULL)\n\n# Rename indicators on the fly\nWDI(country = 'CA', indicator = c('women_private_sector' = 'BI.PWK.PRVS.FE.ZS',\n                                  'women_public_sector' = 'BI.PWK.PUBS.FE.ZS'))\n\n# Get the 5 latest non-NA values\nWDI(country=c(\"US\",\"BR\"), indicator=\"NY.GNS.ICTR.GN.ZS\", latest = 5)"
   },
   {
     "objectID": "man/languages_supported.html",
     "href": "man/languages_supported.html",
     "title": "WDI",
     "section": "",
-    "text": "This prints two lists of languages, the fully supported ones and the locally supported ones:\n\n\nthe languages in the category \"fully\" will return translated names and other info for all countries.\n\n\nthe languages in the category \"partially\" will return translated names and other info only for the country they represent.\n\n\n\n\n\nlanguages_supported()\n\n\n\n\nFor example, choosing \"vi\" (for Vietnamese) will translate \"Vietnam\" in the dataset but other country names won’t be translated and will be empty.\n\n\n\nA list of fully and partially supported languages.",
-    "crumbs": [
-      "Reference",
-      "languages_supported"
-    ]
+    "text": "This prints two lists of languages, the fully supported ones and the locally supported ones:\n\n\nthe languages in the category \"fully\" will return translated names and other info for all countries.\n\n\nthe languages in the category \"partially\" will return translated names and other info only for the country they represent.\n\n\n\n\n\nlanguages_supported()\n\n\n\n\nFor example, choosing \"vi\" (for Vietnamese) will translate \"Vietnam\" in the dataset but other country names won’t be translated and will be empty.\n\n\n\nA list of fully and partially supported languages."
   },
   {
     "objectID": "man/languages_supported.html#list-of-supported-languages",
     "href": "man/languages_supported.html#list-of-supported-languages",
     "title": "WDI",
     "section": "",
-    "text": "This prints two lists of languages, the fully supported ones and the locally supported ones:\n\n\nthe languages in the category \"fully\" will return translated names and other info for all countries.\n\n\nthe languages in the category \"partially\" will return translated names and other info only for the country they represent.\n\n\n\n\n\nlanguages_supported()\n\n\n\n\nFor example, choosing \"vi\" (for Vietnamese) will translate \"Vietnam\" in the dataset but other country names won’t be translated and will be empty.\n\n\n\nA list of fully and partially supported languages.",
-    "crumbs": [
-      "Reference",
-      "languages_supported"
-    ]
+    "text": "This prints two lists of languages, the fully supported ones and the locally supported ones:\n\n\nthe languages in the category \"fully\" will return translated names and other info for all countries.\n\n\nthe languages in the category \"partially\" will return translated names and other info only for the country they represent.\n\n\n\n\n\nlanguages_supported()\n\n\n\n\nFor example, choosing \"vi\" (for Vietnamese) will translate \"Vietnam\" in the dataset but other country names won’t be translated and will be empty.\n\n\n\nA list of fully and partially supported languages."
   },
   {
     "objectID": "man/WDIbulk.html",
     "href": "man/WDIbulk.html",
     "title": "WDI",
     "section": "",
-    "text": "Download all the WDI indicators at once.\n\n\n\nWDIbulk(timeout = 600)\n\n\n\n\n\n\n\ntimeout\n\n\ninteger maximum number of seconds to wait for download\n\n\n\n\n\n\nData frame\na list of 6 data frames: Data, Country, Series, Country-Series, Series-Time, FootNote\n\n\n\nVincent Arel-Bundock vincent.arel-bundock@umontreal.ca",
-    "crumbs": [
-      "Reference",
-      "WDIbulk"
-    ]
+    "text": "Download all the WDI indicators at once.\n\n\n\nWDIbulk(timeout = 600)\n\n\n\n\n\n\n\ntimeout\n\n\ninteger maximum number of seconds to wait for download\n\n\n\n\n\n\nData frame\na list of 6 data frames: Data, Country, Series, Country-Series, Series-Time, FootNote\n\n\n\nVincent Arel-Bundock vincent.arel-bundock@umontreal.ca"
   },
   {
     "objectID": "man/WDIbulk.html#download-all-the-wdi-indicators-at-once.",
     "href": "man/WDIbulk.html#download-all-the-wdi-indicators-at-once.",
     "title": "WDI",
     "section": "",
-    "text": "Download all the WDI indicators at once.\n\n\n\nWDIbulk(timeout = 600)\n\n\n\n\n\n\n\ntimeout\n\n\ninteger maximum number of seconds to wait for download\n\n\n\n\n\n\nData frame\na list of 6 data frames: Data, Country, Series, Country-Series, Series-Time, FootNote\n\n\n\nVincent Arel-Bundock vincent.arel-bundock@umontreal.ca",
-    "crumbs": [
-      "Reference",
-      "WDIbulk"
-    ]
+    "text": "Download all the WDI indicators at once.\n\n\n\nWDIbulk(timeout = 600)\n\n\n\n\n\n\n\ntimeout\n\n\ninteger maximum number of seconds to wait for download\n\n\n\n\n\n\nData frame\na list of 6 data frames: Data, Country, Series, Country-Series, Series-Time, FootNote\n\n\n\nVincent Arel-Bundock vincent.arel-bundock@umontreal.ca"
   },
   {
     "objectID": "man/WDI_data.html",
     "href": "man/WDI_data.html",
     "title": "WDI",
     "section": "",
-    "text": "A list of two character matrices.\n\n\n\nWDI_data\n\n\n\n\nList of 2 data frames\n\n\n\nThe first character matrix includes a full list of WDI series. This list is updated semi-regularly. Users can refresh the list manually using the WDIcache() function and search in the updated list using the cache argument.\n\n\nid WDI indicator code\n\n\nname Short name of the series\n\n\nsourceNote Detailed description provided by the source\n\n\nsource Source database\n\n\nsourceOrganization Source organization\n\n\nThe second character matrix includes extra country information (updated 2012-06-18):\n\n\niso3c ISO 3-letter country code\n\n\niso2c ISO 2-letter country code\n\n\ncountry Country name (long English form)\n\n\nregion Region\n\n\ncapital Capital\n\n\nlongitude Longitude\n\n\nlatitude Latitude\n\n\nincome Income level as defined by the World Bank\n\n\nlending Lending category, as defined by the World Bank",
-    "crumbs": [
-      "Reference",
-      "WDI_data"
-    ]
+    "text": "A list of two character matrices.\n\n\n\nWDI_data\n\n\n\n\nList of 2 data frames\n\n\n\nThe first character matrix includes a full list of WDI series. This list is updated semi-regularly. Users can refresh the list manually using the WDIcache() function and search in the updated list using the cache argument.\n\n\nid WDI indicator code\n\n\nname Short name of the series\n\n\nsourceNote Detailed description provided by the source\n\n\nsource Source database\n\n\nsourceOrganization Source organization\n\n\nThe second character matrix includes extra country information (updated 2012-06-18):\n\n\niso3c ISO 3-letter country code\n\n\niso2c ISO 2-letter country code\n\n\ncountry Country name (long English form)\n\n\nregion Region\n\n\ncapital Capital\n\n\nlongitude Longitude\n\n\nlatitude Latitude\n\n\nincome Income level as defined by the World Bank\n\n\nlending Lending category, as defined by the World Bank"
   },
   {
     "objectID": "man/WDI_data.html#world-development-indicators-series-and-country-information",
     "href": "man/WDI_data.html#world-development-indicators-series-and-country-information",
     "title": "WDI",
     "section": "",
-    "text": "A list of two character matrices.\n\n\n\nWDI_data\n\n\n\n\nList of 2 data frames\n\n\n\nThe first character matrix includes a full list of WDI series. This list is updated semi-regularly. Users can refresh the list manually using the WDIcache() function and search in the updated list using the cache argument.\n\n\nid WDI indicator code\n\n\nname Short name of the series\n\n\nsourceNote Detailed description provided by the source\n\n\nsource Source database\n\n\nsourceOrganization Source organization\n\n\nThe second character matrix includes extra country information (updated 2012-06-18):\n\n\niso3c ISO 3-letter country code\n\n\niso2c ISO 2-letter country code\n\n\ncountry Country name (long English form)\n\n\nregion Region\n\n\ncapital Capital\n\n\nlongitude Longitude\n\n\nlatitude Latitude\n\n\nincome Income level as defined by the World Bank\n\n\nlending Lending category, as defined by the World Bank",
-    "crumbs": [
-      "Reference",
-      "WDI_data"
-    ]
+    "text": "A list of two character matrices.\n\n\n\nWDI_data\n\n\n\n\nList of 2 data frames\n\n\n\nThe first character matrix includes a full list of WDI series. This list is updated semi-regularly. Users can refresh the list manually using the WDIcache() function and search in the updated list using the cache argument.\n\n\nid WDI indicator code\n\n\nname Short name of the series\n\n\nsourceNote Detailed description provided by the source\n\n\nsource Source database\n\n\nsourceOrganization Source organization\n\n\nThe second character matrix includes extra country information (updated 2012-06-18):\n\n\niso3c ISO 3-letter country code\n\n\niso2c ISO 2-letter country code\n\n\ncountry Country name (long English form)\n\n\nregion Region\n\n\ncapital Capital\n\n\nlongitude Longitude\n\n\nlatitude Latitude\n\n\nincome Income level as defined by the World Bank\n\n\nlending Lending category, as defined by the World Bank"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "World Bank data in R",
     "section": "",
-    "text": "The WDI package allows users to search and download data from over 40 datasets hosted by the World Bank, including the World Development Indicators (‘WDI’), International Debt Statistics, Doing Business, Human Capital Index, and Sub-national Poverty indicators.\n\n   \n\n\nWDI is published on CRAN and so can be installed by simply typing this in the R console:\ninstall.packages('WDI')\nTo install the development version of the package, use remotes:\nlibrary(remotes)\ninstall_github('vincentarelbundock/WDI')\n\n\n\nYou can search for data by using keywords in WDIsearch. For instance, if you are looking for data on Gross Domestic Product:\nWDIsearch('gdp')\nWhich produces this:\n&gt; WDIsearch('gdp')[1:10,]\n      indicator              name                                                                      \n [1,] \"BG.GSR.NFSV.GD.ZS\"    \"Trade in services (% of GDP)\"                                            \n [2,] \"BM.KLT.DINV.GD.ZS\"    \"Foreign direct investment, net outflows (% of GDP)\"                      \n [3,] \"BN.CAB.XOKA.GD.ZS\"    \"Current account balance (% of GDP)\"                                      \n [4,] \"BN.CUR.GDPM.ZS\"       \"Current account balance excluding net official capital grants (% of GDP)\"\n [5,] \"BN.GSR.FCTY.CD.ZS\"    \"Net income (% of GDP)\"                                                   \n [6,] \"BN.KLT.DINV.CD.ZS\"    \"Foreign direct investment (% of GDP)\"                                    \n [7,] \"BN.KLT.PRVT.GD.ZS\"    \"Private capital flows, total (% of GDP)\"                                 \n [8,] \"BN.TRF.CURR.CD.ZS\"    \"Net current transfers (% of GDP)\"                                        \n [9,] \"BNCABFUNDCD_\"         \"Current Account Balance, %GDP\"                                           \n[10,] \"BX.KLT.DINV.WD.GD.ZS\" \"Foreign direct investment, net inflows (% of GDP)\" \nWDIsearch uses grep and ignores cases, so you can also use regular expressions. For instance, if you are looking for GDP per capita in constant dollars:\nWDIsearch('gdp.*capita.*constant')\n     indicator           name                                                 \n[1,] \"GDPPCKD\"           \"GDP per Capita, constant US$, millions\"             \n[2,] \"NY.GDP.PCAP.KD\"    \"GDP per capita (constant 2000 US$)\"                 \n[3,] \"NY.GDP.PCAP.KN\"    \"GDP per capita (constant LCU)\"                      \n[4,] \"NY.GDP.PCAP.PP.KD\" \"GDP per capita, PPP (constant 2005 international $)\"\n\n\n\nDownload a series you like for the countries you like:\ndat = WDI(indicator='NY.GDP.PCAP.KD', country=c('MX','CA','US'), start=1960, end=2012)\nLook at the data:\nhead(dat)\n  iso2c country NY.GDP.PCAP.KD year\n1    CA  Canada       9374.883 1960\n2    CA  Canada       9479.824 1961\n3    CA  Canada       9967.366 1962\n4    CA  Canada      10290.362 1963\n5    CA  Canada      10774.653 1964\n6    CA  Canada      11283.606 1965\nPlot the data:\nlibrary(ggplot2)\nggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() + \n    xlab('Year') + ylab('GDP per capita')\n\n\n\nGDP per capita in North America\n\n\nNote: You can use country='all' to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.\n\n\n\nSome World Bank series are available at the monthly or quarterly frequency. You can download those simply using the start and end arguments:\nWDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05')\n\n  iso2c country DPANUSSPB    year\n1   CHN   China  6.324130 2012M05\n2   CHN   China  6.303810 2012M04\n3   CHN   China  6.313545 2012M03\n4   CHN   China  6.300286 2012M02\n5   CHN   China  6.313091 2012M01\n\n\n\nIf the vector that you supply to WDI is named, the function will automatically rename columns where possible.\ndat &lt;- WDI(indicator = c(\"gdp_per_capita\" = \"NY.GDP.PCAP.KD\",\n                         \"population\" = \"SP.POP.TOTL\"))\nhead(dat)\niso2c    country year gdp_per_capita population\n1    1A Arab World 2005       5378.379  316264728\n2    1A Arab World 2006       5594.899  323773264\n3    1A Arab World 2007       5711.663  331653797\n4    1A Arab World 2008       5898.516  339825483\n5    1A Arab World 2009       5782.422  348145094\n6    1A Arab World 2010       5916.330  356508908\n\n\n\nTo speed up search, WDI ships with a local list of all available WDI series. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the cache function:\nWDI_data = WDIcache()\nWDIsearch('gdp', cache=new_cache)\nDeveloper note: To update the search cache, just save it to the repo:\nsave(WDI_data, file = \"data/WDI_data.RData\")\n\n\n\nThanks for using WDI! Please send all bug reports and suggestions through the github issue tracker or by email to vincent.arel-bundock@umontreal.ca",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "The WDI package allows users to search and download data from over 40 datasets hosted by the World Bank, including the World Development Indicators (‘WDI’), International Debt Statistics, Doing Business, Human Capital Index, and Sub-national Poverty indicators.\n\n   \n\n\nWDI is published on CRAN and so can be installed by simply typing this in the R console:\ninstall.packages('WDI')\nTo install the development version of the package, use remotes:\nlibrary(remotes)\ninstall_github('vincentarelbundock/WDI')\n\n\n\nYou can search for data by using keywords in WDIsearch. For instance, if you are looking for data on Gross Domestic Product:\nWDIsearch('gdp')\nWhich produces this:\n&gt; WDIsearch('gdp')[1:10,]\n      indicator              name                                                                      \n [1,] \"BG.GSR.NFSV.GD.ZS\"    \"Trade in services (% of GDP)\"                                            \n [2,] \"BM.KLT.DINV.GD.ZS\"    \"Foreign direct investment, net outflows (% of GDP)\"                      \n [3,] \"BN.CAB.XOKA.GD.ZS\"    \"Current account balance (% of GDP)\"                                      \n [4,] \"BN.CUR.GDPM.ZS\"       \"Current account balance excluding net official capital grants (% of GDP)\"\n [5,] \"BN.GSR.FCTY.CD.ZS\"    \"Net income (% of GDP)\"                                                   \n [6,] \"BN.KLT.DINV.CD.ZS\"    \"Foreign direct investment (% of GDP)\"                                    \n [7,] \"BN.KLT.PRVT.GD.ZS\"    \"Private capital flows, total (% of GDP)\"                                 \n [8,] \"BN.TRF.CURR.CD.ZS\"    \"Net current transfers (% of GDP)\"                                        \n [9,] \"BNCABFUNDCD_\"         \"Current Account Balance, %GDP\"                                           \n[10,] \"BX.KLT.DINV.WD.GD.ZS\" \"Foreign direct investment, net inflows (% of GDP)\" \nWDIsearch uses grep and ignores cases, so you can also use regular expressions. For instance, if you are looking for GDP per capita in constant dollars:\nWDIsearch('gdp.*capita.*constant')\n     indicator           name                                                 \n[1,] \"GDPPCKD\"           \"GDP per Capita, constant US$, millions\"             \n[2,] \"NY.GDP.PCAP.KD\"    \"GDP per capita (constant 2000 US$)\"                 \n[3,] \"NY.GDP.PCAP.KN\"    \"GDP per capita (constant LCU)\"                      \n[4,] \"NY.GDP.PCAP.PP.KD\" \"GDP per capita, PPP (constant 2005 international $)\"\n\n\n\nDownload a series you like for the countries you like:\ndat = WDI(indicator='NY.GDP.PCAP.KD', country=c('MX','CA','US'), start=1960, end=2012)\nLook at the data:\nhead(dat)\n  iso2c country NY.GDP.PCAP.KD year\n1    CA  Canada       9374.883 1960\n2    CA  Canada       9479.824 1961\n3    CA  Canada       9967.366 1962\n4    CA  Canada      10290.362 1963\n5    CA  Canada      10774.653 1964\n6    CA  Canada      11283.606 1965\nPlot the data:\nlibrary(ggplot2)\nggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() + \n    xlab('Year') + ylab('GDP per capita')\n\n\n\nGDP per capita in North America\n\n\nNote: You can use country='all' to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.\n\n\n\nSome World Bank series are available at the monthly or quarterly frequency. You can download those simply using the start and end arguments:\nWDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05')\n\n  iso2c country DPANUSSPB    year\n1   CHN   China  6.324130 2012M05\n2   CHN   China  6.303810 2012M04\n3   CHN   China  6.313545 2012M03\n4   CHN   China  6.300286 2012M02\n5   CHN   China  6.313091 2012M01\n\n\n\nIf the vector that you supply to WDI is named, the function will automatically rename columns where possible.\ndat &lt;- WDI(indicator = c(\"gdp_per_capita\" = \"NY.GDP.PCAP.KD\",\n                         \"population\" = \"SP.POP.TOTL\"))\nhead(dat)\niso2c    country year gdp_per_capita population\n1    1A Arab World 2005       5378.379  316264728\n2    1A Arab World 2006       5594.899  323773264\n3    1A Arab World 2007       5711.663  331653797\n4    1A Arab World 2008       5898.516  339825483\n5    1A Arab World 2009       5782.422  348145094\n6    1A Arab World 2010       5916.330  356508908\n\n\n\nTo speed up search, WDI ships with a local list of all available WDI series. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the cache function:\nWDI_data = WDIcache()\nWDIsearch('gdp', cache=new_cache)\nDeveloper note: To update the search cache, just save it to the repo:\nsave(WDI_data, file = \"data/WDI_data.RData\")\n\n\n\nThanks for using WDI! Please send all bug reports and suggestions through the github issue tracker or by email to vincent.arel-bundock@umontreal.ca"
   },
   {
     "objectID": "index.html#installation",
     "href": "index.html#installation",
     "title": "World Bank data in R",
     "section": "",
-    "text": "WDI is published on CRAN and so can be installed by simply typing this in the R console:\ninstall.packages('WDI')\nTo install the development version of the package, use remotes:\nlibrary(remotes)\ninstall_github('vincentarelbundock/WDI')",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "WDI is published on CRAN and so can be installed by simply typing this in the R console:\ninstall.packages('WDI')\nTo install the development version of the package, use remotes:\nlibrary(remotes)\ninstall_github('vincentarelbundock/WDI')"
   },
   {
     "objectID": "index.html#searching-for-data",
     "href": "index.html#searching-for-data",
     "title": "World Bank data in R",
     "section": "",
-    "text": "You can search for data by using keywords in WDIsearch. For instance, if you are looking for data on Gross Domestic Product:\nWDIsearch('gdp')\nWhich produces this:\n&gt; WDIsearch('gdp')[1:10,]\n      indicator              name                                                                      \n [1,] \"BG.GSR.NFSV.GD.ZS\"    \"Trade in services (% of GDP)\"                                            \n [2,] \"BM.KLT.DINV.GD.ZS\"    \"Foreign direct investment, net outflows (% of GDP)\"                      \n [3,] \"BN.CAB.XOKA.GD.ZS\"    \"Current account balance (% of GDP)\"                                      \n [4,] \"BN.CUR.GDPM.ZS\"       \"Current account balance excluding net official capital grants (% of GDP)\"\n [5,] \"BN.GSR.FCTY.CD.ZS\"    \"Net income (% of GDP)\"                                                   \n [6,] \"BN.KLT.DINV.CD.ZS\"    \"Foreign direct investment (% of GDP)\"                                    \n [7,] \"BN.KLT.PRVT.GD.ZS\"    \"Private capital flows, total (% of GDP)\"                                 \n [8,] \"BN.TRF.CURR.CD.ZS\"    \"Net current transfers (% of GDP)\"                                        \n [9,] \"BNCABFUNDCD_\"         \"Current Account Balance, %GDP\"                                           \n[10,] \"BX.KLT.DINV.WD.GD.ZS\" \"Foreign direct investment, net inflows (% of GDP)\" \nWDIsearch uses grep and ignores cases, so you can also use regular expressions. For instance, if you are looking for GDP per capita in constant dollars:\nWDIsearch('gdp.*capita.*constant')\n     indicator           name                                                 \n[1,] \"GDPPCKD\"           \"GDP per Capita, constant US$, millions\"             \n[2,] \"NY.GDP.PCAP.KD\"    \"GDP per capita (constant 2000 US$)\"                 \n[3,] \"NY.GDP.PCAP.KN\"    \"GDP per capita (constant LCU)\"                      \n[4,] \"NY.GDP.PCAP.PP.KD\" \"GDP per capita, PPP (constant 2005 international $)\"",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "You can search for data by using keywords in WDIsearch. For instance, if you are looking for data on Gross Domestic Product:\nWDIsearch('gdp')\nWhich produces this:\n&gt; WDIsearch('gdp')[1:10,]\n      indicator              name                                                                      \n [1,] \"BG.GSR.NFSV.GD.ZS\"    \"Trade in services (% of GDP)\"                                            \n [2,] \"BM.KLT.DINV.GD.ZS\"    \"Foreign direct investment, net outflows (% of GDP)\"                      \n [3,] \"BN.CAB.XOKA.GD.ZS\"    \"Current account balance (% of GDP)\"                                      \n [4,] \"BN.CUR.GDPM.ZS\"       \"Current account balance excluding net official capital grants (% of GDP)\"\n [5,] \"BN.GSR.FCTY.CD.ZS\"    \"Net income (% of GDP)\"                                                   \n [6,] \"BN.KLT.DINV.CD.ZS\"    \"Foreign direct investment (% of GDP)\"                                    \n [7,] \"BN.KLT.PRVT.GD.ZS\"    \"Private capital flows, total (% of GDP)\"                                 \n [8,] \"BN.TRF.CURR.CD.ZS\"    \"Net current transfers (% of GDP)\"                                        \n [9,] \"BNCABFUNDCD_\"         \"Current Account Balance, %GDP\"                                           \n[10,] \"BX.KLT.DINV.WD.GD.ZS\" \"Foreign direct investment, net inflows (% of GDP)\" \nWDIsearch uses grep and ignores cases, so you can also use regular expressions. For instance, if you are looking for GDP per capita in constant dollars:\nWDIsearch('gdp.*capita.*constant')\n     indicator           name                                                 \n[1,] \"GDPPCKD\"           \"GDP per Capita, constant US$, millions\"             \n[2,] \"NY.GDP.PCAP.KD\"    \"GDP per capita (constant 2000 US$)\"                 \n[3,] \"NY.GDP.PCAP.KN\"    \"GDP per capita (constant LCU)\"                      \n[4,] \"NY.GDP.PCAP.PP.KD\" \"GDP per capita, PPP (constant 2005 international $)\""
   },
   {
     "objectID": "index.html#download-and-use-the-data",
     "href": "index.html#download-and-use-the-data",
     "title": "World Bank data in R",
     "section": "",
-    "text": "Download a series you like for the countries you like:\ndat = WDI(indicator='NY.GDP.PCAP.KD', country=c('MX','CA','US'), start=1960, end=2012)\nLook at the data:\nhead(dat)\n  iso2c country NY.GDP.PCAP.KD year\n1    CA  Canada       9374.883 1960\n2    CA  Canada       9479.824 1961\n3    CA  Canada       9967.366 1962\n4    CA  Canada      10290.362 1963\n5    CA  Canada      10774.653 1964\n6    CA  Canada      11283.606 1965\nPlot the data:\nlibrary(ggplot2)\nggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() + \n    xlab('Year') + ylab('GDP per capita')\n\n\n\nGDP per capita in North America\n\n\nNote: You can use country='all' to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once.",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "Download a series you like for the countries you like:\ndat = WDI(indicator='NY.GDP.PCAP.KD', country=c('MX','CA','US'), start=1960, end=2012)\nLook at the data:\nhead(dat)\n  iso2c country NY.GDP.PCAP.KD year\n1    CA  Canada       9374.883 1960\n2    CA  Canada       9479.824 1961\n3    CA  Canada       9967.366 1962\n4    CA  Canada      10290.362 1963\n5    CA  Canada      10774.653 1964\n6    CA  Canada      11283.606 1965\nPlot the data:\nlibrary(ggplot2)\nggplot(dat, aes(year, NY.GDP.PCAP.KD, color=country)) + geom_line() + \n    xlab('Year') + ylab('GDP per capita')\n\n\n\nGDP per capita in North America\n\n\nNote: You can use country='all' to download data for all available countries. You can also feed a vector of indicator strings if you want to download multiple indicators at once."
   },
   {
     "objectID": "index.html#monthly-or-quarterly-data",
     "href": "index.html#monthly-or-quarterly-data",
     "title": "World Bank data in R",
     "section": "",
-    "text": "Some World Bank series are available at the monthly or quarterly frequency. You can download those simply using the start and end arguments:\nWDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05')\n\n  iso2c country DPANUSSPB    year\n1   CHN   China  6.324130 2012M05\n2   CHN   China  6.303810 2012M04\n3   CHN   China  6.313545 2012M03\n4   CHN   China  6.300286 2012M02\n5   CHN   China  6.313091 2012M01",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "Some World Bank series are available at the monthly or quarterly frequency. You can download those simply using the start and end arguments:\nWDI(indicator = 'DPANUSSPB', country = 'CHN', start = '2012M01', end = '2012M05')\n\n  iso2c country DPANUSSPB    year\n1   CHN   China  6.324130 2012M05\n2   CHN   China  6.303810 2012M04\n3   CHN   China  6.313545 2012M03\n4   CHN   China  6.300286 2012M02\n5   CHN   China  6.313091 2012M01"
   },
   {
     "objectID": "index.html#automatic-rename",
     "href": "index.html#automatic-rename",
     "title": "World Bank data in R",
     "section": "",
-    "text": "If the vector that you supply to WDI is named, the function will automatically rename columns where possible.\ndat &lt;- WDI(indicator = c(\"gdp_per_capita\" = \"NY.GDP.PCAP.KD\",\n                         \"population\" = \"SP.POP.TOTL\"))\nhead(dat)\niso2c    country year gdp_per_capita population\n1    1A Arab World 2005       5378.379  316264728\n2    1A Arab World 2006       5594.899  323773264\n3    1A Arab World 2007       5711.663  331653797\n4    1A Arab World 2008       5898.516  339825483\n5    1A Arab World 2009       5782.422  348145094\n6    1A Arab World 2010       5916.330  356508908",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "If the vector that you supply to WDI is named, the function will automatically rename columns where possible.\ndat &lt;- WDI(indicator = c(\"gdp_per_capita\" = \"NY.GDP.PCAP.KD\",\n                         \"population\" = \"SP.POP.TOTL\"))\nhead(dat)\niso2c    country year gdp_per_capita population\n1    1A Arab World 2005       5378.379  316264728\n2    1A Arab World 2006       5594.899  323773264\n3    1A Arab World 2007       5711.663  331653797\n4    1A Arab World 2008       5898.516  339825483\n5    1A Arab World 2009       5782.422  348145094\n6    1A Arab World 2010       5916.330  356508908"
   },
   {
     "objectID": "index.html#updating-series-list",
     "href": "index.html#updating-series-list",
     "title": "World Bank data in R",
     "section": "",
-    "text": "To speed up search, WDI ships with a local list of all available WDI series. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the cache function:\nWDI_data = WDIcache()\nWDIsearch('gdp', cache=new_cache)\nDeveloper note: To update the search cache, just save it to the repo:\nsave(WDI_data, file = \"data/WDI_data.RData\")",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "To speed up search, WDI ships with a local list of all available WDI series. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the cache function:\nWDI_data = WDIcache()\nWDIsearch('gdp', cache=new_cache)\nDeveloper note: To update the search cache, just save it to the repo:\nsave(WDI_data, file = \"data/WDI_data.RData\")"
   },
   {
     "objectID": "index.html#bugs-suggestions-etc.",
     "href": "index.html#bugs-suggestions-etc.",
     "title": "World Bank data in R",
     "section": "",
-    "text": "Thanks for using WDI! Please send all bug reports and suggestions through the github issue tracker or by email to vincent.arel-bundock@umontreal.ca",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "Thanks for using WDI! Please send all bug reports and suggestions through the github issue tracker or by email to vincent.arel-bundock@umontreal.ca"
   }
 ]
