@@ -1,7 +1,8 @@
 # News
 
-## 2.7.8.9000
+## 2.7.9
 
+* The bulk download URL has changed. The package now uses the new URL. Thanks to @mjantti for issue #66. 
 * Fix a bug where ISO3 codes were wrongly attributed to column `iso2c` (#54).
 * `wdi.dl()` and `wdi.query()` are not exported anymore. Those were undocumented anyway (#65).
 * Update the series search cache.
