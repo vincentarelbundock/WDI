@@ -410,7 +410,7 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
 #' @export
 WDIcache = function(){
     # Series
-    series_url = 'https://api.worldbank.org/v2/indicator?per_page=25000&format=json'
+    series_url = 'https://api.worldbank.org/v2/indicator?per_page=50000&format=json'
     series_dat <- jsonlite::fromJSON(series_url)[[2]]
     series_dat <- data.frame(
         indicator = series_dat$id,
