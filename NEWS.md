@@ -1,5 +1,11 @@
 # News
 
+## 2.7,10
+
+* Updated cache.
+* Allowed more than 25000 indicators. Thanks to @universal for PR #70.b
+
+
 ## 2.7.9
 
 * The bulk download URL has changed. The package now uses the new URL. Thanks to @mjantti for issue #66. 
