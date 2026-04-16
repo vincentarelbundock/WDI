@@ -1,3 +1,6 @@
 docs
 altdoc/freeze.rds
 ^_quarto$
+
+# scrutin history + caches (keep runner scripts tracked)
+.scrutin/state.db*
