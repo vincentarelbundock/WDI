@@ -10,7 +10,8 @@ Authors@R: c(
            email = "etienne.bacher@protonmail.com",
            role = "ctb"))
 Maintainer: Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>
-LazyData: yes 
+LazyData: yes
+LazyDataCompression: xz
 Type: Package
 LazyLoad: yes
 Encoding: UTF-8

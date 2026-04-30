@@ -1,10 +1,13 @@
 # News
 
+## Development
+
+* Updated cache. Motivation: Pakistan and Afghanistan new region names.
+
 ## 2.7,10
 
 * Updated cache.
 * Allowed more than 25000 indicators. Thanks to @universal for PR #70.b
-
 
 ## 2.7.9
 
