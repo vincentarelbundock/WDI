@@ -6,10 +6,10 @@
 * `wdi.dl()` warns when fewer pages are retrieved than the World Bank API announced, instead of silently returning incomplete data.
 * Updated cache. Motivation: Pakistan and Afghanistan new region names.
 
-## 2.7,10
+## 2.7.10
 
 * Updated cache.
-* Allowed more than 25000 indicators. Thanks to @universal for PR #70.b
+* Allowed more than 25000 indicators. Thanks to @universal for PR #70.
 
 ## 2.7.9
 
