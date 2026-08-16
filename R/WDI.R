@@ -353,6 +353,7 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
     lab <- attr(pages[[1]], "label")
 
     dat <- list()
+    expected <- NULL # number of pages the API says are available
     for (i in seq_along(pages)) {
         tmp <- tryCatch(get_page(pages[i]), error = function(e) NULL)
         if (!inherits(tmp, 'data.frame') || (nrow(tmp) == 0)) {
@@ -366,11 +367,27 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
             !is.na(page_count) &&
             is.finite(page_count) &&
             (page_count %% 1 == 0) &&
-            (page_count >= 1) &&
-            (i >= page_count)) {
-            break
+            (page_count >= 1)) {
+            expected <- page_count
+            if (i >= page_count) {
+                break
+            }
         }
     }
+
+    if (length(dat) == 0) {
+        stop("The World Bank API did not return usable data for indicator '",
+             indicator, "'. The server may be unavailable, or the request may be invalid.",
+             call. = FALSE)
+    }
+
+    if (!is.null(expected) && length(dat) < expected) {
+        warning("Retrieved ", length(dat), " of ", expected,
+                " pages announced by the World Bank API for indicator '",
+                indicator, "'. The results are incomplete.",
+                call. = FALSE)
+    }
+
     lastupdated <- attr(dat[[1]], "lastupdated")
 
     dat <- do.call('rbind', dat)

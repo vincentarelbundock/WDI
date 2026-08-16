@@ -1,4 +1,4 @@
-test_that("pagination stops after the first unusable page", {
+test_that("pagination stops after the first unusable page, and warns", {
     requests <- character()
     from_json <- function(url) {
         requests <<- c(requests, url)
@@ -9,12 +9,14 @@ test_that("pagination stops after the first unusable page", {
         make_wdi_page(page)
     }
 
-    out <- WDI:::wdi.dl(
-        indicator = "SYNTH",
-        country = "US",
-        start = 1990,
-        end = 2000,
-        .fromJSON = from_json)
+    expect_warning(
+        out <- WDI:::wdi.dl(
+            indicator = "SYNTH",
+            country = "US",
+            start = 1990,
+            end = 2000,
+            .fromJSON = from_json),
+        "Retrieved 2 of 10 pages")
 
     expect_length(requests, 3)
     expect_equal(out$data$SYNTH, c(1, 2))
@@ -83,7 +85,7 @@ test_that("pagination falls back when page-count metadata is malformed", {
     expect_equal(nrow(out$data), 1)
 })
 
-test_that("pagination stops after a first-page failure", {
+test_that("pagination stops after a first-page failure with an informative error", {
     requests <- 0L
     from_json <- function(url) {
         requests <<- requests + 1L
@@ -97,6 +99,6 @@ test_that("pagination stops after a first-page failure", {
             start = 1990,
             end = 2000,
             .fromJSON = from_json),
-        "subscript out of bounds")
+        "did not return usable data")
     expect_equal(requests, 1L)
 })
