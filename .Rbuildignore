@@ -14,3 +14,4 @@ cran-comments.md
 ^altdoc$
 ^_quarto$
 ^\.scrutin$
+^benchmarks$
