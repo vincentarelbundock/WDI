@@ -14,7 +14,8 @@ Download an updated list of available WDI indicators from the World Bank website
 }
 \note{
 Downloading all series information from the World Bank website can take time.
-The \code{WDI} package ships with a local data object with information on all the series
-available on 2012-06-18. You can update this database by retrieving a new list using \code{WDIcache}, and  then
-feeding the resulting object to \code{WDIsearch} via the \code{cache} argument.
+The \code{WDI} package ships with a local data object containing series and
+country metadata. You can refresh this database with \code{WDIcache}, then
+pass the resulting object to \code{WDIsearch} or \code{WDI} via the
+\code{cache} argument.
 }

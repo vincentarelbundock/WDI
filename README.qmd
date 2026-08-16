@@ -127,16 +127,19 @@ iso2c    country year gdp_per_capita population
 
 ## Updating series list
 
-To speed up search, `WDI` ships with a local list of all available WDI series. This list will be updated semi-regularly, but you may still want to update it manually to get access to the very latest data series. To do so, use the `cache` function:
+To speed up search and provide country metadata, `WDI` ships with a local cache of available WDI series and countries. This cache is updated semi-regularly, but you may still want to refresh it manually to access the latest metadata. To do so, use `WDIcache()` and pass its result to `WDIsearch()` or `WDI()`:
 
 ```r
-WDI_data = WDIcache()
-WDIsearch('gdp', cache=new_cache)
+new_cache <- WDIcache()
+WDIsearch("gdp", cache = new_cache)
+WDI(country = "US", indicator = "NY.GDP.PCAP.KD", extra = TRUE,
+    cache = new_cache)
 ```
 
 Developer note: To update the search cache, just save it to the repo:
 
 ```r
+WDI_data <- WDIcache()
 save(WDI_data, file = "data/WDI_data.RData")
 ```
 
