@@ -316,9 +316,10 @@ wdi.query = function(indicator = "NY.GDP.PCAP.CD",
 #'
 #' @keywords internal
 #' @noRd
-wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en", extra = FALSE){
+wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en", extra = FALSE,
+                   .fromJSON = jsonlite::fromJSON){
     get_page <- function(daturl) {
-        dat_new <- jsonlite::fromJSON(daturl)
+        dat_new <- .fromJSON(daturl)
         meta <- dat_new[[1]]
         dat <- dat_new[[2]]
         dat2 <- data.frame(
@@ -344,6 +345,7 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
         # output
         attr(dat, "lastupdated") <- tryCatch(meta[["lastupdated"]], error = function(e) NULL)
         attr(dat, "label") <- dat_new[[2]]$indicator$value
+        attr(dat, "pages") <- tryCatch(meta[["pages"]], error = function(e) NULL)
         return(dat)
     }
 
@@ -351,17 +353,41 @@ wdi.dl = function(indicator, country, start, end, latest = NULL, language = "en"
     lab <- attr(pages[[1]], "label")
 
     dat <- list()
-    done <- FALSE # done when pages no longer return useable info
+    expected <- NULL # number of pages the API says are available
     for (i in seq_along(pages)) {
-            tmp <- tryCatch(get_page(pages[i]), error = function(e) NULL)
-        if (!done) {
-            if (inherits(tmp, 'data.frame') && (nrow(tmp) > 0)) {
-                dat[[i]] <- tmp
-            } else {
-                done <- TRUE
+        tmp <- tryCatch(get_page(pages[i]), error = function(e) NULL)
+        if (!inherits(tmp, 'data.frame') || (nrow(tmp) == 0)) {
+            break
+        }
+        page_count <- attr(tmp, "pages")
+        attr(tmp, "pages") <- NULL
+        dat[[i]] <- tmp
+        if (length(page_count) == 1 &&
+            is.numeric(page_count) &&
+            !is.na(page_count) &&
+            is.finite(page_count) &&
+            (page_count %% 1 == 0) &&
+            (page_count >= 1)) {
+            expected <- page_count
+            if (i >= page_count) {
+                break
             }
         }
     }
+
+    if (length(dat) == 0) {
+        stop("The World Bank API did not return usable data for indicator '",
+             indicator, "'. The server may be unavailable, or the request may be invalid.",
+             call. = FALSE)
+    }
+
+    if (!is.null(expected) && length(dat) < expected) {
+        warning("Retrieved ", length(dat), " of ", expected,
+                " pages announced by the World Bank API for indicator '",
+                indicator, "'. The results are incomplete.",
+                call. = FALSE)
+    }
+
     lastupdated <- attr(dat[[1]], "lastupdated")
 
     dat <- do.call('rbind', dat)

@@ -2,12 +2,14 @@
 
 ## Development
 
+* `wdi.dl()` stops requesting pages once the World Bank API reports that the final page has been received. This reduces the number of requests from ten per indicator to the number of pages that actually exist. Thanks to @dshkol for PR #71.
+* `wdi.dl()` warns when fewer pages are retrieved than the World Bank API announced, instead of silently returning incomplete data.
 * Updated cache. Motivation: Pakistan and Afghanistan new region names.
 
-## 2.7,10
+## 2.7.10
 
 * Updated cache.
-* Allowed more than 25000 indicators. Thanks to @universal for PR #70.b
+* Allowed more than 25000 indicators. Thanks to @universal for PR #70.
 
 ## 2.7.9
 
