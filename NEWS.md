@@ -2,7 +2,6 @@
 
 ## Development
 
-* `WDI()` requests only the number of API pages reported by the World Bank, with an early stop when metadata is unavailable.
 * Updated cache. Motivation: Pakistan and Afghanistan new region names.
 
 ## 2.7,10
