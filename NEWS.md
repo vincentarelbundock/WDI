@@ -1,6 +1,6 @@
 # News
 
-## Development
+## 2.8.0
 
 * Refreshed the built-in indicator and country metadata using `WDIcache()`, and clarified the cache update instructions in the README and documentation.
 * `wdi.dl()` stops requesting pages once the World Bank API reports that the final page has been received. This reduces the number of requests from ten per indicator to the number of pages that actually exist. Thanks to @dshkol for PR #71.

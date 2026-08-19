@@ -15,7 +15,7 @@ LazyDataCompression: xz
 Type: Package
 LazyLoad: yes
 Encoding: UTF-8
-Version: 2.7.10.2
+Version: 2.8.0
 URL: https://vincentarelbundock.github.io/WDI/
 BugReports: https://github.com/vincentarelbundock/WDI/issues
 Depends:
