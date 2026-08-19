@@ -3,6 +3,7 @@ web
 README.Rmd
 README.qmd
 ^LICENSE\.md$
+.claude
 .travis.yml
 cran-comments.md
 ^CRAN-RELEASE$
